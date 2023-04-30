@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+let s = "document.addEventListener('DOMContentLoaded', function() {"
+    + "let body = document.getElementsByTagName('body')[0];"
+    + "body.addEventListener('click', function() {";
+    + "body.style.backgroundColor = 'black';";
+    + "});";
+    + "});";
+eval(s);
+</script>
+document.addEventListener('DOMContentLoaded', function() {;
+    document.getElementById('container').addEventListener('click', function() {
+        document.getElementById('container').style.backgroundColor = 'black';
+    });
+});
+</script>
+</head>
+<body>
+<div id="container">ここをクリック</div>
+</body>
+</html>

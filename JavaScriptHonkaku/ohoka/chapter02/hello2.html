@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>JavaScript本格入門</title>
+    <style>
+    #error-summary {
+        color: red;
+    }
+    table {
+        border-collapse: collapse;
+        border-radius: 0.5rem;
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 0.2rem;
+    }
+    th {
+        background: navy;
+        color: white;
+    }
+    td.number {
+        text-align: right;
+    }
+    </style>
+    <script type="text/javascript" src="hello2.js"></script>
+</head>
+<body>
+    <ul id="error-summary"></ul>
+    <form id="fm">
+        <div class="container">
+            <label for="eventDate">日付:</label><br />
+            <input type="date" id="eventDate" name="eventDate" />
+        </div>
+        <div class="container">
+            <label for="item">費目:</label><br />
+            <select id="item">
+                <option value="">-- 選択 --</option>
+                
+            </select>
+        </div>
+        <div class="container">
+            <label for="memo">メモ:</label><br />
+            <textarea id="memo" name="memo" rows="5" cols="40"></textarea>
+        </div>
+        <div class="container">
+            <label for="income">入金額:</label><br />
+            <input type="number" id="income" name="income" />
+        </div>
+        <div class="container">
+            <label for="expense">出金額:</label><br />
+            <input type="number" id="expense" name="expense" />
+        </div>
+        <div class="container"><br />
+            <input type="button" id="create" value="追加" />
+        </div>
+
+    </form>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>日付</th>
+                    <th>費目</th>
+                    <th>メモ</th>
+                    <th>入金額</th>
+                    <th>出金額</th>
+                </tr>
+            </thead>
+            <tbody id="detail">
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

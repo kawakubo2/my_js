@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<form>
+    <label for="food">一番好きな食べ物は</label>
+    <select id="food">
+        <option value="ラーメン">ラーメン</option>
+        <option value="餃子">餃子</option>
+        <option value="焼肉">焼肉</option>
+    </select>
+</form>
+<script>
+let s = document.getElementById('food');
+let opts = s.childNodes;
+for (let i = 0, len = opts.length; i < len; i++) {
+    let opt = opts.item(i);
+    console.log(opt.nodeType);
+    if (opt.nodeType === 1) {
+        console.log(opt.value);
+    }
+}
+
+let query_list = document.querySelectorAll('ul a');
+for (let i = 0, len = query_list.length; i < len; i++) {
+    console.log(query_list[i].innerHTML); // list.item(i).href
+}
+
+let child = s.firstChild;
+while(child) {
+    if (child.nodeType === 1) {
+        console.log(child.value);
+    }
+    child = child.nextSibling;
+}
+
+let child2 = s.firstElementChild;
+while(child2) {
+    console.log(child2.value);
+    child2 = child2.nextElementSibling;
+}
+</script>
+</body>
+</html>

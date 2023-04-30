@@ -1,0 +1,13 @@
+const stack = [];
+stack.push('A');
+console.log(`stack = ${stack.toString()}`);
+stack.push('B');
+console.log(`stack = ${stack.toString()}`);
+stack.push('C');
+console.log(`stack = ${stack.toString()}`);
+stack.pop();
+console.log(`stack = ${stack.toString()}`);
+stack.pop();
+console.log(`stack = ${stack.toString()}`);
+stack.pop();
+console.log(`stack = ${stack.toString()}`);

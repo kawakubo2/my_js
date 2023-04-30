@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>yahoo! category Ranking</title>
+<!--<script type="text/javascript" src="../jquery-2.0.3.min.js"></script>-->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> -->
+<script type="module" src="yahoo_category_ranking.js"></script>
+</head>
+<body>
+    <h3>yahoo! カテゴリランキング</h3>
+	<form>
+		<div class="container">
+			<label for="gender">性別:</label>
+			<select id="gender">
+				<option value="">選択</option>
+				<option value="male">男性</option>
+				<option value="female">女性</option>
+			</select>
+		</div>
+		<div class="container">
+			<label for="generation">性別:</label>
+			<select id="generation">
+				<option value="">選択</option>
+				<option value="10">10代以下</option>
+				<option value="20">20代</option>
+				<option value="30">30代</option>
+				<option value="40">40代</option>
+				<option value="50">50代以上</option>
+			</select>
+		</div>
+		<input type="button" id="search" value="検索" />
+	</form>
+	<hr>
+	<div class="table">
+    	<table>
+    		<thead>
+    			<tr>
+    				<th>Rank</th><th>店名</th><th>商品名</th><th>画像</th>
+    			</tr>
+    		</thead>
+    		<tbody id="ranking-body">
+    		</tbody>
+    	</table>
+	</div>
+</body>
+</html>

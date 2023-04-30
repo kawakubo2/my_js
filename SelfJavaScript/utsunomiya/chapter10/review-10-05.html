@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height : 2000px;
+            width: 2000px;
+            background: linear-gradient(135deg, black 0%, white 100%);
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let coord = localStorage.getItem("coord");
+        coord = JSON.parse(coord);
+        if (coord === null) {
+            coord = {x: 0, y: 0};
+        }
+        window.scroll(coord.x, coord.y);
+
+        let timer = setInterval(() => {
+            coord = {x: window.scrollX, y: window.scrollY};
+            const json = JSON.stringify(coord)
+            localStorage.setItem("coord", json);
+        }, 1000)
+    </script>
+</body>
+</html>

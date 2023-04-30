@@ -1,0 +1,26 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const list = document.getElementById('list');
+    const pic = document.getElementById('pic');
+    const del = document.getElementById('del');
+
+    list.addEventListener('click', function(e) {
+        const isbn = e.target.getAttribute('data-isbn');
+        if (isbn) {
+            const img = document.createElement('img');
+            img.src = 'http://www.wings.msn.to/books/' + isbn + '/' + isbn + '.jpg';
+            img.alt = e.target.innerHTML;
+            img.height = 150;
+            img.weight = 108;
+            if (pic.getElementsByTagName('img').length > 0) {
+                pic.replaceChild(img, pic.lastChild);
+            } else {
+                del.disabled = false;
+                pic.appendChild(img);
+            }
+        }
+    });
+    del.addEventListener('click', () => {
+        pic.removeChild(pic.lastChild);
+        del.disabled = false;
+    });
+});

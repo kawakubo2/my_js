@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('abc').addEventListener('click', function() {
+                alert('「ううう」ボタンがクリックされました。');
+            });
+            document.getElementById('abc').addEventListener('click', function() {
+                document.getElementsByTagName('body')[0].style.backgroundColor = 'yellow';
+            });
+            document.getElementById('abc').addEventListener('click', function() {
+                document.getElementsByTagName('body')[0].style.color = 'blue';
+            });
+        });
+    </script>
+</head>
+<body>
+<button id="abc">ううう</button>
+<p>JavaScript本格入門</p>
+</body>
+</html>

@@ -1,0 +1,9 @@
+.calendar table {
+    border-collapse: collapse;
+}
+.calendar table th,
+.calendar table td {
+    display: inline-block;
+    width: 2em;
+    text-align: center;
+}

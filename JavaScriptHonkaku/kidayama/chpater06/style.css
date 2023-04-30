@@ -1,0 +1,11 @@
+.highlight {
+    margin: 1rem auto;
+    padding: 1rem;
+    background-color: yellow;
+    border-radius: 1rem;
+    box-shadow: 10px 10px 5px #ccc;
+}
+
+.line {
+    border: 1px solid blue;
+}

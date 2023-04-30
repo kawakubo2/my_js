@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>CSSの練習</title>
+    <style>
+        #main {
+            background-color: Yellow;
+            border: 2px solid Blue;
+            width: 50rem;
+            padding: 1.5rem;
+            border-radius: 0.8rem;
+        }
+        div#main > div#inner1 {
+            position: relative;
+            width: 10rem;
+            height: 4rem;
+            border: 1px solid red;
+            background: lightblue;
+            top: 1rem;
+            left: 1rem;
+        }
+        div#main > div#inner2 {
+            position: relative;
+            width: 10rem;
+            height: 4rem;
+            border: 1px solid red;
+            background: lightblue;
+            top: -1rem;
+            left: 4rem;
+        }
+        div#main > div#inner3 {
+            position: relative;
+            width: 10rem;
+            height: 4rem;
+            border: 1px solid red;
+            background: lightblue;
+            top: -3rem;
+            left: 7rem;
+        }
+        div.container > a {
+            text-decoration: none;
+            display: block;
+            width: 12rem;
+            background-color: navy;
+            color: white;
+            border-radius: 1rem;
+            padding: 0.5rem;
+            text-align: center;
+            margin: 1rem auto;
+        }
+        div#sub1 {
+            background-image: url(gekioko_cat.jpg);
+            width: 20rem;
+            height: 30rem;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const main = document.getElementById('main');
+            const inner1 = document.getElementById('inner1');
+            const inner2 = document.getElementById('inner2');
+            const inner3 = document.getElementById('inner3');
+            const sub1 = document.getElementById('sub1');
+            document.getElementById('toggle').addEventListener('click', function() {
+                let state = sub1.style.display;
+                sub1.style.display = (state !== 'none') ? 'none': 'block';
+                inner1.style.zIndex = 10
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="main">
+        <div id="inner1">zindex用1</div>
+        <div id="inner2">zindex用2</div>
+        <div id="inner3">zindex用3</div>
+    </div>
+    <div class="container"><a href="https://www.amazon.co.jp">日本アマゾン</a></div>
+    <div id="sub2"><button id="toggle">トグルボタン</div>
+    <div id="sub1">背景画像がここに入るはず</div>
+</body>
+</html>
+        div.container > a {
+            text-decoration: none;
+            display: block;
+            width: 12rem;
+            background-color: navy;
+            color: white;
+            border-radius: 1rem;
+            padding: 0.5rem;
+            text-align: center;
+            margin: 1rem auto;
+        }
+        div#sub1 {
+            background-image: url(gekioko_cat.jpg);
+            width: 20rem;
+            height: 30rem;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const main = document.getElementById('main');
+            const inner1 = document.getElementById('inner1');
+            const inner2 = document.getElementById('inner2');
+            const inner3 = document.getElementById('inner3');
+            const sub1 = document.getElementById('sub1');
+            document.getElementById('toggle').addEventListener('click', function() {
+                let state = sub1.style.display;
+                sub1.style.display = (state !== 'none') ? 'none': 'block';
+                inner1.style.zIndex = 10
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="main">これはCSS練習用のdiv要素です。
+        <div id="inner1">zindex用1</div>
+        <div id="inner2">zindex用2</div>
+        <div id="inner3">zindex用3</div>
+    </div>
+    <div class="container"><a href="https://www.amazon.co.jp">日本アマゾン</a></div>
+    <div id="sub2"><button id="toggle">トグルボタン</div>
+    <div id="sub1">背景画像がここに入るはず</div>
+</body>
+</html>
+        div.container > a {
+            text-decoration: none;
+            display: block;
+            width: 12rem;
+            background-color: navy;
+            color: white;
+            border-radius: 1rem;
+            padding: 0.5rem;
+            text-align: center;
+            margin: 1rem auto;
+        }
+        div#sub1 {
+            background-image: url(gekioko_cat.jpg);
+            width: 20rem;
+            height: 30rem;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const main = document.getElementById('main');
+            const inner1 = document.getElementById('inner1');
+            inner1.style.zIndex = 1;
+            const inner2 = document.getElementById('inner2');
+            const inner3 = document.getElementById('inner3');
+            const sub1 = document.getElementById('sub1');
+            document.getElementById('toggle').addEventListener('click', function() {
+                let state = sub1.style.display;
+                sub1.style.display = (state !== 'none') ? 'none': 'block';
+                if (inner1.style.zIndex == 1) {
+                    inner1.style.zIndex = 3;
+                    inner2.style.zIndex = 2;
+                    inner3.style.zIndex = 1;
+                } else {
+                    inner1.style.zIndex = 1;
+                    inner2.style.zIndex = 2;
+                    inner3.style.zIndex = 3;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="main">これはCSS練習用のdiv要素です。
+        <div id="inner1">zindex用1</div>
+        <div id="inner2">zindex用2</div>
+        <div id="inner3">zindex用3</div>
+    </div>
+    <div class="container"><a href="https://www.amazon.co.jp">日本アマゾン</a></div>
+    <div id="sub2"><button id="toggle">トグルボタン</div>
+    <div id="sub1">背景画像がここに入るはず</div>
+</body>
+</html>

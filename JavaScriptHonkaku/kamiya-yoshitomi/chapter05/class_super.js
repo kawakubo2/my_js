@@ -1,0 +1,38 @@
+class Member {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    get firstName() {
+        return this._firstName;
+    }
+    set firstName(value) {
+        this._firstName = value;
+    }
+    get lastName() {
+        return this._lastName;
+    }
+    set lastName(value) {
+        this._lastName = value;
+    }
+    getName() {
+        return this.lastName + ' ' + this.firstName;
+    }
+}
+
+class BusinessPerson extends Member {
+    constructor(firstName, lastName, clazz) {
+        super(firstName, lastName);
+        this.clazz = clazz;
+    }
+    work() {
+        return super.getName() + 'は働いています。';
+    }
+    getName() {
+        return super.getName() + '/役職: ' + this.clazz; 
+    }
+}
+
+const bm = new BusinessPerson('太郎', '山田', '課長');
+console.log(bm.work());
+console.log(bm.getName());

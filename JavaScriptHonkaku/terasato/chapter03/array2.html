@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        const 待合室 = [];
+        while (true) {
+            let answer = prompt('1.受付 2.診察 9.終了');
+            if (answer == '9') {
+                break;
+            }
+            if (answer == '1') {
+                let name = prompt('名前');
+                待合室.push(name);
+            } else if (answer == '2') {
+                if (待合室.length <= 0) {
+                    console.log('待合室は誰もいません');
+                    continue;
+                }
+                let name = 待合室.shift();
+                console.log(`${name}さん、診察室へどうそ。`);
+            } else {
+                console.log('1または2を選択してください');
+            }
+            console.log(`待合室: ${待合室.toString()}`);
+        }
+    </script>
+</body>
+
+</html>

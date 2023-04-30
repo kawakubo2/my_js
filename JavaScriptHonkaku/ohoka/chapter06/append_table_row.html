@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #error_summary {
+            color: red;
+        }
+    </style>
+    <script src="append_table_row.js"></script>
+    </script>
+</head>
+<body>
+    <h3>書籍追加</h3>
+    <ul id="error_summary"></ul>
+    <ul id="error"></ul>
+    <form>
+        題名:<input type="text" id="title" name="title" /><br>
+        作者:<input type="text" id="author" name="author" /><br>
+        価格:<input type="number" id="price" name="price" /><br>
+    </form>
+    <hr />
+    <table border="1">
+        <tbody id="booklist">
+            <tr id="title-book"><th>題名</th><th>作者</th><th>価格</th>
+                <th><input type="button" class="add" value="追加" /></th>
+                <th><input type="button" class="delete" value="削除" /></th>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

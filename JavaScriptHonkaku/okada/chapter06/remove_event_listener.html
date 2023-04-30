@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const set_color = (e) => {
+            e.target.style.color = 'blue';
+        }
+        const set_border = (e) => {
+            e.target.style.border = '1px dotted lime';
+        }
+        const set_bgcolor = (e) => {
+            e.target.style.backgroundColor = 'yellow';
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            let aaa = document.getElementById('aaa');
+            aaa.addEventListener('click', set_color);
+            aaa.addEventListener('click', set_border);
+            aaa.addEventListener('click', set_bgcolor);
+
+            document.getElementById('remove_bgcolor').addEventListener('click', function() {
+                aaa.style.backgroundColor = '';
+                aaa.removeEventListener('click', set_bgcolor);
+            });
+            document.getElementById('add_bgcolor').addEventListener('click', function() {
+                aaa.addEventListener('click', set_bgcolor);
+            });
+        });
+
+    </script>
+</head>
+<body>
+<button id="remove_bgcolor">背景色を黄色にするイベントリスナの削除</button>
+<button id="add_bgcolor">背景色を黄色にするイベントリスナの追加</button>
+<div id="aaa">ああああああ</div>
+</body>
+</html>

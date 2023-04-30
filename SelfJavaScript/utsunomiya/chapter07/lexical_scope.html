@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>レキシカルスコープ</title>
+</head>
+
+<body>
+    <script>
+        let scriptVal = 'スクリプトスコープの変数';
+
+        function fn() {
+            let fnVal = '関数スコープの変数';
+            if (true) {
+                console.log(scriptVal, fnVal);
+                console.log(scriptFn());
+                console.log(sVal);
+            }
+        }
+
+        function scriptFn() {
+            let sVal = 'scriptFnの変数';
+            return 'scriptFnの実行結果';
+        }
+
+        fn();
+    </script>
+
+</body>
+
+</html>

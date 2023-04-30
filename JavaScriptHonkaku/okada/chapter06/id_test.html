@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <p class="abc">JavaScriptはHTMLだけでなくXMLもDOM操作できる。</p>
+    <h3 id="title">DOM操作</h3>
+    <p>今日の福岡は朝から冷え込んだが、昼は若干温度が上がり快適だった。</p>
+    <form>
+        名前:<input type="text" name="name" class="abc" /><br>
+        年齢:<input type="number" name="age" value="32" /><br>
+        身長:<input type="number" name="height" /><br>
+        <input type="submit" value="送信" />
+    </form>
+    <p id="result"></p>
+    <script>
+        let title = document.getElementById('title');
+        title.style.color = 'blue';
+        title.style.backgroundColor = 'yellow';
+        let ps = document.getElementsByTagName('p');
+        // for(let i = 0, len = ps.length; i < len; i++) {
+        //     ps[i].style.border = '2px solid red';
+        // }
+        for (let p of ps) {
+            p.style.border = '5px dotted blue';
+        }
+        let age = document.getElementsByName('age');
+        console.log('年齢:' + age[0].value);
+        document.getElementById('result').textContent = age[0].value;
+        let abc = document.getElementsByClassName('abc');
+        for (let v of abc) {
+            v.style.border = "5px solid black";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	h3 {
+		font-size: 80%;
+	}
+	form {
+		font-size: 65%;
+	}
+	input {
+		font-size: 25%;
+	}
+	button {
+		font-size: 25%;
+	}
+	ul {
+		font-size: 65%;
+	}
+</style>
+<title>CovidResearch</title>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="../js/covid_research_tablegene_csv.js"></script>
+</head>
+<body>
+    <h3>コロナ陽性患者発表情報</h3>
+    <form>
+        <hr>
+        <label>入力日付以降に発表されたコロナ陽性患者の集計データを表示します。</label><br><br>
+	    <label for="publisheddate">公表年月日：</label>
+	    <input id="publisheddate" name="publisheddate" type="text" size="25">
+        <button id="btn">検索</button><br>
+        <label>※YYYY/MM/DDの形式で半角入力してください</label>
+    </form><br>
+    <div id="result"></div><br>
+    <table border="1">
+    	<tbody id="infectedpersonlist">
+			<tr id="listheader">
+				<th>
+					<input type="button" class="area" value="居住地" />
+				</th>
+				<th>
+					<input type="button" class="gene0" value="10歳未満" />
+				</th>
+				<th>
+					<input type="button" class="gene10" value="10代" />
+				</th>
+				<th>
+					<input type="button" class="gene20" value="20代" />
+				</th>
+				<th>
+					<input type="button" class="gene30" value="30代" />
+				</th>
+				<th>
+					<input type="button" class="gene40" value="40代" />
+				</th>
+				<th>
+					<input type="button" class="gene50" value="50代" />
+				</th>
+				<th>
+					<input type="button" class="gene60" value="60代" />
+				</th>
+				<th>
+					<input type="button" class="gene70" value="70代" />
+				</th>
+				<th>
+					<input type="button" class="gene80" value="80代" />
+				</th>
+				<th>
+					<input type="button" class="gene90" value="90代以上" />
+				</th>
+				<th>
+					<input type="button" class="count" value="合計" />
+				</th>
+				<th>
+					<input type="button" class="latestpublished" value="直近公表日" />
+				</th>
+			</tr>
+    	</tbody>
+    </table>
+    <div id="age_pie_chart"></div>
+</body>
+</html>

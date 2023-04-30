@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<script>
+let s = "document.addEventListener('DOMContentLoaded', function() {";
+    s += "document.getElementsByTagName('body')[0].addEventListener('click', function() {";
+        s += "document.getElementsByTagName('body')[0].style.backgroundColor = 'black';";
+    s += "});";
+s += "});";
+eval(s);
+</script>
+</body>
+</html>

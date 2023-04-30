@@ -1,0 +1,109 @@
+book
+HOME
+JavaScript
+jQueryでスライドショーを自動再生する方法を解説「Slick」
+JavaScript
+jQuery
+Slick
+スライドショー
+jQueryでスライドショーを自動再生する方法を解説「Slick」
+2021/02/12 ( 更新日：2021/10/10 )
+jQueryでスライドショーを自動再生する方法を解説「Slick」
+コーポレートサイトのトップページなどで、画像が一定時間ごとに画像が切り替わっていくサイトを見たことがあると思います。jQueryを用いれば、同じように自動再生するスライドショーをWebサイトに実装できます。
+
+jQueryでスライドショーを自動再生するには複雑なコードが必要になりますが、プラグインを用いれば簡単です。本記事ではjQueryでスライドショーを自動再生する方法をslickというプラグインを用いて解説します。
+
+また、他のプラグインを使う方法も解説しています。
+
+Contents
+jQueryでスライドショーを自動再生する方法
+slickを使う
+slickのダウンロード
+slickの基本コード
+スライドショーを自動再生するサンプルコード
+他のプラグインを使う
+bxSlider
+FlexSlider2
+まとめ
+jQueryでスライドショーを自動再生する方法
+
+slickを使う
+slickはスライダーを作成するためのjQueryのプラグインの1つです。カスタマイズの幅も広いために世界中で使用されています。ほとんどのブラウザで利用できる点も支持される理由の1つです。
+
+レスポンシブデザインにも対応が簡単なので、汎用性もあります。
+
+slickのダウンロード
+slickを使うにはまずHTMLファイルにslickのCSSファイルとJavaScriptファイルを読み込まなければいけません。方法は２つあります。
+
+ダウンロードする
+公式ページからCDNを利用する
+今回は一つ目の「ダウンロードをする」で紹介します。CDNの利用は公式ページからコードをコピー＆ペーストするだけです。
+
+slick公式ページ
+
+ダウンロードの方法は公式ページに行ってください。上にリンクを貼っています。公式ページの「get it now」を押せば、ダウンロードリンクまでスライドします。「Download now」をクリックすればダウンロードされます。
+
+
+ダウンロードしたファイルを解凍します。中入っている「slick.css」「slick-theme.css」「slick.js」のファイルを使います。「slick.css」「slick-theme.css」はheadタグに、「slick.js」はbodyタグの終了タグの前に読み込みましょう。
+
+以下に、読み込み用のコードを記述します。３つのファイルを作業用のフォルダにコピーして使ってみてください。
+
+
+<link rel="stylesheet" type="text/css" href="slick.css">
+<link rel="stylesheet" type="text/css" href="slick-theme.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+slickの基本コード
+slickの基本コードを示します。まだこの状態では自動再生はできませんが、基本構文なので覚えておきましょう。
+
+
+$(“セレクタ”).slick();
+自動再生をするにはslickの引数に中括弧（{})の中に下記のコードを書きましょう。
+
+
+autoplay: true,
+autoplaySpeed: 3000,
+speed: 400
+autoplayをtrueにすることで、自動再生できるようになります。また、autoplaySpeedで次の画像に切り替わるまでの画像の保持時間です。単位はm秒なので1000で1秒になります。speedは切り替わるスピードです。こちらもm秒になります。
+
+スライドショーを自動再生するサンプルコード
+サンプルコードを下に示します。画像ファイルは私の用意したものなので、自分のフォルダに入っているファイルを入れましょう。
+
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css">
+</head>
+
+<body>
+    <div class="single-item">
+        <div><img src="img/car.jpg" width="400" height="300"></div>
+        <div><img src="img/natto1.jpeg" width="400" height="300"></div>
+        <div><img src="img/sushi1.jpeg" width="400" height="300"></div>
+    </div>
+
+    <!-- slick jsの読込み -->
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+    <!-- slickの設定 -->
+    <script type="text/javascript">
+        $(function () {
+            $('.single-item').slick({
+                accessibility: true,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                speed: 400
+            });
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const result = document.getElementById('result');
+            document.getElementById('btn').addEventListener('click', () => {
+                const pattern = document.getElementById('pattern').value;
+                const target = document.getElementById('target').value;
+                const option = document.getElementById('option').value;
+                if (pattern !== '' && target !== '') {
+                    let option;
+                    if (option) {
+                        regexp = new RegExp(pattern, option);
+                    } else {
+                        regexp = new RegExp(pattern);
+                    }
+                    if (regexp.test(target)) {
+                        result.textContent = '○';
+                    } else {
+                        result.textContent = '×';
+                    }
+                } else {
+                    result.textContent = '';
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>正規表現練習ツール</h1>
+    <form id="form">
+        <label>正規表現　: <input type="text" name="pattern" id="pattern" size="50"></label><br>
+        <label>対象文字列: <input type="text" name="target" id="target" size="50"></label><br>
+        <label>オプション: <input type="text" name="option" id="option" size="5"></label><br>
+        <input id="btn" type="button" value="テスト">
+    </form>
+    <div>判定結果: <span id="result"></span></div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Drawing Soft</title>
+        <script>
+            let isMouseDown = false;
+            let strokeX = 0;
+            let strokeY = 0;
+            let strokeWidth = 3;
+            let context2d;
+            let shape = 'arc';
+            let color = 'black';
+
+            window.addEventListener('load', function() {
+                var canvas = document.getElementById('paintArea');
+                context2d = canvas.getContext('2d');
+                // canvasにイベントリスナーを登録
+                canvas.addEventListener('mousemove', function(event) {
+                    if (isMouseDown) {
+                        strokeX = event.clientX - 20;
+                        strokeY = event.clientY - 20;
+                        paint();
+                    }
+                });
+                canvas.addEventListener('mousedown', function() { isMouseDown = true; });
+                canvas.addEventListener('mouseup', function() { isMouseDown = false; });
+                canvas.addEventListener('mouseout', function() { isMouseDown = false; });
+
+                // 個々のラジオボタンにイベントリスナーを登録
+                var shapeList = document.getElementsByClassName('shape');
+                for (var i = 0; i < shapeList.length; i++) {
+                    (function(x) {
+                        shapeList.item(x).addEventListener('click', function() {
+                            shape = shapeList.item(x).value;
+                        });
+                    })(i);
+                }
+                document.getElementById('color1').addEventListener('change', function() {
+                    color = document.getElementById('color1').value;
+                });
+                document.getElementById('range1').addEventListener('change', function() {
+                    strokeWidth = document.getElementById('range1').value;
+                });
+            });
+            function paint() {
+                context2d.beginPath();
+                context2d.fillStyle = color;
+                if (shape === 'arc') {
+                    context2d.arc(strokeX, strokeY, strokeWidth, 0, Math.PI * 2, false);
+                } else if (shape === 'rect') {
+                    context2d.rect(strokeX, strokeY, strokeWidth * 2, strokeWidth * 2);
+                }
+                context2d.fill();
+            }
+
+        </script>
+        <style>
+            body {
+                background-color: lightgoldenrodyellow;
+                margin: 20px 20px;
+            }
+            #paintArea {
+                background-color: #ffffff;
+            }
+            #stroke {
+                background-color: #ccffff;
+                margin: 10px;
+                border: solid 1px black;
+                border-collapse: collapse;
+            }
+            #stroke td {
+                padding: 3px;
+                border: solid 1px black;
+                border-collapse: collapse;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <div>
+            <canvas id="paintArea" width="800" height="400"></canvas>
+        </div>
+        <form>
+            <table id="stroke">
+                <caption>筆</caption>
+                <tr>
+                    <td>形</td>
+                    <td>
+                        <span>
+                            <input type="radio" value="arc" class="shape" name="shape" checked />円
+                            <input type="radio" value="rect" class="shape" name="shape" />四角
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>色</td>
+                    <td>
+                        <span>
+                            <input type="color" id="color1" name="color_name">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>幅</td>
+                    <td>
+                        <span>
+                            <input type="range" id="range1" name="range1" min="1" max="15" />
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
+
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="file_reader.js"></script>
+</head>
+<body>
+    <form>
+        <label for="file">ファイル: </label>
+        <input type="file" name="file" id="file">
+        <label for="charset">文字コード: </label>
+        <select id="charset">
+            <option value="UTF-8">UTF-8</opition>
+            <option value="Shift_JIS">Shift_JIS</option>
+        </select>
+    </form>
+    <hr />
+    <pre id="result"></pre>
+</body>
+</html>

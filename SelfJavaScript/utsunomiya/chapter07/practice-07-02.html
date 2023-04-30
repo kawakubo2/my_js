@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>スコープテスト</title>
+</head>
+
+<body>
+    <script>
+        console.log('1番目のスクリプト');
+        var a = 'Global Scope!';
+        let b;
+
+        function fn1() {
+            var c;
+            let d;
+            if (true) {
+                var e;
+                let f;
+
+                function fn2() {
+                    console.log('fn2が呼び出された');
+                }
+            }
+            fn2();
+        }
+        fn1();
+        // console.log(`c=${c}`); cは関数スコープのためアクセス不可
+        const fn3 = function() {}
+    </script>
+    <script>
+        console.log('2番目のスクリプト');
+        console.log(`a=${a}`);
+        console.log(`b=${b}`);
+        fn1();
+    </script>
+</body>
+
+</html>

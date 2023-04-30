@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>モジュール</title>
+    <script type="module" src="./lib/Util.js"></script>
+    <script type="module">
+        import { Member, Area } from './lib/Util.js';
+        let mem = new Member('太郎', '山田');
+        console.log(mem.getName());
+
+        console.log(Area.getTriangle(10, 5));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

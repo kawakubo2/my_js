@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>
+ul {
+    border-radius: 1rem;
+}
+li > a {
+    font-weight: bold;
+    padding: 0.3rem;
+    text-decoration: none;
+}
+li  {
+    background-color: yellow;
+    border: 3px solid lime;
+    border-radius: 0.5rem;
+    margin: 0.2rem;
+    list-style-type: none;
+    float: left;
+    box-shadow: 5px 5px 5px #ccc;
+}
+hr#abc {
+    clear: both;
+}
+</style>
+<title>DOM操作</title>
+</head>
+<body>
+<h3>アンケート</h3>
+<ul id="list">
+    <li><a href="http://www.wings.msn.to/" class="my">
+        サーバサイド技術の学び舎 - WINGS</a></li>
+    <li><a href="http://www.web-deli.com/" class="my">
+        WebDeli</a></li>
+    <li><a href="http://www.buildinsider.net/web/jqueryref" class="external">
+        jQuery逆引きリファレンス</a></li>
+    <li><a href="http://www.buildinsider.net/web/angularjstips" class="external">
+        AngularJS TIPS</a></li>
+</ul>
+<a href="https:/www.amazon.co.jp">日本アマゾン</a>
+<hr id="abc">
+<script type="text/javascript" src="element_query.js"></script>
+</body>
+</html>

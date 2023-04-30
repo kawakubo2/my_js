@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>DOM操作</title>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('add-color').addEventListener('click', function() {
+        document.getElementById('main').style.backgroundColor = 'Yellow';
+        document.getElementById('main').style.border = '3px solid Blue';
+    });
+    document.getElementById('remove-color').addEventListener('click', function() {
+        document.getElementById('main').style.backgroundColor = 'White';
+    });
+    document.getElementById('remove-main').addEventListener('click', function() {
+        document.getElementById('main').textContent = '';
+    });
+    let p_tags = document.getElementsByTagName('p');
+    for (let i = 0, len = p_tags.length; i < len; i++) {
+        console.log(p_tags[i].textContent);
+    }
+});
+</script>
+</head>
+<body>
+<div>
+    <h3>DOM操作を覚える</h3>
+    <div id="main">DOMとはHTMLやXMLファイルを元に要素・属性・テキストなどをノードオブジェクトに変換し、親子関係を作り出しツリー構造にしたものを指す。DOMツリーを操作することをDOM操作と呼ぶ。したがって、ブラウザはHTMLのタグをそのまま読み込んでレンダリングしているわけではなく、いったんノードオブジェクトに変換してから操作を行っている。最近は仮想DOMを作ることによって高速化は図っている場合もある。</div>
+    <button id="add-color">色を付ける</button>
+    <button id="remove-color">色を消す</button>
+    <button id="remove-main">文章削除</button>
+    <p>Ajaxを使ってサーバサイドと通信し、結果をJSONやXMLとして取得し、DOM操作で画面を作る。</p>
+    <p>RESTの原則にしたがってサーバサイドとやり取りする方法を覚える。</p>
+</div>
+</body>
+</html>

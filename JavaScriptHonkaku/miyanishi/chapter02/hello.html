@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>JavaScript本格入門</title>
+</head>
+<body>
+    <form id="fm">
+        <div class="container">
+            <label for="title">タイトル:</label><br>
+            <input type="text" id="title" size="20" />
+        </div>
+        <div class="container">
+            <label for="price">価格:</label><br>
+            <input type="number" id="price" size="20" />
+        </div>
+        <input type="button" id="add" value="追加" />
+    </form>
+    <hr>
+    <table border="1">
+        <thead>
+            <tr><th>タイトル</th><th>価格</th></tr>
+        </thead>
+        <tbody id="tbody">
+        </body
+    </table>
+<script type="text/javascript">
+    /*
+        このスクリプトはこれからJavaScriptを勉強する上で必要となる
+        文法を紹介するために作成した。
+        作者:川久保
+        日付:2021-06-15
+    */
+    document.addEventListener('DOMContentLoaded', function() { // DOMContentLoadedは画像ファイル以外の・・・
+        let tbody = document.getElementById('tbody');
+        let title = document.getElementById('title');
+        let price = document.getElementById('price');
+        document.getElementById('add').addEventListener('click', function() {
+            if (title.value === '' || price.value === '') return;
+            let tr = document
+                        .createElement('tr');
+            let title_td = document.createElement('td');
+            let price_td = document.createElement('td');
+            let title_text = document.createTextNode(title.value);
+            let price_text = document.createTextNode(price.value);
+            title_td.appendChild(title_text);
+            price_td.appendChild(price_text);
+            tr.appendChild(title_td);
+            tr.appendChild(price_td);
+            tbody.appendChild(tr);
+            title.value = '';
+            price.value = '';
+            title.focus();
+        });
+    });
+</script>
+</body>
+</html>

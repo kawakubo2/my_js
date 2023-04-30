@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .anchor2button {
+            float: left;
+            list-style-type: none;
+            padding: 0.3rem;
+            margin: 0.5rem;
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+            border-radius: 0.4rem;
+            background: #ffcccc;
+        }
+        
+        hr#end {
+            clear: both;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('btn').addEventListener('click', function() {
+                const list = document.querySelectorAll('#lang > li');
+                for (const li of list) {
+                    li.className = 'anchor2button';
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <ul id="lang">
+        <li>JavaScript</li>
+        <li>Python</li>
+        <li>C++</li>
+        <li>Go</li>
+        <li>Rust</li>
+        <li>Julia</li>
+    </ul>
+    <hr id="end" />
+    <button id="btn">リストをボタンっぽく見せる</button>
+</body>
+
+</html>

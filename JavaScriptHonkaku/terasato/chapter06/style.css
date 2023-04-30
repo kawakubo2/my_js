@@ -1,0 +1,14 @@
+.highlight {
+    width: 400px;
+    height: 100px;
+    border-radius: 1rem;
+    box-shadow: 5px 5px #CCC;
+    background-color: Yellow;
+    color: Blue;
+    text-align: center;
+    padding: 100px
+}
+
+.line {
+    border: 5px solid Red;
+}

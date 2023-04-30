@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>JavaScript本格入門</title>
+</head>
+<body>
+<script>
+document.write('<table border="1">');
+let count = 0;
+kuku:
+for (let i = 1; i <= 9; i++) {
+    document.write('<tr>');
+    for (let j = 1; j <= 9; j++) {
+        count++;
+        if (i * j > 30) {
+            break kuku;
+        }
+        document.write('<td>' + (i * j) + '</td>');
+    }
+    document.write('</tr>');
+}
+document.write('</table>');
+document.write(count + '回<br>');
+</script>
+</body>
+</html>

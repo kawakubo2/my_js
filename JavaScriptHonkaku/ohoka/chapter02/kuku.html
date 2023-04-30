@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>九九</title>
+</head>
+<body>
+<script>
+// document.writeは普段は使用しない
+document.write('<table border="1">');
+let counter = 0;
+outer:
+for (let i = 1; i <= 9; i++) {
+    document.write('<tr>');
+    for (let j = 1; j <= 9; j++) {
+        counter++;
+        if (i * j > 30) break outer;
+        document.write('<td>' + (i * j) + '</td>');
+    }
+    document.write('</tr>');
+}
+document.write('</table>');
+document.write('<span>' + counter + '回</span>');
+</script>
+</body>
+</html>

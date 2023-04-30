@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="storage3.js"></script>
+</head>
+<body>
+    <h2>localStorageの基本</h2>
+    <form>
+        <div>
+            <label for="ope">操作:</label>
+            <select id="ope" name="ope">
+                <option value="">--選択--</option>
+                <option value="set">追加/更新</option>
+                <option value="get">取得</option>
+                <option value="getAll">全件取得</option>
+                <option value="remove">削除</option>
+            </select>
+        </div>
+        <div id="key-div">
+            <label for="key">キー:</label><br>
+            <input type="text" name="key" id="key" />
+        </div>
+        <div id="val-div">
+            <label for="val">値:</label><br>
+            <input type="text" name="val" id="val" />
+        </div>
+        <div>
+            <input type="button" id="btn" value="操作" />
+        </div>
+    </form>
+    <ul id="list">
+
+    </ul>
+</body>
+</html>

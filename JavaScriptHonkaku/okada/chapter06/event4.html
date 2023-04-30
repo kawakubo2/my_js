@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('abc').addEventListener('keyup', function(e) {
+                console.log(e.key + ':' + e.keyCode);
+                console.log('alt=' + e.altKey);
+                console.log('ctrl=' + e.ctrlKey);
+                console.log('shift=' + e.shiftKey);
+
+            });
+            document.getElementById('header').addEventListener('click', function(e) {
+                console.log('cancelable=' + e.cancelable);
+            });
+            /*
+            let books = document.getElementsByName('book');
+            for (let book of books) {
+                book.addEventListener('click', function(e) {
+                    console.log(book.value);
+                });
+            }
+            */
+            document.getElementById('blood').addEventListener('change', function(e) {
+                let target = e.target;
+                console.log(target.value);
+            });
+            document.getElementById('outer').addEventListener('click', function(e) {
+                console.log('outer');
+            }, false);
+            document.getElementById('inner').addEventListener('click', function(e) {
+                console.log('inner1');
+                e.stopImmediatePropagation();
+            }, false);
+            document.getElementById('inner').addEventListener('click', function(e) {
+                console.log('inner2');
+            }, false);
+            document.getElementById('books').addEventListener('click', function(e) {
+                let target = e.target;
+                console.log(target.value);
+                if (target.checked) {
+                    console.log('チェック');
+                } else {
+                    console.log('アンチェック');
+                }
+            });
+            document.getElementById('xyz').addEventListener('click', function(e){
+                console.log('screenX=' + e.screenX);
+                console.log('screenY=' + e.screenY);
+                console.log('pageX=' + e.pageX);
+                console.log('pageY=' + e.pageY);
+                console.log('clientX=' + e.clientX);
+                console.log('clientY=' + e.clientY);
+                console.log('offsetX=' + e.offsetX);
+                console.log('offsetY=' + e.offsetY);
+            });
+            document.getElementById('lmn').addEventListener('click', function(e){
+                console.log('screenX=' + e.screenX);
+                console.log('screenY=' + e.screenY);
+                console.log('pageX=' + e.pageX);
+                console.log('pageY=' + e.pageY);
+                console.log('clientX=' + e.clientX);
+                console.log('clientY=' + e.clientY);
+                console.log('offsetX=' + e.offsetX);
+                console.log('offsetY=' + e.offsetY);
+            });
+        });
+    </script>
+
+</head>
+<body id="main">
+    <div id="header">aaa</div>
+    <textarea rows="5" cols="40" id="xyz"></textarea>
+    <input type="text" id="abc" name="abc" size="30" />
+    <select id="blood">
+        <option value="">----</option>
+        <option value="A">A型</option>
+        <option value="B">B型</option>
+        <option value="O">O型</option>
+        <option value="AB">AB型</option>
+    </select>
+    <br>
+    <div id="books">
+        <input type="checkbox" name="book" value="sports" />スポーツ
+        <input type="checkbox" name="book" value="novel" />小説
+        <input type="checkbox" name="book" value="travel" />旅行
+        <input type="checkbox" name="book" value="cooking" />料理
+    </div>
+    <textarea rows="50" cols="40" id="lmn"></textarea>
+    <div id="outer">
+        <p>outer要素</p>
+        <p id="inner">inner要素</p>
+    </div>
+</body>
+</html>

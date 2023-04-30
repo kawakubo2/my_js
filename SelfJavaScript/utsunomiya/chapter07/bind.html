@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Member {
+            constructor(name, age, weight, height) {
+                this.name = name;
+                this.age = age;
+                this.weight = weight;
+                this.height = height;
+                this.bmi = this.bmi.bind(this);
+            }
+            bmi() {
+                return this.weight / (this.height / 100) ** 2;
+            }
+        }
+        const member = new Member('山田太郎', 42, 70, 170);
+        console.log(member.bmi());
+
+
+        this.weight = 100;
+        this.height = 100;
+
+        function myfunc(func) {
+            console.log(func());
+        }
+
+        myfunc(member.bmi);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const create_td = (text) => {
+            let td = document.createElement('td');
+            let t = document.createTextNode(text);
+            td.appendChild(t);
+            return td;
+        };
+        const create_button = (clazz, label) => {
+            let button = document.createElement('input');
+            button.className = clazz
+            button.type = 'button';
+            button.value = label;
+            return button;
+
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            let subject = document.getElementById('subject');
+            let author = document.getElementById('author');
+            let price = document.getElementById('price');
+
+            let error_list = document.getElementById('error');
+
+            document.getElementById('booklist').addEventListener('click', function(e) {
+                if (e.target.className === 'remove') {
+                    document.getElementById('booklist').removeChild(e.target.parentNode.parentNode);
+                } else if (e.target.className === 'up') {
+                    let tr = e.target.parentNode.parentNode;
+                    let previous_tr = tr.previousElementSibling;
+                    if (document.getElementById('title-book') === previous_tr) {
+                        return;
+                    }
+                    let removed_tr = document.getElementById('booklist').removeChild(tr);
+                    document.getElementById('booklist').insertBefore(removed_tr, previous_tr);
+                } else if (e.target.className === 'down') {
+                    let tr = e.target.parentNode.parentNode;
+                    let next_tr = tr.nextElementSibling;
+                    if (document.getElementById('booklist').lastElementChild === tr) {
+                        return;
+                    }
+                    let removed_tr = document.getElementById('booklist').removeChild(next_tr);
+                    document.getElementById('booklist').insertBefore(removed_tr, tr);
+                } else if (e.target.className === 'add') {
+                    error_list.textContent = '';
+                    let errors = [];
+                    if (subject.value === null || subject.value.trim() === '') {
+                        errors.push('題名は必須入力です。');
+                    }
+                    if (author.value === null || author.value.trim() === '') {
+                        errors.push('作者は必須入力です。');
+                    }
+                    if (price.value === null || price.value.trim() === '') {
+                        errors.push('価格は必須入力です。');
+                    }
+                    if (errors.length > 0) {
+                        let frag = document.createDocumentFragment();
+                        for (let error of errors) {
+                            let li = document.createElement('li');
+                            let error_text = document.createTextNode(error);
+                            li.appendChild(error_text);
+                            frag.appendChild(li);
+                        }
+                        error_list.appendChild(frag);
+                        return;
+                    }
+                    let booklist = document.getElementById('booklist');
+                    let tr = document.createElement('tr');
+                    let subject_td = create_td(subject.value);
+                    let author_td = create_td(author.value);
+                    let price_td = create_td(price.value);
+
+                    let add_button = create_button('add', '追加');
+                    let remove_button = create_button('remove', '削除');
+                    let up_button = create_button('up', '▲');
+                    let down_button = create_button('down', '▼');
+
+                    let add_td = document.createElement('td');
+                    add_td.append(add_button);
+
+                    let remove_td = document.createElement('td');
+                    remove_td.append(remove_button);
+
+                    let up_td = document.createElement('td');
+                    up_td.appendChild(up_button);
+
+                    let down_td = document.createElement('td');
+                    down_td.appendChild(down_button);
+
+                    let next_tr = e.target.parentNode.parentNode.nextElementSibling;
+
+                    tr.append(subject_td);
+                    tr.append(author_td);
+                    tr.append(price_td);
+                    tr.append(add_td);
+                    tr.append(remove_td);
+                    tr.append(up_td);
+                    tr.append(down_td);
+                    booklist.insertBefore(tr, next_tr);
+
+                    subject.value = '';
+                    author.value = '';
+                    price.value = '';
+                    subject.focus();
+                    subject.select();
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h3>書籍追加</h3>
+    <ul id="error"></ul>
+    <form>
+        題名:<input type="text" id="subject" name="subject" /><br> 作者:
+        <input type="text" id="author" name="author" /><br> 価格:
+        <input type="number" id="price" name="price" /><br>
+    </form>
+    <hr>
+    <table border="1">
+        <thead>
+            <tr id="title-book">
+                <th>題名</th>
+                <th>作者</th>
+                <th>価格</th>
+                <th>
+                    <input type="button" class="add" value="追加" />
+                </th>
+            </tr>
+        </thead>
+        <tbody id="booklist">
+        </tbody>
+    </table>
+</body>
+
+</html>

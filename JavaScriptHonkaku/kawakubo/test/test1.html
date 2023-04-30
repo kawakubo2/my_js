@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let str = "●●○入力";
+        document.addEventListener('DOMContentLoaded', function() {
+            let text0 = document.getElementsByTagName('input')[0];
+            text0.addEventListener('keyup', function() {
+                let target = text0.parentNode.parentNode.firstElementChild.querySelector('.count');
+                let limit = target.textContent.split('/')[1];
+                target.textContent = text0.value.length + "/" + limit;
+            });
+            document.getElementById('btn').addEventListener('click', function() {
+                let str = '今日の福岡は平年並みの気温に戻った。';
+               // let target = text0.parentNode.parentNode.firstElementChild.querySelector('.count');
+               // let limit = target.textContent.split('/')[1];
+               // target.textContent = str.length + "/" + limit;
+                text0.value = str;
+                text0.dispatchEvent(new KeyboardEvent('keyup'));
+            });
+        });
+    </script>
+</head>
+<body>
+<button id="btn">追加</button>
+<div>
+    <div>
+        <label>辞書名</label>
+        <div><span class="count">0/50</span></div>
+    </div>
+    <div>
+        <input type="text" name="abc" />
+    </div>
+</div>
+<div>
+    <div>
+        <label>あああ</label>
+        <div><span class="count">0/100</span></div>
+    </div>
+    <div>
+        <input type="text" name="abc" />
+    </div>
+</div>
+</body>
+</html>

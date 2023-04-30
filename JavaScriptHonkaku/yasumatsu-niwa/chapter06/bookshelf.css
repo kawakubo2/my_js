@@ -1,0 +1,13 @@
+header, main {
+    width: 22rem;
+    margin: 1rem auto;
+}
+.container {
+    width: 20rem;
+    background-color: #f0f0f0;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 0.8rem;
+    box-shadow: 2px 2px 2px #ccc;
+    margin: 0.5rem;
+}

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>正規表現</title>
+</head>
+<body>
+<script>
+let p = /(http(s)?:\/\/([\w-]+\.)+[\w-]*(\/[\w- .\/>%&=]*)?)/gi;
+let str = '日本で一番ためになるプログラミング教室はhttps://haru-idea.jp/です。';
+document.write(str.replace(p, '<a href="$1">$1</a>'));
+</script>
+</body>
+</html>

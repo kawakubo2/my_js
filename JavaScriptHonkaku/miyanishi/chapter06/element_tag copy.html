@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<ul>
+    <li><a href="http://www.wings.mns.to/" class="my">サーバサイドの学び舎</a></li>
+    <li><a href="http://www.web-deli.com/" class="my">WebDeli</a></li>
+    <li><a href="http://www.buildinsider.net/web/jqueryref">jQuery逆引きリファレンス</a></li>
+    <li>TypeScript逆引きリファレンス(近日公開予定)</li>
+</ul>
+<a href="https://haru-idea.jp">haruプログラミング教室</a>
+<script>
+let list = document.getElementsByClassName('my');
+for (let i = 0, len = list.length; i < len; i++) {
+    console.log(list[i].href); // list.item(i).href
+}
+
+let query_list = document.querySelectorAll('ul a');
+for (let i = 0, len = query_list.length; i < len; i++) {
+    console.log(query_list[i].innerHTML); // list.item(i).href
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+const btn_click = () => alert('ボタンがクリックされました。');

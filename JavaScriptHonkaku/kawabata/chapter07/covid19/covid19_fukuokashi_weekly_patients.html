@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #CCC;
+        padding: 0.2rem;
+    }
+    td.number {
+        text-align: right;
+    }
+    area_line_chart {
+        width: 100rem;
+        height: 30rem;
+    }
+    svg {
+        width: 100rem;
+        height: 30rem;
+    }
+</style>
+<title>福岡市コロナ感染者陽性患者情報</title>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="covid19_fukuokashi_weekly_patients.js"></script>
+</head>
+<body>
+    <h3>コロナ陽性患者発表情報</h3>
+    <form>
+        <button id="btn">検索</button><br>
+    </form><br>
+    <div id="area_line_chart"></div>
+    <hr>
+    <table>
+        <thead id="table-header">
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+</body>
+</html>

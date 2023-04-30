@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        table {
+            border-collapse: collapse;
+            border-radius: 0.5rem;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 0.2rem;
+        }
+        th {
+            background: navy;
+            color: white;
+        }
+        td.number {
+            text-align: right;
+        }
+    </style>
+    <title>HTMLの練習</title>
+</head>
+<body>
+    <h1>はじめてのHTML</h1>
+    <p>知っている言語</p>
+    <ul>
+        <li>FORTRAN</li>
+        <li>COBOR</li>
+        <li>RPGⅡ</li>
+        <li>BASIC</li>
+        <li>Sed/Awk</li>
+        <li>Perl</li>
+        <li>C</li>
+        <li>C++</li>
+        <li>C#</li>
+        <li>Java</li>
+        <li>Python</li>
+        <li>JavaScript</li>
+        <li>PHP</li>
+    </ul>
+    <p>習得したい言語</p>
+    <ol>
+        <li>Go</li>
+        <li>TypeScript</li>
+        <li>Rust</li>
+        <li>PowerShell</li>
+    </ol>
+    <div>
+        <input type="radio" name="bloodtype" value="A" />A型
+        <input type="radio" name="bloodtype" value="B" />B型
+        <input type="radio" name="bloodtype" value="AB" />AB型
+        <input type="radio" name="bloodtype" value="O" />O型
+    </div>
+    <div>
+        <p>好きな本のジャンル</p>
+        <input type="checkbox" name="jenre" value="novel" />小説
+        <input type="checkbox" name="jenre" value="non-fiction" />ノンフィクション
+        <input type="checkbox" name="jenre" value="sport" />スポーツ
+        <input type="checkbox" name="jenre" value="cooking" />料理
+        <input type="checkbox" name="jenre" value="travel" />旅行
+        <input type="checkbox" name="jenre" value="music" />音楽
+    </div>
+    <div>
+        <p>関東の都県</p>
+        <select name="pref">
+            <option value="">選択</option>
+            <option value="08">茨木県</option>
+            <option value="09">栃木県</option>
+            <option value="10">群馬県</option>
+            <option value="11">埼玉県</option>
+            <option value="12">千葉県</option>
+            <option value="13">東京都</option>
+            <option value="14">神奈川県</option>
+        </select>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>日付</th>
+                    <th>費目</th>
+                    <th>メモ</th>
+                    <th>入金額</th>
+                    <th>出金額</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>2021-07-03</td><td>食費</td><td>コーヒーを購入</td><td class="number">0</td><td class="number">380</td></tr>
+                <tr><td>2021-07-10</td><td>給料</td><td>6月の給料</td><td class="number">2800</td><td class="number">0</td></tr>
+                <tr><td>2021-07-11</td><td>橋梁娯楽費</td><td>書籍を購入</td><td class="number">0</td><td class="number">2800</td></tr>
+                <tr><td>2021-07-14</td><td>交際費</td><td>同期会の会費</td><td class="number">0</td><td class="number">5000</td></tr>
+            </tbody>
+
+        </table>
+    </div>
+</body>
+</html>

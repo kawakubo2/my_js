@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let x = '10';
+        let y = 10;
+
+        console.log(x == y); // 等価演算子
+        console.log(x === y); // 同値演算子(型と値が一致した場合のみtrue)
+
+        let a = 0;
+        let s = '';
+        let array = [];
+        let obj = [];
+        console.log('--- 等価演算子 ---');
+        console.log(a == false);
+        console.log(s == false);
+        console.log(array == false);
+        console.log(obj == false);
+        console.log('--- 同値演算子 ---');
+        console.log(a === false);
+        console.log(s === false);
+        console.log(array === false);
+        console.log(obj === false);
+
+        const score = 50;
+        if (score >= 70) {
+            console.log('合格');
+        } else {
+            console.log('不合格');
+        }
+        console.log((score >= 70) ? '合格' : '不合格');
+
+        console.log('--- ショートカット演算 ---');
+        score >= 70 && console.log('合格');
+        score >= 70 || console.log('不合格');
+
+        let n1 = 10;
+        let n2 = 20;
+        let n3 = 30;
+
+        // 条件式で代入は文法的には可だが、一般的には使わない
+        if (n1 > 5 || (n2 *= 2)) {
+            n3 += 100;
+        }
+
+        console.log(`n1=${n1}, n2=${n2}, n3=${n3}`);
+
+        // let errors = ['名前は必須入力です', 'パスワードは8文字以上で入力してください'];
+        let errors = [];
+        console.log(errors == false);
+
+        errors = errors || ['エラーなし'];
+        console.log(errors);
+    </script>
+</body>
+
+</html>

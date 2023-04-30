@@ -1,0 +1,10 @@
+let x = 10;
+console.log(typeof x);
+x = 'abc';
+console.log(typeof x);
+x = true;
+console.log(typeof x);
+x = [];
+console.log(typeof x);
+console.log(typeof x === 'object' && x instanceof Array);
+console.log(Array.isArray(x));

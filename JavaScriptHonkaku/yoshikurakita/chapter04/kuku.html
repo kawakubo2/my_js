@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>ラベル付きbreak文</title>
+</head>
+<body>
+    <h3>ラベル付きbreak文</h3>
+    <table border="1">
+    <script type="text/javascript">
+    let count = 0;
+    outer:
+    for (let i = 1; i <= 9; i++) {
+        document.write('<tr>');
+        for (let j = 1; j <= 9; j++) {
+            count++;
+            if (i * j > 30) {
+                break outer;
+            }
+            document.write('<td>' + (i * j) + '</td>');
+        }
+        document.write('</tr>');
+    }
+    </script>
+    </table>
+    <script>
+    document.write('<span>' + count + '回</span>');
+    </script>
+</body>
+</html>

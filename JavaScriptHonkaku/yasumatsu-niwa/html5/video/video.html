@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="video.css" />
+    <script type="text/javascript" src="video.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <h1>JS Video Player</h1>
+        <section>
+            <h2>ビデオの選択</h2>
+            <select id="playlist">
+                <option value="">--選択--</option>
+                <option value="video1_1.mp4">video1_1.mp4</option>
+                <option value="video1_2.mp4">video1_2.mp4</option>
+                <option value="video1_3.mp4">video1_3.mp4</option>
+            </select>
+        </section>
+        <section>
+        <video id="video"></video>
+        </section>
+        <section>
+            <div id="seekbar-wrap">
+                <div id="seekbar-out">
+                    <div id="seekbar-in"></div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div id="controller">
+                <div>
+                    <input type="button" id="play" value="再生" />
+                    <input type="button" id="pause" value="一時停止" />
+                    <span>音量: </span>
+                    <input type="range" name="volume" id="volume", min="0.0" max="1.0" step="0.1" value="0.5" />
+                    <span>再生時間: <span id="current"></span> / <span id="duration"></span></span> 
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

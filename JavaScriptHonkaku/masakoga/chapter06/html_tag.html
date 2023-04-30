@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        h1 {
+            background: navy;
+            color: white;
+            border-radius: 0.5rem;
+            padding: 0.3rem;
+            text-align: center;
+            box-shadow: 5px 5px #ccc;
+        }
+        h2 {
+            background: #ff3333;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 1rem auto;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 0.3rem;
+        }
+        td.number {
+            text-align: right;
+        }
+        div#main {
+            margin: 1rem auto;
+        }
+    </style>
+    <title>HTMLタグ</title>
+</head>
+<body>
+    <h1>HTMLタグの練習</h1>
+    <p>HTMLはWebページの構造を与える。プログラム言語とは違い、タグを使うマークアップ言語である。htmlタグはJavaScriptに取り込まれるとDOMノードとなり、全体としてDOMツリーとなる。</p>
+    <p>XMLも同様にDOMツリーで管理されるため、同様の操作がJavaScriptで可能である。JavaScriptはDOM操作することでノードの追加・削除が可能である。そのためにもHTMLタグの知識は必須である。</p>
+    <p>はWebページの構造を与える。プログラム言語とは違い、タグを使うマークアップ言語である。htmlタグはJavaScriptに取り込まれるとDOMノードとなり、全体としてDOMツリーとなる。
+    <h2>ulタグ、olタグ</h2>
+    <p>Webアプリを作成するために必要な最低限の技術</p>
+    <ul>
+        <li>
+            クライアントサイド
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+            </ul>
+        </li>
+        <li>
+            サーバサイド
+            <ul>
+                <li>PHP, Java, Python, C#などの言語
+                <li>SQL</li>
+            </ul>
+        </li>
+    </ul>
+    <p>学習順序</p>
+    <ol>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>サーバサイドの言語</li>
+        <li>SQL</li>
+        <li>サーバ構築</li>
+        <li>ネットワーク構築</li>
+    </ol>
+    <dl>
+        <dt>HTML</dt>
+        <dd>HTMLやXMLはマークアップ言語で呼ばれ、プログラミング言語のように制御構文やコレクションクラスは持たない。タグで作成するスタイルをとる。</dd>
+        <dt>CSS</dt>
+        <dd>Cascading Style Sheetの略。HTMLがWebページに構造を与えるのに対し、CSSはその構造の色やフォント、配置などを与えるために使用する。CSSのセレクタはJavaScriptでも使用可能である。</dd>
+        <dt>JavaScript</dt>
+        <dd>HTMLやCSSをコントロールできる。もともとはブラウザベースで動作するように設計されたが、通常のプログラミング言語と同様に制御構文、コレクションクラスを持つのでサーバサイドとしても使用できる。サーバサイドというとNode.jsを連想する人も多いが、10数年前から既にサーバサイドで使用されていた。</dd>
+    </dl>
+    <table>
+        <thead>
+            <tr><th>日付</th><th>費目</th><th>メモ</th><th>入金額</th><th>出金額</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>2021-10-03</td><td>食費</td><td>コーヒーを購入</td><td class="number">0</td><td class="number">380</td></tr>
+            <tr><td>2021-10-10</td><td>給料</td><td>9月の給料</td><td class="number">280000</td><td class="number">0</td></tr>
+            <tr><td>2021-10-11</td><td>教養娯楽費</td><td>書籍を購入</td><td class="number">0</td><td class="number">2800</td></tr>
+            <tr><td>2021-10-14</td><td>接待費</td><td>同期会の会費</td><td class="number">0</td><td class="number">5000</td></tr>
+        </tbody>
+    </table>
+    <div id="main">
+        <form method="POST" action="">
+            <div class="container">
+                <label for="hiduke">日付:</label><br>
+                <input type="date" id="hiduke" name="hiduke" />
+            </div>
+            <div class="container">
+                <label for="himoku">費目:</label><br>
+                <select id="himoku" name="hiomku">
+                    <option value="">--選択--</option>
+                    <option value="1">食費</option>
+                    <option value="2">給料</option>
+                    <option value="3">教養娯楽費</option>
+                    <option value="4">交際費</option>
+                    <option value="5">水道光熱費</option>
+                    <option value="6">通信費</option>
+                    <option value="7">居住費</option>
+                </select>
+            </div>
+            <div class="container">
+                収支区分:<br>
+                <input type="radio" name="inout" value="支出" />支出
+                <input type="radio" name="inout" value="収入" />収入
+            </div>
+            <div class="container">
+                <label for="memo">メモ:</label><br>
+                <textarea rows="5" cols="40" id="memo"
+                    name="memo"></textarea>
+            </div>
+            <div class="container">
+                <label for="income">入金額:</label><br>
+                <input type="number" id="income" name="income" />
+            </div>
+            <div class="container">
+                <label for="expense">出金額:</label><br>
+                <input type="number" id="expense" name="expense" />
+            </div>
+            <div class="container">
+                <label for="xxxtime">
+                <input type="time" step="900" id="xxxtime" name="xxxtime" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>

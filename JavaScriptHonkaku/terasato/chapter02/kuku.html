@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>do while文</title>
+    </head>
+    <body>
+    <script>
+        /*
+         30を超える値を表示しない
+        */
+        let counter = 0;
+        document.write('<table border="1">');
+        for (let i = 1; i <= 99; i++) {
+            document.write('<tr>');
+            for (let j = 1; j <= 99; j++) {
+                counter++;
+                if (i * j > 300) break;
+                document.write(`<td>${i * j}</td>`);
+            }
+            document.write('</tr>');
+        }
+        document.write('</table>');
+        document.write(`<p>${counter}`);
+    </script>
+    </body>
+</html>

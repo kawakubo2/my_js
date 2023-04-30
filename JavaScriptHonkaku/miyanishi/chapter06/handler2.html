@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <script>
+    // アロー関数
+    const div_op = () => {
+        document.getElementById('result').innerHTML = '<div>Inner</div>';
+        document.getElementById('result').style.backgroundColor = 'Yellow';
+        console.log('ダイアログ表示');
+    };
+    const alert_op = () => {
+        alert('Hello, Event Driven Programming!');
+    };
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('btn').addEventListener('click', alert_op); 
+        document.getElementById('btn').addEventListener('click', div_op);
+        document.getElementById('alert_off').addEventListener('click', function() {
+            document.getElementById('btn').removeEventListener('click', alert_op);
+        });
+    });
+    </script>
+</head>
+<body>
+<form>
+    <input type="button" id="btn" value="ダイアログ表示" />
+    <input type="button" id="alert_off" value="アラート解除" />
+    <div width="500" height="300" id="result"></div>
+</form>
+</body>
+</html>

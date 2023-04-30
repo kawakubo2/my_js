@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<ul>
+    <li><a href="http://www.wings.mns.to/">サーバサイドの学び舎</a></li>
+    <li><a href="http://www.web-deli.com/">WebDeli</a></li>
+    <li><a href="http://www.buildinsider.net/web/jqueryref">jQuery逆引きリファレンス</a></li>
+</ul>
+<script>
+let list = document.getElementsByTagName('a');
+for (let i = 0, len = list.length; i < len; i++) {
+    console.log(list[i].href); // list.item(i).href
+}
+</script>
+</body>
+</html>

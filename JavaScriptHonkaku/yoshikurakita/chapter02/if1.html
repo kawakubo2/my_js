@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<script>
+
+let gender = 'F';
+let age = 28;
+
+if (gender == 'F' && age <= 20) {
+    console.log('2000円です。');
+} else if (gender == 'F' && age <= 50) {
+    console.log('2200円です。');
+} else if (gender == 'F' && age <= 70) {
+    console.log('2400円です。');
+} else if (gender == 'F' && age > 70) {
+    console.log('2600円です。');
+} else if (gender == 'M' && age <= 20) {
+    console.log('2400円です。');
+} else if (gender == 'M' && age <= 50) {
+    console.log('2800円です。');
+} else if (gender == 'F' && age <= 70) {
+    console.log('3200円です。');
+} else if (gender == 'F' && age > 70) {
+    console.log('3600円です。');
+}
+
+if (gender == 'F') {
+    if (age <= 20) {
+        console.log('2400円です。');    
+    } else if (age <= 50) {
+        console.log('2800円です。');
+    } else if (age <= 70) {
+        console.log('3200円です。');
+    } else {
+        console.log('3600円です。')
+    }
+} else if (gender == 'M') {
+    if (age <= 20) {
+        console.log('2000円です。');    
+    } else if (age <= 50) {
+        console.log('2200円です。');
+    } else if (age <= 70) {
+        console.log('2400円です。');
+    } else {
+        console.log('2600円です。')
+    }
+}
+
+
+
+
+</script>
+</head>
+</html>

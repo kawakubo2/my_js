@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="file_reader.js"></script>
+</head>
+<body>
+    <form>
+        <div class="container">
+            <label for="file">ファイル　:</label>
+            <input id="file" name="file" type="file" />
+        </div>
+        <div class="container">
+            <label for="charset">文字セット:</label>
+            <select id="charset">
+                <option value="UTF-8">UTF-8</option>
+                <option value="Shift_JIS">Shift_JIS</option>
+                <option value="EUC-JP">EUC-JP</option>
+            </select>
+        </div>
+    </form>
+    <pre id="result"></pre>
+</body>
+</html>

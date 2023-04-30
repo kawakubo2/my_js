@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="bookshelf.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>haru図書館</h1>
+    <form>
+        <div class="container">
+            <label for="title">題名:</label>
+            <input type="text" name="title" id="title" />
+        </div>
+        <div class="container">
+            <label for="author">著者:</label>
+            <input type="text" name="author" id="author" />
+        </div>
+        <div class="container">
+            <label for="price">価格:</label>
+            <input type="text" name="price" id="price" />
+        </div>
+    </form>
+    <table border="1">
+        <tbody id="booklist">
+            <tr id="booklist-header"><th>題名</th><th>作者</th><th>価格</th>
+                <th>
+                    <input type="button" class="add" value="追加" />
+                </th>
+            </tr>
+        </tbody>
+    </table>    
+</body>
+</html>

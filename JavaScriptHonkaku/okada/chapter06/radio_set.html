@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const setRadioValue = (name, value) => {
+            let elems = document.getElementsByName(name);
+            for (let i = 0, len = elems.length; i < len; i++) {
+                let elem = elems[i];
+                if (elem.value === value) {
+                    elem.checked = true;
+                    break;
+                }
+            }
+        }
+        document.addEventListener('DOMContentLoaded',
+            () => {
+                setRadioValue('food', '焼肉');
+            }
+        );
+        
+    </script>
+</head>
+<body>
+<form>
+    <div>
+        好きな食べ物は？
+        <label><input type="radio" name="food" value="ラーメン" />ラーメン</label>
+        <label><input type="radio" name="food" value="餃子" />餃子</label>
+        <label><input type="radio" name="food" value="焼肉" />焼肉</label>
+    </div>
+    <input type="submit" value="送信" />
+</form>
+</body>
+</html>

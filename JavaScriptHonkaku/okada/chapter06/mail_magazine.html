@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let email = document.getElementById('email');
+            email.style.display = 'none';
+            email.disable = true;
+            let onoff = document.getElementById('onoff');
+            onoff.addEventListener('click', function() {
+                if (onoff.checked) {
+                    email.style.display = 'block';
+                    email.disabled = false;
+                } else {
+                    email.style.display = 'none';
+                    email.value = '';
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <form method="GET" action="">
+        <input type="checkbox" id="onoff" name="onoff" />メルマガ希望
+        <input type="email" id="email" name="email" />
+        <input type="submit" value="送信" />
+    </form>
+</body>
+</html>

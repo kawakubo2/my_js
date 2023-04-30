@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<ul id="list">
+    <li><a href="aaa.html" class="my"><img src="xxx" class="external" alt="aaaa" />aaa</a></li>
+    <li id="xyz"><a href="bbb.html" ><img src="yyy" alt="bbbb" />bbb</a></li>
+    <li><a href="ccc.html" class="external">ccc</a></li>
+    <li><a href="ddd.html" class="external">ddd</a></li>
+</ul> 
+<script>
+    let list4 = document.querySelectorAll('img[alt="bbbb"]')
+    for (let i = 0, len = list4.length; i < len; i++) {
+        list4[i].style.border = '5px solid red';
+    }
+    // let list = document.querySelectorAll('#list .external');
+    // for (let i = 0, len = list.length; i < len; i++) {
+    //     list[i].style.border = '5px solid red';
+    // }
+    // let list2 = document.querySelectorAll('#list > li');
+    // for (let i = 0, len = list2.length; i < len; i++) {
+    //     list2[i].style.backgroundColor = 'yellow';
+    // }
+    // let list3 = document.querySelectorAll('#xyz ~ li');
+    // for (let i = 0, len = list3.length; i < len; i++) {
+    //     list3[i].style.backgroundColor = 'red';
+    // }
+</script>
+</body>
+</html>

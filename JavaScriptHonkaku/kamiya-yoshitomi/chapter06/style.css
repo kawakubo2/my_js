@@ -1,0 +1,7 @@
+.highlight {
+    background-color: yellow;
+    border: 1px solid #999;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    box-shadow: 10px 5px 5px #ccc;
+}
