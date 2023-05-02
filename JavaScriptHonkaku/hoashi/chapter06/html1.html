@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 0.3rem;
+        }
+        th {
+            background: lemonchiffon;
+        }
+        td {
+            background: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTMLの基礎</h1>
+    <p>HTMLはHyper Text Markup Languageの略。ブラウザ等のエンジンで処理されるときは各要素はNodeオブジェクトに変換され、ツリー構造となる。この場合、HTML Nodeがルードノードとなり、</p>
+    <p>HTMLはWebアプリを作るときの基礎となり、サーバサイド側で初期画面を作ることもあり、サーバサイド技術者も基礎を知る必要がある。</p>
+    <h2>基礎となる技術</h2>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>SQL</li>
+        <li>Java</li>
+        <li>Python</li>
+        <li>PHP</li>
+    </ul>
+    <h2>習得する順序</h2>
+    <ol>
+        <li>HMTL</li>
+        <li>CSS</li>
+        <li>SQL</li>
+        <li>JavaScript</li>
+        <li>サーバサイド技術言語のいずれか(Java, Python, PHP, Ruby, C#等</li>
+    </ol>
+    <ul>
+        <li><a id="xyz" href="https://haru-idea.jp/images/haru0050_sm.jpg">教室の画像1</a></li>
+        <li><a href="https://haru-idea.jp/images/haru0051_sm.jpg">教室の画像2</a></li>
+        <li><a href="https://haru-idea.jp/images/haru0053_sm.jpg">教室の画像3</a></li>
+    </ul>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>費目</th>
+                <th>メモ</th>
+                <th>入金額</th>
+                <th>出金額</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>2023-05-03</td><td>食費</td><td>コーヒーを購入</td><td class="price">0</td><td class="price">380</td></tr>
+            <tr><td>2023-05-10</td><td>給料</td><td>4月の給料</td><td class="price">280000</td><td class="price">0</td></tr>
+            <tr><td>2023-05-11</td><td>教養娯楽費</td><td>書籍を購入</td><td class="price">0</td><td class="price">2800</td></tr>
+            <tr><td>2023-05-14</td><td>交際費</td><td>同期会の会費</td><td class="price">0</td><td class="price">5000</td></tr>
+            </tr>
+        </tbody>
+    </table>
+    <h2>アンケートフォーム</h2>
+    <form method="post" action="abc.xxx">
+        <div class="container">
+            <label for="name">名前: </label><br>
+            <input type="text" name="name" id="name">
+        </div>
+        <div class="container">
+            <label for="email">Eメールアドレス: </label><br>
+            <input type="email" name="email" id="email">
+        </div>
+        <div class="container">
+            <label for="gender">性別: </label><br>
+            <select name="gender" id="gender">
+                <option value="male">男性</option>
+                <option value="female">女性</option>
+                <option value="other">その他</option>
+            </select>
+        </div>
+        <div class="containre">
+            血液型: <br>
+            <label><input type="radio" name="bloodtype" id="A">A型</label>
+            <label><input type="radio" name="bloodtype" id="B">B型</label>
+            <label><input type="radio" name="bloodtype" id="AB">AB型</label>
+            <label><input type="radio" name="bloodtype" id="O">O型</label>
+        </div>
+        <div class="container">
+            今回のセミナーでどの分野に興味を持たれましたか？(複数選択可) <br>
+            <label><input type="checkbox" name="genre" value="web">WEB開発</label>
+            <label><input type="checkbox" name="genre" value="smart-phone">スマホ開発</label>
+            <label><input type="checkbox" name="genre" value="network">ネットワーク</label>
+            <label><input type="checkbox" name="genre" value="security">セキュリティ</label>
+            <label><input type="checkbox" name="genre" value="ai">AI</label>
+        </div>
+        <div>
+            <input type="submit" value="送信">
+        </div>
+    </form>
+    <script>
+        const input = document.querySelectorAll('td[class="price"]');
+        for (let i = 0; i < input.length; i++) {
+            console.log(input[i].textContent);
+        }
+        const a = document.querySelector('#xyz');
+        a.style.background = 'yellow';
+    </script>
+</body>
+</html>
