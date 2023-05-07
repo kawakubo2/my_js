@@ -27,8 +27,17 @@
         }
         div#target {
             width: 1600px;
-            height: 380px;
+            height: 330px;
             background: #F3F3F3;
+        }
+        #items-total {
+            border-top: 2px solid #333;
+        }
+        #grand-total {
+            font-weight: bold;
+        }
+        #grand-total-label {
+            text-align: right;
         }
     </style>
 </head>
@@ -100,13 +109,17 @@
             <th>商品名</th>
             <th>単価</th>
             <th>数量</th>
-            <th>小計</th>
+            <th>合計</th>
         </thead>
         <tbody id="items">
 
         </tbody>
-        <tfoot id="total">
-
+        <tfoot id="items-total">
+            <tr>
+                <td colspan="2"></td>
+                <td id="grand-total-label">総合計</td>
+                <td id="grand-total"></td>
+            </tr>
         </tfoot>
     </table>
 </body>
