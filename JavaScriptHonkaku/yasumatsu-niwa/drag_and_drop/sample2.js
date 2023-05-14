@@ -25,6 +25,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
     const create_tr = item => {
         const tr = document.createElement('tr');
+        tr.id = 'item-' + item.id;
         const itemNameTd = document.createElement('td');
         const itemNameText = document.createTextNode(item.querySelector('.product-name').textContent);
         itemNameTd.appendChild(itemNameText);
@@ -48,13 +49,35 @@ window.addEventListener('DOMContentLoaded', event => {
         tr.appendChild(subTotalTd);
         return tr;
     }
-    const drop_handler = event => {
-        event.preventDefault();
-        event.stopPropagation();
+    /*
+    ショーケースから買い物かごにドラッグしたときの処理
+    ショーケースのSetから削除し、買い物かごに追加
+    合計金額を計算し直す。
+    */
+    const target_set = new Set();
+    const target_drop_handler = event => {
         const data = event.dataTransfer.getData("text");
         const item = document.getElementById(data);
         event.target.appendChild(item);
+        if (target_set.has(data)) {
+            return;
+        }
+        show_case_set.delete(data);
+        target_set.add(data);
         table_items.appendChild(create_tr(item));
+        update_grand_total();
+    };
+    const show_case_set = new Set();
+    const show_case_drop_handler = event => {
+        const data = event.dataTransfer.getData("text");
+        const item = document.getElementById(data);
+        event.target.appendChild(item);
+        if (show_case_set.has(data)) {
+            return;
+        }
+        table_items.removeChild(table_items.querySelector('#item-' + data));
+        show_case_set.add(data);
+        target_set.delete(data);
         update_grand_total();
     };
     const update_grand_total = event => {
@@ -79,8 +102,8 @@ window.addEventListener('DOMContentLoaded', event => {
     for (const item of items) {
         item.addEventListener('dragstart', dragstart_handler);
     }
-    target.addEventListener('drop', drop_handler);
+    target.addEventListener('drop', target_drop_handler);
     target.addEventListener('dragover', dragover_handler);
-    show_case.addEventListener('drop', drop_handler);
+    show_case.addEventListener('drop', show_case_drop_handler);
     show_case.addEventListener('dragover', dragover_handler);
 });
