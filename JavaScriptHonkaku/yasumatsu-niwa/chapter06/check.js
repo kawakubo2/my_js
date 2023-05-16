@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     document.getElementById('btn').addEventListener('click', () => {
         const foods = getCheckboxValues('food');
-        window.alert(foods.toString());
+        console.log(foods.toString());
+        const sports = getCheckboxValues('sport');
+        console.log(sports.toString());
     })
 });
