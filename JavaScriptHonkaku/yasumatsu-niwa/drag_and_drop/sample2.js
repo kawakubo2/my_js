@@ -101,6 +101,8 @@ window.addEventListener('DOMContentLoaded', event => {
     const items = document.getElementsByClassName('item');
     for (const item of items) {
         item.addEventListener('dragstart', dragstart_handler);
+        // item.addEventListener('dragover', event => event.preventDefault());
+        // item.addEventListener('drop', event => event.preventDefault());
     }
     target.addEventListener('drop', target_drop_handler);
     target.addEventListener('dragover', dragover_handler);
