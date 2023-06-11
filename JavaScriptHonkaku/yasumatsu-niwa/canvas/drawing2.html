@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/>
+<title>TestCanvasMouseEvent01.html</title>
+<script src="drawing2.js"></script>
+<style>
+body { 
+    background:#cccccc; margin:15px 15px; 
+}
+canvas#canvas1 {
+    background:#ffffff; 
+}
+pre {
+    font-family:"ＭＳ Ｐゴシック"; font-size:10.5pt; line-height:150%;
+}
+</style>
+</head>
+<body>
+
+<div>
+<canvas id="canvas1" width="400" height="400"
+	onmousemove="onMouseMove(event)"
+	onmouseout="onMouseDown(false)"
+	onmouseup="onMouseDown(false)"
+	onmousedown="onMouseDown(true)"></canvas>
+</div>
+    <form>
+        <p>筆の色：
+        <input type="radio" value="arc" name="shape" onclick="changeShape(this);"/>円弧
+        <input type="radio" value="rect" name="shape" onclick="changeShape(this);" />四角
+        </p>
+    </form>
+
+<div id="mouse_state"></div>
+
+
+<pre>
+・マウスイベントを拾うサンプル
+  簡単な塗り絵。マウスをドラッグすると描画。
+
+・ノート
+  マウスの座標はウインド内の左上が (0,0)、Canvas の座標は 
+　Canvasの左上が (0,0) である点に注意。canvas の位置によって座
+　標がずれる。
+  単純な方法は body のマージンをゼロにして Canvas を左上に詰める。
+</pre>
+
+</body>
+</html>
+
+
