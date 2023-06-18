@@ -4,15 +4,21 @@ let penY = 0;
 let penWidth = 10;
 let ctx;
 let shape = 'arc';
-let color = 'green';
 
 window.addEventListener('DOMContentLoaded', () => {
     let canvas = document.getElementById('canvas1');
-    const arc = document.getElementById('arc');
-    const rect = document.getElementById('rect');
     ctx = canvas.getContext('2d');
-    
-    const setMouseDown = b => mouseDown = b;
+    canvas.addEventListener('mousemove', event => {
+        if (mouseDown){
+            //マウス座標とCanvasの座標を適当に調整
+            penX = event.clientX - 15;
+            penY = event.clientY - 15;
+            draw();
+        }
+    });
+    canvas.addEventListener('mousedown', function(event) {
+        mousedown = event;
+    });
     const draw = () => {
         ctx.beginPath();
         ctx.fillStyle = "#0099ff";
@@ -23,25 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         ctx.fill();
     }
-    canvas.addEventListener('mousemove', event => {
-        if (mouseDown){
-            //マウス座標とCanvasの座標を適当に調整
-            penX = event.offsetX - 15;
-            penY = event.offsetY - 15;
-
-            draw();
-        }
-    });
-    canvas.addEventListener('mousedown', () => setMouseDown(true));
-    canvas.addEventListener('mouseout', () => setMouseDown(false));
-    canvas.addEventListener('mouseup', () => setMouseDown(false));
-
-    arc.addEventListener('click', event => {
-        shape = event.target.value;
-    });
-    rect.addEventListener('click', event => {
-        shape = event.target.value;
-    });
+    
 });
 
 
@@ -72,7 +60,6 @@ const onMouseMove = event => {
         //マウス座標とCanvasの座標を適当に調整
         penX = event.clientX - 15;
         penY = event.clientY - 15;
-
         draw();
     }
     debug();

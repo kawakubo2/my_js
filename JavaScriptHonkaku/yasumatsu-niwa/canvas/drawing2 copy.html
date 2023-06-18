@@ -19,18 +19,17 @@ pre {
 <body>
 
 <div>
-<canvas id="canvas1" width="400" height="400"></canvas>
+<canvas id="canvas1" width="400" height="400"
+	onmousemove="onMouseMove(event)"
+	onmouseout="onMouseDown(false)"
+	onmouseup="onMouseDown(false)"
+	onmousedown="onMouseDown(true)"></canvas>
 </div>
     <form>
-        <div class="container">
-          <h4>筆先の形状</h4>
-          <input type="radio" value="arc" id="arc" name="shape" />円弧
-          <input type="radio" value="rect" id="rect" name="shape" />四角
-        </div>
-        <div class="container">
-          <h4>色</h4>
-          <input type="color" name="color" id="color">
-        </div>
+        <p>筆の色：
+        <input type="radio" value="arc" name="shape" onclick="changeShape(this);"/>円弧
+        <input type="radio" value="rect" name="shape" onclick="changeShape(this);" />四角
+        </p>
     </form>
 
 <div id="mouse_state"></div>
