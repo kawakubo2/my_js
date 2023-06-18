@@ -1,0 +1,16 @@
+table {
+    border-collapse: collapse;
+    border: 1px solid #CCC;
+}
+th, td {
+    padding: 0.3rem;
+}
+.price {
+    text-align: right;
+}
+thead {
+    background: lemonchiffon;
+}
+tbody {
+    background: aquamarine
+}
