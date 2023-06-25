@@ -6,47 +6,57 @@
 <script src="drawing2.js"></script>
 <style>
 body { 
-    background:#cccccc; margin:15px 15px; 
+    background: #F0F0F0;
+    margin: 3rem 1rem; 
 }
 canvas#canvas1 {
     background:#ffffff; 
+    border: 1px solid #999;
+    border-radius: 0.5rem;
+    margin: 20px;
 }
 pre {
     font-family:"ＭＳ Ｐゴシック"; font-size:10.5pt; line-height:150%;
 }
+span.container {
+  border: 1px solid #999;
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 2px #999;
+  margin: 0.5rem;
+  padding: 0.3rem;
+}
 </style>
 </head>
 <body>
-
 <div>
-<canvas id="canvas1" width="400" height="400"></canvas>
-</div>
-    <form>
-        <div class="container">
-          <h4>筆先の形状</h4>
-          <input type="radio" value="arc" id="arc" name="shape" />円弧
+  <form>
+      <span class="container">
+        <label>筆先の形状: 
+          <input type="radio" value="arc" id="arc" name="shape" checked />円弧
           <input type="radio" value="rect" id="rect" name="shape" />四角
-        </div>
-        <div class="container">
-          <h4>色</h4>
-          <input type="color" name="color" id="color">
-        </div>
-    </form>
-
-<div id="mouse_state"></div>
-
-
-<pre>
-・マウスイベントを拾うサンプル
-  簡単な塗り絵。マウスをドラッグすると描画。
-
-・ノート
-  マウスの座標はウインド内の左上が (0,0)、Canvas の座標は 
-　Canvasの左上が (0,0) である点に注意。canvas の位置によって座
-　標がずれる。
-  単純な方法は body のマージンをゼロにして Canvas を左上に詰める。
-</pre>
-
+        </label>
+      </span>
+      <span class="container">
+        <label for="color">色</label>
+        <input type="color" name="color" id="color">
+      </span>
+      <span class="container">
+        <label for="width">筆の幅: </label>
+        <input type="range" name="width" id="width" min="5" max="30">
+      </span>
+      <span class="container">
+        <label for="canvas-width">キャンバスの幅: </label>
+        <input type="range" name="canvas-width" id="canvas-width" value="400" min="200" max="1800">
+      </span>
+      <span class="container">
+        <label for="canvas-height">キャンバスの高さ: </label>
+        <input type="range" name="canvas-height" id="canvas-height" value="400" min="200" max="1000">
+      </div>
+  </form>
+</div>
+<div>
+<canvas id="canvas1" width="800" height="400"></canvas>
+</div>
 </body>
 </html>
 

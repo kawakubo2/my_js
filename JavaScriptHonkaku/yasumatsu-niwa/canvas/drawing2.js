@@ -10,16 +10,20 @@ window.addEventListener('DOMContentLoaded', () => {
     let canvas = document.getElementById('canvas1');
     const arc = document.getElementById('arc');
     const rect = document.getElementById('rect');
+    const penSliderBar = document.getElementById('width');
+    const colorPalette = document.getElementById('color');
+    const canvasWidth = document.getElementById('canvas-width');
+    const canvasHeight= document.getElementById('canvas-height');
     ctx = canvas.getContext('2d');
-    
+
     const setMouseDown = b => mouseDown = b;
     const draw = () => {
         ctx.beginPath();
-        ctx.fillStyle = "#0099ff";
+        ctx.fillStyle = color;
         if (shape === 'arc') {
-            ctx.arc(penX, penY, penWidth, 0, Math.PI*2, false);
+            ctx.arc(penX + 20, penY + 20, penWidth / 2, 0, Math.PI*2, false);
         } else if (shape === 'rect') {
-            ctx.rect(penX, penY, 30, 30);
+            ctx.rect(penX + 10, penY + 10, penWidth, penWidth);
         }
         ctx.fill();
     }
@@ -42,6 +46,18 @@ window.addEventListener('DOMContentLoaded', () => {
     rect.addEventListener('click', event => {
         shape = event.target.value;
     });
+    penSliderBar.addEventListener('change', () => {
+        penWidth = penSliderBar.value;
+    });
+    colorPalette.addEventListener('change', () => {
+        color = colorPalette.value;
+    });
+    canvasWidth.addEventListener('change', () => {
+        canvas.width = canvasWidth.value;
+    });
+    canvasHeight.addEventListener('change', () => {
+        canvas.height = canvasHeight.value;
+    });
 });
 
 
@@ -50,41 +66,14 @@ const changeShape = elem => {
     shape = elem.value;
 }
 
-const draw = () => {
-    if (!ctx){
-        canvas = document.getElementById('canvas1');
-        ctx = canvas.getContext('2d');
-    }
-
-    ctx.beginPath();
-    ctx.fillStyle = "#0099ff";
-    if (shape === 'arc') {
-        ctx.arc(penX, penY, penWidth, 0, Math.PI*2, false);
-    } else if (shape === 'rect') {
-        ctx.rect(penX, penY, 30, 30);
-    }
-    ctx.fill();
-}
-
 const onMouseMove = event => {
     //マウスボタンを押している場合は描画する
     if (mouseDown){
         //マウス座標とCanvasの座標を適当に調整
-        penX = event.clientX - 15;
-        penY = event.clientY - 15;
-
+        penX = event.clientX;
+        penY = event.clientY;
         draw();
     }
-    debug();
 };
 
-const onMouseDown = b => {
-    mouseDown = b;
-    debug();
-};
-
-const debug = () => {
-    let s = "筆の座標: "+ penX +", "+ penY + "<br/>"
-            + "マウスボタン:" + (mouseDown ? "押した" : "押していない") + "<br/>";
-    document.getElementById("mouse_state").innerHTML = s;
-};
+const onMouseDown = b => { mouseDown = b; }
