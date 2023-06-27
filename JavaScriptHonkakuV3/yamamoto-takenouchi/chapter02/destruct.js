@@ -1,0 +1,12 @@
+let x = 8;
+let y = 5;
+console.log(`x = ${x}, y = ${y}`);
+let temp = x;
+x = y;
+y = temp;
+console.log(`x = ${x}, y = ${y}`);
+let a = 3;
+let b = 7;
+console.log(`a = ${a}, b = ${b}`);
+[b, a] = [a, b];
+console.log(`a = ${a}, b = ${b}`);
