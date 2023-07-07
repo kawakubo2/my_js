@@ -14,8 +14,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const colorPalette = document.getElementById('color');
     const canvasWidth = document.getElementById('canvas-width');
     const canvasHeight= document.getElementById('canvas-height');
+    const saveButton = document.getElementById('save');
+    const clearButton = document.getElementById('clear');
     ctx = canvas.getContext('2d');
-
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     const setMouseDown = b => mouseDown = b;
     const draw = () => {
         ctx.beginPath();
@@ -58,9 +61,17 @@ window.addEventListener('DOMContentLoaded', () => {
     canvasHeight.addEventListener('change', () => {
         canvas.height = canvasHeight.value;
     });
+
+    saveButton.addEventListener('click', () => {
+        const a = document.createElement('a');
+        a.href = canvas.toDataURL("image/jpeg", 0.75);
+        a.download = "image.jpg";
+        a.click();
+    });
+    clearButton.addEventListener('click', () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
 });
-
-
 
 const changeShape = elem => {
     shape = elem.value;
