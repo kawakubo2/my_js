@@ -1,0 +1,1 @@
+for (let i = 1, j = 1; console.log(i * j), i < 4; i++, j++);
