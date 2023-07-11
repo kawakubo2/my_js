@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const print_errors = errors => {
+        error_list.textContent = '';
         for (const error of errors) {
             const li = document.createElement('li');
             const text = document.createTextNode(error);
@@ -61,25 +62,70 @@ document.addEventListener('DOMContentLoaded', () => {
         const titleTd  = create_td(title.value);
         const authorTd = create_td(author.value);
         const priceTd  = create_td(price.value);
-        const buttonTd   = create_td_with_button('add', '追加');
+        const addButtonTd  = create_td_with_button('add', '追加');
+        const deleteButtonTd  = create_td_with_button('delete', '削除');
+        const upButtonTd  = create_td_with_button('up', '△');
+        const downButtonTd  = create_td_with_button('down', '▽');
         tr.appendChild(titleTd);
         tr.appendChild(authorTd);
         tr.appendChild(priceTd);
-        tr.appendChild(buttonTd);
+        tr.appendChild(addButtonTd);
+        tr.appendChild(deleteButtonTd);
+        tr.appendChild(upButtonTd);
+        tr.appendChild(downButtonTd);
         return tr;
     }
 
-    document.getElementById('tbody').addEventListener('click', event => {
+    tbody.addEventListener('click', event => {
 
-        const errors = check_input();
-        if (errors.length > 0) {
-            print_errors(errors);
-            return;
-        }
-        const tr = create_tr();
         const target_tr = event.target.parentNode.parentNode;
-        tbody.insertBefore(tr, target_tr.nextElementSibling);
-        error_list.textContent = '';
-        clear_element();
+
+        const add_tr = () => {
+            const errors = check_input();
+            if (errors.length > 0) {
+                print_errors(errors);
+                return;
+            }
+            const tr = create_tr();
+            tbody.insertBefore(tr, target_tr.nextElementSibling);
+            error_list.textContent = '';
+            clear_element();
+        };
+
+        const delete_tr = () => {
+            tbody.removeChild(target_tr);
+        };
+
+        const down_tr = () => {
+            let next = target_tr.nextElementSibling;
+            if (next) {
+                next = next.nextElementSibling;
+            }
+            tbody.insertBefore(target_tr, next);
+        };
+
+        const up_tr = () => {
+            const prev = target_tr.previousElementSibling;
+            if (prev == document.getElementById('thead')) return;
+            tbody.insertBefore(target_tr, prev);
+        };
+
+        switch(event.target.className) {
+            case "add":
+                add_tr();
+                break;
+            case "delete":
+                delete_tr();
+                break;
+            case "up":
+                up_tr();
+                break;
+            case "down":
+                down_tr();
+                break;
+            default:
+                console.warn("unkown event");
+                break;
+        }
     })
 });
