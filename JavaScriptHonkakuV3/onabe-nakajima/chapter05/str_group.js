@@ -10,4 +10,5 @@ while (true) {
         end = str.length;
     }
     start += step
+    if (start >= str.length) break;
 }
