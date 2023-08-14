@@ -1,5 +1,5 @@
 const str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-let step = 5;
+let step = 2;
 let start = 0;
 let end = start + step;
 while (true) {
