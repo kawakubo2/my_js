@@ -53,9 +53,9 @@ function mytotal4(nums) {
 console.log(`3の倍数の合計: ${mytotal4(numbers)}`);
 
 /*
-ある関数が引数として関数を、受け取ったり、
+ある関数が引数として関数を受け取ったり、
 戻り値として関数を返す、そのような関数を
-高階関数と呼ぶ。
+高階関数(higher order function)と呼ぶ。
 
 上記のmytotal2, mytotal3, mytotal4では条件式だけが異なる。
 共通しているのは整数値がある条件を満たしていたらtrue、そうで
