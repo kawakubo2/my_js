@@ -19,6 +19,8 @@ function getTriangleArea(base, height) {
 10, 4       --- 実引数(arguments)
 area        --- 戻り値を格納するための変数
 */
+
+/*
 try { // 例外処理
     let area = getTriangleArea(10, 4);
     console.log(area);
@@ -31,6 +33,4 @@ const b = 12;
 const h = 8;
 area = getTriangleArea(b, h);
 console.log(`底辺が${b}、高さが${h}の三角形の面積は${area}`);
-
-getTriangleArea = 100;
-console.log(getTriangleArea(5, 4));
+*/
