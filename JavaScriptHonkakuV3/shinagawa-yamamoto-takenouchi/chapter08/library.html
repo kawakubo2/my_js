@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="library.css">
+    <script src="Book.js"></script>
+    <script src="Bookshelf.js"></script>
+    <script src="library.js"></script>
+</head>
+<body>
+    <h1>○○図書館</h1>
+    <div>
+        <input type="radio" name="operation" id="add" value="add">新規の本を追加
+        <input type="radio" name="operation" id="borrow" value="borrow">借りる
+        <input type="radio" name="operation" id="returns" value="returns">返す
+        <input type="radio" name="operation" id="search" value="search">タイトルで検索する
+    </div>
+    <div id="div-add" class="operation-container">
+        <form>
+            <div class="container">
+                <label for="id">id: </label><br>
+                <input type="text" name="id" id="id" size="20" />
+            </div>
+            <div class="container">
+                <label for="title">タイトル: </label><br>
+                <input type="text" name="title" id="title" size="50" />
+            </div>
+            <div class="container">
+                <label for="publisher">出版社: </label><br>
+                <input type="text" name="publisher" id="publisher" size="30" />
+            </div>
+            <div class="container">
+                <label for="published">刊行日: </label><br>
+                <input type="date" name="published" id="published" />
+            </div>
+            <div class="container">
+                <label for="price">価格: </label><br>
+                <input type="number" name="price" id="price" />
+            </div>
+            <input id="button-add" type="button" value="新規作成" />
+        </form>
+    </div>
+    <div id="div-search" class="operation-container">
+        <form>
+            <div class="container">タイトル: </div>
+            <input type="text" name="search-title" id="search-title">
+            <input id="button-searh" type="button" value="検索">
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>タイトル</th>
+                            <th>出版社</th>
+                            <th>刊行日</th>
+                            <th>貸出可能</th>
+                        </tr>
+                    </thead>
+                    <tbody id="search-result">
+
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
