@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="book.js"></script>
+    <script src="bookshelf.js"></script>
+    <script src="library.js"></script>
+</head>
+<body>
+    <h2>○○○図書館</h2>
+    <form>
+        <div class="container">
+            <label for="menu">メニュー: </label><br>
+            <select name="menu" id="menu">
+                <option value=""></option>
+                <option value="rental">貸出</option>
+                <option value="returns">返却</option>
+                <option value="search">検索</option>
+                <option value="add">購入</option>
+                <option value="remove">廃棄</option>
+            </select>
+        </div>
+    </form>
+    <hr>
+    <form id="add-form" class="library-form">
+        <div class="container">
+            <label for="title">タイトル: </label><br>
+            <input type="text" name="title" id="title">
+        </div>
+        <div class="container">
+            <label for="price">価格: </label><br>
+            <input type="number" name="price" id="price">
+        </div>
+        <div class="container">
+            <label for="publisher">出版社: </label><br>
+            <input type="text" name="publisher" id="publisher">
+        </div>
+        <div class="container">
+            <label for="published">出版社: </label><br>
+            <input type="date" name="published" id="published">
+        </div>
+        <div class="container">
+            <input id="add-book" type="button" value="追加">
+        </div>
+    </form>
+    <hr>
+    <form id="searchForm" class="library-form">
+        <div class="container">
+            <input type="text" name="search_text" id="search_text">
+        </div>
+        <div class="container">
+            <input id="search_button" type="button" value="検索">
+        </div>
+    </form>
+</body>
+</html>
