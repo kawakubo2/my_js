@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     function getCheckboxValuesByAttributeName(attributeName) {
         const result = [];
-        const foods = document.querySelectorAll(`input[name="${attributeName}"]`);
-        for (const food of foods) {
-            if (food.checked) {
-                result.push(food.value);
+        const items = document.querySelectorAll(`input[name="${attributeName}"]`);
+        for (const item of items) {
+            if (item.checked) {
+                result.push(item.value);
             }
         }
         return result;
