@@ -13,7 +13,7 @@ const fruits = {banana: "バナナ", apple: "リンゴ", strawberry: "苺", grap
 document.addEventListener('DOMContentLoaded', () => {
     const result = document.querySelector('#result');
     const select = document.createElement('select');
-    select.name = 'fruits';
+    select.name = 'fruits'; // select.setAttribute('name', 'fruits');
     select.id = 'fruits';
     for (const fruit_en in fruits) {
         const fruit_ja = fruits[fruit_en];
