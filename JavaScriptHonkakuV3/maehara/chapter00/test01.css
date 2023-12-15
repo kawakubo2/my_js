@@ -1,0 +1,18 @@
+#list {
+    border: 1px solid #666;
+    padding: 1rem;
+}
+
+ul#list > li {
+    list-style-type: none;
+    border: 1px solid #666;
+    padding: 0.4rem;
+    margin: 0.7rem auto;
+    width: 8rem;
+    box-shadow: 4px 4px 4px #aaa;
+    border-radius: 0.6rem;
+}
+
+ul#list > li.odd {
+    background: whitesmoke;
+}
