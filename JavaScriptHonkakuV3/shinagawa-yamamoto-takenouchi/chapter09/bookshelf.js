@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const price = document.querySelector('#price');
     const btn = document.querySelector('#items input[type="button"]');
     const error_summary = document.querySelector('#error_summary');
+    const items = document.querySelector('#items');
+    const fm = document.querySelector('#fm');
 
     function validate_input() {
         const errors = [];
@@ -34,13 +36,59 @@ document.addEventListener('DOMContentLoaded', () => {
         error_summary.append(frag);
     }
 
-    btn.addEventListener('click', () => {
+    function create_tr() {
+        const tr = document.createElement('tr');
+        const td_title = create_td(title.value);
+        const td_publisher = create_td(publisher.value);
+        const td_price = create_td(price.value);
+        const td_add = create_td_with_button('追加', 'add');
+        tr.append(td_title);
+        tr.append(td_publisher);
+        tr.append(td_price);
+        tr.append(td_add);
+        return tr;
+    }
+
+    function create_td_with_button(button_value, clazz, attrs = {}) {
+        const td = document.createElement('td');
+        const button = create_button(button_value, clazz);
+        td.append(button);
+        return td;
+    }
+
+    function create_button(button_value, clazz) {
+        const button = document.createElement('input');
+        button.type = 'button';
+        button.classList.add(clazz);
+        button.value = button_value;
+        return button;
+    }
+
+    function create_td(str, attrs = {}) {
+        const td = document.createElement('td');
+        td.textContent = str;
+        for (const key in attrs) {
+            const attr = document.createAttribute(key);
+            attr.value = attrs[key];
+        }
+        return td;
+    }
+
+    function clear_form() {
+        fm.reset();
+        title.focus();
+    }
+
+    items.addEventListener('click', (e) => {
         const errors = validate_input();
         error_summary.textContent = '';
         if (errors.length > 0) {
             print_errors(errors);
             return;
         }
-        console.log(errors);
+        const current = e.target.parentNode.parentNode;
+        current.after(create_tr());
+
+        clear_form();
     });
 });

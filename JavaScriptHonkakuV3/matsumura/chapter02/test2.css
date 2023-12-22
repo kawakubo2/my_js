@@ -1,0 +1,20 @@
+#main {
+    width: 40rem;
+    margin: 1rem auto;
+}
+table {
+    border-collapse: collapse;
+}
+#kakeibo-header {
+    background-color: aquamarine;
+}
+#kakeibo-body {
+    background-color: lemonchiffon;
+}
+th, td {
+    border: 1px solid #666;
+    padding: 0.3rem;
+}
+td.price {
+    text-align: right;
+}
