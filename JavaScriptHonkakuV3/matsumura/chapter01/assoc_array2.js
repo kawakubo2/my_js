@@ -8,4 +8,6 @@ let employees = {
     1050: "佐藤勝男"
 };
 
-console.log(employees[1040]);
+for (const id in employees) {
+    const name = employees[id];
+}
