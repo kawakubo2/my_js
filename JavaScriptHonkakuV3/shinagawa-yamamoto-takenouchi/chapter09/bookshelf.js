@@ -42,10 +42,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const td_publisher = create_td(publisher.value);
         const td_price = create_td(price.value);
         const td_add = create_td_with_button('追加', 'add');
+        const td_delete = create_td_with_button('削除', 'delete');
+        const td_up = create_td_with_button('△', 'up');
+        const td_down = create_td_with_button('▽', 'down');
         tr.append(td_title);
         tr.append(td_publisher);
         tr.append(td_price);
         tr.append(td_add);
+        tr.append(td_delete);
+        tr.append(td_up);
+        tr.append(td_down);
         return tr;
     }
 
@@ -80,14 +86,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     items.addEventListener('click', (e) => {
-        const errors = validate_input();
-        error_summary.textContent = '';
-        if (errors.length > 0) {
-            print_errors(errors);
-            return;
-        }
         const current = e.target.parentNode.parentNode;
-        current.after(create_tr());
+        if (e.target.classList.contains('add')) {
+            const errors = validate_input();
+            error_summary.textContent = '';
+            if (errors.length > 0) {
+                print_errors(errors);
+                return;
+            }
+            current.after(create_tr());
+        } else if (e.target.classList.contains('delete')) {
+            items.removeChild(current);
+        } else if (e.target.classList.contains('up')) {
+            const prev_tr = current.previousElementSibling;
+            if (prev_tr !== document.querySelector('#table-header')) {
+                prev_tr.before(current);
+            }
+        } else if (e.target.classList.contains('down')) {
+            const next_tr = current.nextElementSibling;
+            if (next_tr !== null) {
+                next_tr.after(current);
+            }
+        }
 
         clear_form();
     });
