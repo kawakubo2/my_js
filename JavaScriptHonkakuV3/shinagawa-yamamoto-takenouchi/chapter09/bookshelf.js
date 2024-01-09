@@ -87,7 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     items.addEventListener('click', (e) => {
         const current = e.target.parentNode.parentNode;
-        if (e.target.classList.contains('add')) {
+        const classes = e.target.classList;
+        if (classes.contains('add')) {
             const errors = validate_input();
             error_summary.textContent = '';
             if (errors.length > 0) {
@@ -95,14 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             current.after(create_tr());
-        } else if (e.target.classList.contains('delete')) {
+        } else if (classes.contains('delete')) {
             items.removeChild(current);
-        } else if (e.target.classList.contains('up')) {
+        } else if (classes.contains('up')) {
             const prev_tr = current.previousElementSibling;
             if (prev_tr !== document.querySelector('#table-header')) {
                 prev_tr.before(current);
             }
-        } else if (e.target.classList.contains('down')) {
+        } else if (classes.contains('down')) {
             const next_tr = current.nextElementSibling;
             if (next_tr !== null) {
                 next_tr.after(current);
