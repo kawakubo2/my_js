@@ -38,13 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function create_tr() {
         const tr = document.createElement('tr');
-        const td_title = create_td(title.value);
-        const td_publisher = create_td(publisher.value);
-        const td_price = create_td(price.value);
+        const td_title = create_td(title.value, 'editable');
+        const td_publisher = create_td(publisher.value, 'editable');
+        const td_price = create_td(price.value, 'editable');
         const td_add = create_td_with_button('追加', 'add');
         const td_delete = create_td_with_button('削除', 'delete');
         const td_up = create_td_with_button('△', 'up');
         const td_down = create_td_with_button('▽', 'down');
+        const td_top = create_td_with_button('TOP', 'top');
+        const td_bottom = create_td_with_button('BOTTOM', 'bottom');
         tr.append(td_title);
         tr.append(td_publisher);
         tr.append(td_price);
@@ -52,6 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tr.append(td_delete);
         tr.append(td_up);
         tr.append(td_down);
+        tr.append(td_top);
+        tr.append(td_bottom);
         return tr;
     }
 
@@ -70,9 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return button;
     }
 
-    function create_td(str, attrs = {}) {
+    function create_td(str, clazz, attrs = {}) {
         const td = document.createElement('td');
         td.textContent = str;
+        td.classList.add(clazz);
         for (const key in attrs) {
             const attr = document.createAttribute(key);
             attr.value = attrs[key];
@@ -83,6 +88,25 @@ document.addEventListener('DOMContentLoaded', () => {
     function clear_form() {
         fm.reset();
         title.focus();
+    }
+
+    function edit_td_content_start(target) {
+        const origin = target.textContent;
+        target.textContent = '';
+        console.log(`original value=${origin}`);
+        const textbox = document.createElement('input');
+        textbox.type = 'text';
+        textbox.className = 'edit';
+        textbox.value = origin;
+        target.append(textbox);
+        textbox.focus();
+    }
+
+    function edit_td_content_end(target) {
+        const origin = target.value;
+        console.log(`edit_td_content_end: original value=${origin}`);
+        const parent = target.parentNode;
+        parent.textContent = origin;
     }
 
     items.addEventListener('click', (e) => {
@@ -96,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             current.after(create_tr());
+            clear_form();
         } else if (classes.contains('delete')) {
             items.removeChild(current);
         } else if (classes.contains('up')) {
@@ -108,8 +133,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (next_tr !== null) {
                 next_tr.after(current);
             }
+        } else if (classes.contains('top')) {
+            const tr_header = document.querySelector('#table-header');
+            tr_header.after(current);
+        } else if (classes.contains('bottom')) {
+            items.append(current);
         }
-
-        clear_form();
+    });
+    items.addEventListener('dblclick', (e) => {
+        edit_td_content_start(e.target);
+    });
+    items.addEventListener('focusout', (e) => {
+        if (e.target.classList.contains('edit')) {
+            edit_td_content_end(e.target);
+        }
     });
 });
