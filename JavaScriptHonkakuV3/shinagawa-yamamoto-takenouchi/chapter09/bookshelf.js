@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelector('#items');
     const fm = document.querySelector('#fm');
 
+    let in_edit_flag = false;
+
     function validate_input() {
         const errors = [];
         if (title.value === '') {
@@ -91,25 +93,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function edit_td_content_start(target) {
+        in_edit_flag = true;
         const origin = target.textContent;
         target.textContent = '';
-        console.log(`original value=${origin}`);
         const textbox = document.createElement('input');
         textbox.type = 'text';
         textbox.className = 'edit';
         textbox.value = origin;
         target.append(textbox);
         textbox.focus();
+        textbox.select();
     }
 
     function edit_td_content_end(target) {
+        in_edit_flag = false;
         const origin = target.value;
-        console.log(`edit_td_content_end: original value=${origin}`);
         const parent = target.parentNode;
         parent.textContent = origin;
     }
 
     items.addEventListener('click', (e) => {
+        if (in_edit_flag) return;
         const current = e.target.parentNode.parentNode;
         const classes = e.target.classList;
         if (classes.contains('add')) {
@@ -141,10 +145,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     items.addEventListener('dblclick', (e) => {
-        edit_td_content_start(e.target);
+        if (e.target.classList.contains('editable')) {
+            edit_td_content_start(e.target);
+        }
     });
     items.addEventListener('focusout', (e) => {
-        if (e.target.classList.contains('edit')) {
+        if (e.target.parentNode.classList.contains('editable')) {
             edit_td_content_end(e.target);
         }
     });
