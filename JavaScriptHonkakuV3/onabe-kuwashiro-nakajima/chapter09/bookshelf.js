@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const title = document.querySelector('#title');
+    const tbody     = document.querySelector('#items');
+    const form      = document.querySelector('#fm');
+    const title     = document.querySelector('#title');
     const publisher = document.querySelector('#publisher');
-    const price = document.querySelector('#price');
-    const tbody = document.querySelector('#items');
+    const price     = document.querySelector('#price');
     const error_summary = document.querySelector('#error_summary');    
 
 
@@ -37,6 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
         error_summary.append(fragment);
     }
 
+    function create_button(button_name, clazz) {
+        const button = document.createElement('input');
+        button.type = 'button';
+        button.classList.add(clazz);
+        button.value = button_name;
+        return button
+    }
+
+    function create_td_with_button(button_name, clazz) {
+        const td = document.createElement('td');
+        td.append(create_button(button_name, clazz));
+        return td;
+    }
+
     function create_td(str) {
         const td = document.createElement('td');
         td.textContent = str;
@@ -48,19 +63,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const td_title = create_td(title.value);
         const td_publisher = create_td(publisher.value);
         const td_price = create_td(price.value);
+        const td_add_button = create_td_with_button('追加', 'add');
         tr.append(td_title);
         tr.append(td_publisher);
         tr.append(td_price);
+        tr.append(td_add_button);
         return tr;
     }
 
-    tbody.addEventListener('click', () => {
+    function clear_form() {
+        form.reset();
+        title.focus();
+    }
+
+    tbody.addEventListener('click', (e) => {
         const errors = validate_input();
+        const current_tr = e.target.parentNode.parentNode;
         if (errors.length > 0) {
             print_errors(errors);
             return;
         }
-        tbody.append(create_tr());
+        current_tr.after(create_tr());
+        clear_form();
     });
 
 });
