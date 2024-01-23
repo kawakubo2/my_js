@@ -76,6 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return button;
     }
 
+    function create_textbox(value) {
+        const textbox = document.createElement('input');
+        textbox.type = 'text';
+        textbox.value = value;
+        return textbox;
+    }
+
     function create_td(str, clazz, attrs = {}) {
         const td = document.createElement('td');
         td.textContent = str;
@@ -96,19 +103,18 @@ document.addEventListener('DOMContentLoaded', () => {
         in_edit_flag = true;
         const origin = target.textContent;
         target.textContent = '';
-        const textbox = document.createElement('input');
-        textbox.type = 'text';
-        textbox.className = 'edit';
-        textbox.value = origin;
+        const textbox = create_textbox(origin, 'edit') 
         target.append(textbox);
+        target.append(create_button('×', 'close'));
         textbox.focus();
         textbox.select();
     }
 
-    function edit_td_content_end(target) {
+    function edit_td_content_end(close_button) {
         in_edit_flag = false;
-        const origin = target.value;
-        const parent = target.parentNode;
+        const textbox = close_button.previousElementSibling;
+        const origin = textbox.value;
+        const parent = textbox.parentNode;
         parent.textContent = origin;
     }
 
@@ -149,8 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
             edit_td_content_start(e.target);
         }
     });
-    items.addEventListener('focusout', (e) => {
-        if (e.target.parentNode.classList.contains('editable')) {
+    items.addEventListener('click', (e) => {
+        if (e.target.classList.contains('close')) {
             edit_td_content_end(e.target);
         }
     });
