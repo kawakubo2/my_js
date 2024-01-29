@@ -64,10 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const td_publisher = create_td(publisher.value);
         const td_price = create_td(price.value);
         const td_add_button = create_td_with_button('追加', 'add');
+        const td_delete_button = create_td_with_button('削除', 'delete');
         tr.append(td_title);
         tr.append(td_publisher);
         tr.append(td_price);
         tr.append(td_add_button);
+        tr.append(td_delete_button);
         return tr;
     }
 
@@ -76,15 +78,24 @@ document.addEventListener('DOMContentLoaded', () => {
         title.focus();
     }
 
-    tbody.addEventListener('click', (e) => {
+    function add_tr(current_tr) {
         const errors = validate_input();
-        const current_tr = e.target.parentNode.parentNode;
         if (errors.length > 0) {
             print_errors(errors);
             return;
         }
         current_tr.after(create_tr());
         clear_form();
+    }
+
+    tbody.addEventListener('click', (e) => {
+        const target = e.target;
+        const current_tr = target.parentNode.parentNode;
+        if (target.classList.contains("add")) {
+            add_tr(current_tr);
+        } else if (target.classList.contains("delete")) {
+
+        }
     });
 
 });
