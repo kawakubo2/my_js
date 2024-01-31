@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const tbody     = document.querySelector('#items');
     const form      = document.querySelector('#fm');
+    const first_tr  = document.querySelector('#table-header')
     const title     = document.querySelector('#title');
     const publisher = document.querySelector('#publisher');
     const price     = document.querySelector('#price');
@@ -65,11 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const td_price = create_td(price.value);
         const td_add_button = create_td_with_button('追加', 'add');
         const td_delete_button = create_td_with_button('削除', 'delete');
+        const td_up_button = create_td_with_button('△', 'up');
         tr.append(td_title);
         tr.append(td_publisher);
         tr.append(td_price);
         tr.append(td_add_button);
         tr.append(td_delete_button);
+        tr.append(td_up_button);
         return tr;
     }
 
@@ -94,7 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (target.classList.contains("add")) {
             add_tr(current_tr);
         } else if (target.classList.contains("delete")) {
-
+            // tbody.removeChild(current_tr)
+            current_tr.remove();
+        } else if (target.classList.contains("up")) {
+            const prev_tr = current_tr.previousElementSibling;
+            if (prev_tr === first_tr) return;
+            prev_tr.before(current_tr);
         }
     });
 
