@@ -1,0 +1,16 @@
+{
+    "title": "TypeScript入門",
+    "price": 2948,
+    "publisher": "技術評論社",
+    "authors": [
+        {
+
+            "name": "山田太郎",
+            "email": "taro@yamada.com"
+        },
+        {
+            "name": "横山花子",
+            "email": "hanako@yokoyama.com"
+        }
+    ]
+}
