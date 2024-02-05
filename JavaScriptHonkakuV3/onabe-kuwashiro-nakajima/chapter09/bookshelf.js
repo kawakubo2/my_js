@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const price     = document.querySelector('#price');
     const error_summary = document.querySelector('#error_summary');    
 
-
     function is_empty(str) {
         return str === null || str.replace('　', '').trim().length === 0;
     }
@@ -67,12 +66,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const td_add_button = create_td_with_button('追加', 'add');
         const td_delete_button = create_td_with_button('削除', 'delete');
         const td_up_button = create_td_with_button('△', 'up');
+        const td_down_button = create_td_with_button('▽', 'down');
+        const td_top_button = create_td_with_button('Top', 'top');
+        const td_bottom_button = create_td_with_button('Bottom', 'bottom');
         tr.append(td_title);
         tr.append(td_publisher);
         tr.append(td_price);
         tr.append(td_add_button);
         tr.append(td_delete_button);
         tr.append(td_up_button);
+        tr.append(td_down_button);
+        tr.append(td_top_button);
+        tr.append(td_bottom_button);
         return tr;
     }
 
@@ -103,7 +108,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const prev_tr = current_tr.previousElementSibling;
             if (prev_tr === first_tr) return;
             prev_tr.before(current_tr);
+        } else if (target.classList.contains("down")) {
+            const next_tr = current_tr.nextElementSibling;
+            if (next_tr) {
+                next_tr.after(current_tr);
+            }
+        } else if (target.classList.contains("top")) {
+            first_tr.after(current_tr);
+        } else if (target.classList.contains("bottom")) {
+            tbody.append(current_tr);
         }
+    });
+
+    tbody.addEventListener('dblclick', (e) => {
+
     });
 
 });
