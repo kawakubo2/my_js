@@ -52,32 +52,24 @@ document.addEventListener('DOMContentLoaded', () => {
         return td;
     }
 
-    function create_td(str) {
+    function create_td(str, clazz) {
         const td = document.createElement('td');
         td.textContent = str;
+        if (clazz) td.classList.add(clazz);
         return td;
     }
 
     function create_tr() {
         const tr = document.createElement('tr');
-        const td_title = create_td(title.value);
-        const td_publisher = create_td(publisher.value);
-        const td_price = create_td(price.value);
-        const td_add_button = create_td_with_button('追加', 'add');
-        const td_delete_button = create_td_with_button('削除', 'delete');
-        const td_up_button = create_td_with_button('△', 'up');
-        const td_down_button = create_td_with_button('▽', 'down');
-        const td_top_button = create_td_with_button('Top', 'top');
-        const td_bottom_button = create_td_with_button('Bottom', 'bottom');
-        tr.append(td_title);
-        tr.append(td_publisher);
-        tr.append(td_price);
-        tr.append(td_add_button);
-        tr.append(td_delete_button);
-        tr.append(td_up_button);
-        tr.append(td_down_button);
-        tr.append(td_top_button);
-        tr.append(td_bottom_button);
+        tr.append(create_td(title.value, 'editable'));
+        tr.append(create_td(publisher.value, 'editable'));
+        tr.append(create_td(price.value, 'editable'));
+        tr.append(create_td_with_button('追加', 'add'));
+        tr.append(create_td_with_button('削除', 'delete'));
+        tr.append(create_td_with_button('△', 'up'));
+        tr.append(create_td_with_button('▽', 'down'));
+        tr.append(create_td_with_button('Top', 'top'));
+        tr.append(create_td_with_button('Bottom', 'bottom'));
         return tr;
     }
 
@@ -96,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clear_form();
     }
 
-    tbody.addEventListener('click', (e) => {
+    tbody.addEventListener("click", (e) => {
         const target = e.target;
         const current_tr = target.parentNode.parentNode;
         if (target.classList.contains("add")) {
@@ -120,8 +112,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    tbody.addEventListener('dblclick', (e) => {
+    function start_edit(editable_field) {
+        const form = document.createElement('form');
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = editable_field.textContent;
+        editable_field.textContent = '';
+        const close_button = create_button('×', 'close');
+        form.append(input);
+        form.append(close_button);
+        editable_field.append(form);
+    }
 
+    function end_edit(td, value) {
+        td.textContent = value;
+    }
+
+    tbody.addEventListener('dblclick', (e) => {
+        const td = e.target;
+        if (td.classList.contains("editable")) {
+            start_edit(td);
+        }
     });
 
+    tbody.addEventListener('click', (e) => {
+        const target = e.target;
+        if (e.target.classList.contains('close')) {
+            end_edit(target.parentNode.parentNode, target.previousElementSibling.value);
+        }
+    });
 });
