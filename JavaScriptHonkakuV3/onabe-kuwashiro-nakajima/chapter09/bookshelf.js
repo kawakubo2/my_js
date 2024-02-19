@@ -141,4 +141,5 @@ document.addEventListener('DOMContentLoaded', () => {
             end_edit(target.parentNode.parentNode, target.previousElementSibling.value);
         }
     });
+
 });
