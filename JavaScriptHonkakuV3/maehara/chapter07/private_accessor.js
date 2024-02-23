@@ -13,7 +13,7 @@ class Member {
     }
     set age(value) {
         if (typeof(value) !== 'number' || value < 0) {
-            throw new TypeError('ageは0以上の数値で指定してください。');
+            throw new TypeError('ageは0以上の数値で指定してください。'); // 例外を投げる
         }
         this.#age = value;
     }
@@ -24,4 +24,9 @@ class Member {
 
 const m = new Member('佐藤理央', 25);
 m.show();
-m.age = -18;
+console.log(`私は${m.name}、${m.age}歳です。`);
+try {
+    m.age = -18;
+} catch(e) { // 例外を補足
+    console.log(e.message);
+}
