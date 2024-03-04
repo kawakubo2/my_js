@@ -112,16 +112,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function start_edit(editable_field) {
+    function start_edit(editable_td) {
         const form = document.createElement('form');
         const input = document.createElement('input');
         input.type = 'text';
-        input.value = editable_field.textContent;
-        editable_field.textContent = '';
+        input.value = editable_td.textContent;
+        editable_td.textContent = '';
         const close_button = create_button('×', 'close');
         form.append(input);
         form.append(close_button);
-        editable_field.append(form);
+        editable_td.append(form);
     }
 
     function end_edit(td, value) {
