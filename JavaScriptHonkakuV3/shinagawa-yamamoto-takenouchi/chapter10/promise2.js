@@ -11,7 +11,13 @@ function asyncProcess(value) {
 }
 
 asyncProcess('トクジロウ')
-    .then(response => console.log(response))
+    .then(response => {
+        console.log(response);
+        return asyncProcess('ニンザブロウ');
+    })
+    .then(response => {
+        console.log(response);
+    })
     .catch(error => console.log(`エラー: ${error}`))
     .finally(() => console.log('処理終了'));
 
