@@ -112,14 +112,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    function create_textbox(text) {
+        const textbox = document.createElement('input');
+        textbox.type = 'text';
+        textbox.value = text;
+        return textbox;
+    }
     function start_edit(editable_td) {
         const form = document.createElement('form');
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.value = editable_td.textContent;
-        editable_td.textContent = '';
+        const textbox = create_textbox(editable_td.textContent);
         const close_button = create_button('×', 'close');
-        form.append(input);
+        editable_td.textContent = '';
+        form.append(textbox);
         form.append(close_button);
         editable_td.append(form);
     }
