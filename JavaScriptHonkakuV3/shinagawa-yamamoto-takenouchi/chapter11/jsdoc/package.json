@@ -1,20 +1,16 @@
 {
-  "name": "node",
+  "name": "jsdoc",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "class.js",
   "type": "module",
   "scripts": {
-    "test": "SET NODE_OPTIONS=--experimental-vm-modules && jest"
+    "doc": "jsdoc ./doc -r"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "decimal.js": "^10.4.3"
-  },
   "devDependencies": {
-    "jest": "^29.7.0",
     "jsdoc": "^4.0.2"
   }
 }
