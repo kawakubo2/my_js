@@ -1,0 +1,9 @@
+{
+	"author": "Yoshihiro Yamada",
+	"date": "2024-04-08",
+	"books": [
+		{ "title": "JavaScript本格入門", "price": 3800, "publisher": "技術評論社" },
+		{ "title": "独習Python", "price": 4200, "publisher": "翔泳社" },
+		{ "title": "React徹底入門", "price": 4400, "publisher": "技術評論社" }
+	]
+}
