@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let score;
+        do {
+            score = Number.parseInt(prompt("点数"));
+            if (score < 0 || score > 100) {
+                console.log('0～100を入力してください。');
+            }
+        } while(score < 0 || score > 100);
+        console.log(`点数は${score}点です。`);
+    </script>
+</body>
+</html>
