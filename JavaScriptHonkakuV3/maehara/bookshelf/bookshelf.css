@@ -1,0 +1,14 @@
+#form-div {
+    width: 18rem;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.container {
+    width: 16rem;
+    margin: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #999;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #ccc;
+}

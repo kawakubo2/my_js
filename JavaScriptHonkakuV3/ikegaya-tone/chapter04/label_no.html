@@ -8,10 +8,11 @@
 <body>
     <script>
         let count = 0;
-        for (let i = 1; i <= 99; i++) {
-            for (let j = 1; j <= 99; j++) {
+        kuku:
+        for (let i = 1; i <= 9; i++) {
+            for (let j = 1; j <= 9; j++) {
                 count++;
-                if (i * j > 300) break;
+                if (i * j > 30) break kuku; // ラベル付きbreak文
                 document.write(`${i * j} `);
             }
             document.write('<br />');
