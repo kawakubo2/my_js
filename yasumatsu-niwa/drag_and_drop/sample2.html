@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="sample2.js"></script>
+    <title>Document</title>
+    <style>
+        div#show-case {
+            width: 1600px;
+            height: 380px;
+        }
+        div.item {
+            float: left;
+            width: 220px;
+            border: 1px solid #eee;
+            background: #f0f0f0;
+        }
+        div img {
+            width: 200px;
+            margin: 8px;
+        }
+        div p {
+            margin: 0;
+        }
+        div#target {
+            width: 1600px;
+            height: 380px;
+            background: #F3F3F3;
+        }
+    </style>
+</head>
+<body>
+    <div id="show-case">
+        <div class="item" id="1" draggable="true"  width="30" height="30">
+            <table>
+                <tr><th>商品名</th><td class="product-name">Java Tシャツ</td></tr>
+                <tr><th>価格</th><td class="unit-price">1,600円</td></tr>
+                <tr><th>サイズ</th><td>S</td></tr>
+                <tr><th>色</th><td>カーキ</td></tr>
+                <tr><td colspan="2"><img src="t-shirts1.jpg" alt="PHP Tシャツ" /></td></tr>
+            </table>
+        </div>
+        <div class="item" id="2" draggable="true"  width="30" height="30">
+            <table>
+                <tr><th>商品名</th><td class="product-name">Python Tシャツ</td></tr>
+                <tr><th>価格</th><td class="unit-price">1,800円</td></tr>
+                <tr><th>サイズ</th><td>M</td></tr>
+                <tr><th>色</th><td>カーキ</td></tr>
+                <tr><td colspan="2"><img src="t-shirts2.jpg" alt="Tシャツ" /></td></tr>
+            </table>
+        </div>
+        <div class="item" id="3" draggable="true"  width="30" height="30">
+            <table>
+                <tr><th>商品名</th><td class="product-name">JavaScript Tシャツ</td></tr>
+                <tr><th>価格</th><td class="unit-price">2,000円</td></tr>
+                <tr><th>サイズ</th><td>S</td></tr>
+                <tr><th>色</th><td>カーキ</td></tr>
+                <tr><td colspan="2"><img src="t-shirts3.jpg" alt="Tシャツ" /></td></tr>
+            </table>
+        </div>
+        <div class="item" id="4" draggable="true"  width="30" height="30">
+            <table>
+                <tr><th>商品名</th><td class="product-name">Go Tシャツ</td></tr>
+                <tr><th>価格</th><td class="unit-price">2,200円</td></tr>
+                <tr><th>サイズ</th><td>M</td></tr>
+                <tr><th>色</th><td>カーキ</td></tr>
+                <tr><td colspan="2"><img src="t-shirts4.jpg" alt="Tシャツ" /></td></tr>
+            </table>
+        </div>
+        <div class="item" id="5" draggable="true"  width="30" height="30">
+            <table>
+                <tr><th>商品名</th><td class="product-name">C++ Tシャツ</td></tr>
+                <tr><th>価格</th><td class="unit-price">2,400円</td></tr>
+                <tr><th>サイズ</th><td>L</td></tr>
+                <tr><th>色</th><td>カーキ</td></tr>
+                <tr><td colspan="2"><img src="t-shirts5.jpg" alt="Tシャツ" /></td></tr>
+            </table>
+        </div>
+        <div class="item" id="6" draggable="true"  width="30" height="30">
+            <table>
+                <tr><th>商品名</th><td class="product-name">シャツ</td></tr>
+                <tr><th>価格</th><td class="unit-price">2,600円</td></tr>
+                <tr><th>サイズ</th><td>S, M, L</td></tr>
+                <tr><th>色</th><td>カーキ</td></tr>
+                <tr><td colspan="2"><img src="t-shirts6.jpg" alt="Tシャツ" /></td></tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        <h3>買い物かご</h3>
+        <div id="target">
+            
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <th>商品名</th>
+            <th>単価</th>
+            <th>数量</th>
+            <th>小計</th>
+        </thead>
+        <tbody id="items">
+
+        </tbody>
+        <tfoot id="total">
+
+        </tfoot>
+    </table>
+</body>
+</html>

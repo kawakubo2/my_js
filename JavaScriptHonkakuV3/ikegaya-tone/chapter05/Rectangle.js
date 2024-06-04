@@ -24,7 +24,7 @@ const rect2 = new Rectangle(8, 6);
 
 
 console.log(`長方形1: 幅=${rect1.width} 高さ=${rect1.height}`);
-console.log(`面積: ${rect1.area()}`);
+console.log(`面積: ${rect1.area()}`); // newしてインスタンスを作ってからでないと使用できないメソッドをインスタンスメソッドと呼ぶ
 console.log(`対角線: ${rect1.diagonal()}`);
 console.log(`外周: ${rect1.perimeter()}`);
 

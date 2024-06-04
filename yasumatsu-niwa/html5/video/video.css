@@ -1,0 +1,58 @@
+h1, h2, h3 {
+    text-align: center;
+}
+
+main {
+    width: 820px;
+    margin: 1rem auto;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    background: #eee;
+    box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+section {
+    width: 800px;
+    margin: 0.2rem auto;
+}
+
+video#video {
+    width: 800px;
+}
+
+#playlist {
+    display: block;
+    width: 8rem;
+    margin: 0.5rem auto;
+}
+
+#controller {
+    width: 800px;
+    background: navy;
+    color: white;
+}
+
+#seekbar-wrap {
+    width: 800px;
+    height: 1rem;
+}
+
+#seekbar-out {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    transform: scaleY(0.5);
+    transition: 0.3s;
+}
+
+#seekbar-in {
+    margin: 0 auto 0 0;
+    width: 100%;
+    height: 100%;
+    background: #36C;
+    border-radius: 0.2rem;
+    transform-origin: top left;
+    transition: 0.1s
+}
