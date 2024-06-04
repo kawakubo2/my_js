@@ -29,6 +29,7 @@ window.addEventListener('DOMContentLoaded', event => {
         itemNameTd.appendChild(itemNameText);
         tr.appendChild(itemNameTd);
         const unitPriceTd = document.createElement('td');
+        unitPriceTd.classList.add('unit-price');
         const unitPriceText = document.createTextNode(item.querySelector('.unit-price').textContent);
         const unitPrice = extract_int(unitPriceText.textContent);        
         unitPriceTd.appendChild(unitPriceText);
@@ -38,7 +39,7 @@ window.addEventListener('DOMContentLoaded', event => {
         quantity.type = 'number';
         quantity.value = 1;
         quantity.classList.add('quantity');
-        quantity.addEventListener('change', (e) => {
+        quantity.addEventListener('blur', (e) => {
             const parentTr = e.target.parentNode.parentNode;
             const unitPrice = extract_int(parentTr.querySelector('.unit-price').textContent);
             parentTr.querySelector('.subtotal').textContent = unitPrice * e.target.value;
