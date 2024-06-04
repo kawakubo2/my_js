@@ -22,7 +22,6 @@ window.addEventListener('DOMContentLoaded', event => {
     };
 
     const create_tr = item => {
-        // console.log(`item=${item}`);
         const tr = document.createElement('tr');
         const itemNameTd = document.createElement('td');
         const itemNameText = document.createTextNode(item.querySelector('.product-name').textContent);
@@ -33,21 +32,12 @@ window.addEventListener('DOMContentLoaded', event => {
         const unitPrice = extract_int(unitPriceText.textContent);        
         unitPriceTd.appendChild(unitPriceText);
         tr.appendChild(unitPriceTd);
-        const quantityTd = document.createElement('td');
-        const quantity = document.createElement('input');
-        quantity.type = 'number';
-        quantity.value = 1;
-        quantity.classList.add('quantity');
-        quantity.addEventListener('change', (e) => {
-            const parentTr = e.target.parentNode.parentNode;
-            const unitPrice = extract_int(parentTr.querySelector('.unit-price').textContent);
-            parentTr.querySelector('.subtotal').textContent = unitPrice * e.target.value;
-        });
-        quantityTd.append(quantity);
+        const quantityTd = document.createElement('input');
+        quantityTd.type = 'number';
+        quantityTd.value = 1;
         tr.appendChild(quantityTd);
         const subTotalTd = document.createElement('td');
-        subTotalTd.classList.add('subtotal');
-        const subTotalText = document.createTextNode(unitPrice * Number.parseInt(quantity.value));
+        const subTotalText = document.createTextNode(unitPrice * Number.parseInt(quantityTd.value));
         subTotalTd.appendChild(subTotalText);
         tr.appendChild(subTotalTd);
         return tr;
@@ -56,13 +46,11 @@ window.addEventListener('DOMContentLoaded', event => {
         event.preventDefault();
         event.stopPropagation();
         const data = event.dataTransfer.getData("text");
-        console.log(`data=${data}`);
         const item = document.getElementById(data);
-        console.log(`item=${item}`);
         event.target.appendChild(item);
         total.appendChild(create_tr(item));
     };
-    const items = document.querySelectorAll('.item');
+    const items = document.getElementsByClassName('item');
     for (const item of items) {
         item.addEventListener('dragstart', dragstart_handler);
     }
