@@ -2,10 +2,15 @@ window.addEventListener('DOMContentLoaded', event => {
     const target = document.getElementById('target');
     const show_case = document.getElementById('show-case');
     const total = document.getElementById('total');
+
+    const sources = new Set([1, 2, 3, 4, 5, 6]);
+    const targets = new Set();
+
     const dragstart_handler = event => {
         event.dataTransfer.setData("text", event.target.id);
         event.dataTransfer.effectAllowed = "move";
     };
+
     const dragover_handler = event => {
         event.preventDefault();
         event.stopPropagation();
@@ -59,6 +64,9 @@ window.addEventListener('DOMContentLoaded', event => {
         const data = event.dataTransfer.getData("text");
         console.log(`data=${data}`);
         const item = document.getElementById(data);
+        if (targets.has(item)) return;
+        sources.delete(item);
+        targets.add(item);
         console.log(`item=${item}`);
         event.target.appendChild(item);
         total.appendChild(create_tr(item));
