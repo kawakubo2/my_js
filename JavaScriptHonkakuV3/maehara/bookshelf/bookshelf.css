@@ -12,3 +12,9 @@
     border-radius: 10px;
     box-shadow: 5px 5px 5px #ccc;
 }
+
+#error_summary {
+    color: red;
+    width: 18rem;
+    margin: 1rem auto 0;
+}

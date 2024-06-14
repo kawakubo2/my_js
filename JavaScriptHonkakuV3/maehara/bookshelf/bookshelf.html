@@ -10,8 +10,11 @@
 </head>
 <body>
     <h3>私の本棚</h3>
+    <ul id="error_summary">
+
+    </ul>
     <div id="form-div">
-        <form>
+        <form id="fm1">
             <div class="container">
                 <label for="title">題名　</label>
                 <input type="text" name="title" id="title" />
@@ -24,18 +27,17 @@
                 <label for="price">価格　</label>
                 <input type="text" name="price" id="price" />
             </div>
-            <input id="add-button" type="button" value="追加" />
         </form>
     </div>
     <table class="table table-striped">
-        <thead>
+        <tbody id="bookshelf-body">
             <tr>
                 <th>題名　</th>
                 <th>出版社</th>
                 <th>価格　</th>
+                <th><input class="add" type="button" value="追加" /></th>
+                <th></th>
             </tr>
-        </thead>
-        <tbody id="bookshelf-body">
             <!-- <tr>
                 <td>改訂第3版JavaScript本格入門</td>
                 <td>技術評論社</td>
