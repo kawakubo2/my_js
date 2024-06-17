@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const publisher = document.querySelector('#publisher');
     const price = document.querySelector('#price');
     const error_summary = document.querySelector('#error_summary');
+    const head_tr = document.querySelector('#head-tr');
 
     function is_empty(value) {
         return value === null || value === undefined || value.trim() === '';
@@ -49,6 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
         tr.append(create_td(price.value));
         tr.append(create_td_with_button('追加', 'add'));
         tr.append(create_td_with_button('削除', 'delete'));
+        tr.append(create_td_with_button('△', 'up'));
+        tr.append(create_td_with_button('▽', 'down'));
+        tr.append(create_td_with_button('top', 'top'));
+        tr.append(create_td_with_button('bottom', 'bottom'));
         return tr;
     }
 
@@ -81,6 +86,22 @@ document.addEventListener('DOMContentLoaded', () => {
             current_tr.after(new_tr);
         } else if (e.target.className === 'delete') {
             tbody.removeChild(e.target.parentNode.parentNode);
+        } else if (e.target.className === 'up') {
+            const current_tr = e.target.parentNode.parentNode;
+            const before_tr = current_tr.previousElementSibling;
+            if (before_tr === head_tr) return;
+            before_tr.before(current_tr);
+        } else if (e.target.className === 'down') {
+            const current_tr = e.target.parentNode.parentNode;
+            const after_tr = current_tr.nextElementSibling;
+            if (after_tr === null) return;
+            after_tr.after(current_tr);
+        } else if (e.target.className === 'top') {
+            const current_tr = e.target.parentNode.parentNode;
+            head_tr.after(current_tr);
+        } else if (e.target.className === 'bottom') {
+            const current_tr = e.target.parentNode.parentNode;
+            tbody.lastElementChild.after(current_tr);
         }
 
         form.reset();
