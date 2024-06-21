@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     });
     stop.addEventListener('click', function() {
-        stop.disabled = true;
         start.disabled = false;
+        stop.disabled = true;
         clearInterval(timer);
     });
 });
