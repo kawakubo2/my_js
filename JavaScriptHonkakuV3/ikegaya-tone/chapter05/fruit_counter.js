@@ -3,6 +3,20 @@ const fruits = ['banana', 'apple', 'orange', 'banana', 'grape',
                 'apple', 'orange'
 ];
 
+const fruitMap = new Map();
+
+for (const f of fruits) {
+    if (fruitMap.has(f)) {
+        fruitMap.set(f, fruitMap.get(f) + 1);
+    } else {
+        fruitMap.set(f, 1);
+    }
+}
+
+for (const [f, count] of fruitMap.entries()) {
+    console.log(`${f}: ${count}`);
+}
+
 /*
 banana: 4
 apple: 3
