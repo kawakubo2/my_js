@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function create_tr() {
+        // console.time('create_tr');
         const tr = document.createElement('tr');
         const td_title = create_td(title.value, 'editable');
         const td_publisher = create_td(publisher.value, 'editable');
@@ -58,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tr.append(td_down);
         tr.append(td_top);
         tr.append(td_bottom);
+        // console.timeEnd('create_tr');
         return tr;
     }
 
