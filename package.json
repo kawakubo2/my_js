@@ -3,6 +3,7 @@
     "jsdoc": "^4.0.2"
   },
   "dependencies": {
+    "jest": "^29.7.0",
     "three.js": "^0.77.1",
     "vue.js": "^0.3.2"
   }
