@@ -1,14 +1,16 @@
 class Rectangle {
     #width = 0;
     #height = 0;
+    // コンストラクタ・インジェクション
     constructor(width, height) {
-        this.width = width;
-        this.height = height;
+        this.#width = width;
+        this.#height = height;
     }
     // アクセサメソッド ---> プロパティ
     get width() {
         return this.#width;
     }
+    // セッター・インジェクション
     set width(value) {
         if (typeof value !== 'number' || value <= 0) {
             throw new Error(`引数が正しくありません: ${value}`);
@@ -18,6 +20,7 @@ class Rectangle {
     get height() {
         return this.#height;
     }
+    // セッター・インジェクション
     set height(value) {
         if (typeof value !== 'number' || value <= 0) {
             throw new Error(`引数が正しくありません: ${value}`);
