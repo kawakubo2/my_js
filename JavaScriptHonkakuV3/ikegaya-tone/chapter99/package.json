@@ -1,0 +1,17 @@
+{
+  "name": "chapter99",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "d3.js": "^0.0.2-security",
+    "three.js": "^0.77.1"
+  }
+}

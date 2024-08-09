@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="abc">DOM操作の基本</div>
+    <div id="xyz">
+        <h3>要素ノードの取得</h3>
+        <p class="flower">ひまわり</p>
+        <p class="fruits">バナナ</p>
+        <p class="flower">チューリップ</p>
+        <p class="fruits">ぶどう</p>
+        <p class="flower">ばら</p>
+        <p class="fruits">リンゴ</p>
+        <p class="flower">マリーゴールド</p>
+        <p class="fruits">ナシ</p>
+    </div>
+    <script>
+        const elem1 = document.getElementById('abc');
+        console.log(elem1.textContent);
+        const elem2 = document.querySelector('#abc');
+        elem2.style.border = '3px solid blue';
+        // const flowers = Array.from(document.querySelector('.flower'));
+        const flowers = document.querySelectorAll('.flower');
+        for (const flower of flowers) {
+            console.log(flower.textContent);
+        }
+
+        const p_in_xyz = document.querySelectorAll('#xyz p');
+        console.log('---< div#xyzの配下のp要素を見つけ出す >---');
+        for (const p of p_in_xyz) {
+            console.log(p.textContent);
+        }
+        console.log('---< fruitの背景色を変える >---');
+        const fruits = document.querySelectorAll('.fruits');
+        for (const f of fruits) {
+            f.style.backgroundColor = 'lemonchiffon';
+        }
+    </script>
+</body>
+</html>

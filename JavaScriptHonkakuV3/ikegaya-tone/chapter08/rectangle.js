@@ -37,9 +37,14 @@ class Rectangle {
     perimeter() {
         return (this.width + this.height) * 2;
     }
+    // 特殊メソッド
+    toString() {
+        return `長方形: 幅: ${this.width} 高さ: ${this.height}`;
+    }
 }
 
 const rec1 = new Rectangle(8, 6);
+console.log(rec1.toString());
 console.log(`幅が${rec1.width}、高さが${rec1.height}の長方形の面積は${rec1.area()}`);
 
 class CoordinateRectangle extends Rectangle {
