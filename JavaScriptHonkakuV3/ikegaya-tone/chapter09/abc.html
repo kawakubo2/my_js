@@ -18,6 +18,58 @@
         <p class="flower">マリーゴールド</p>
         <p class="fruits">ナシ</p>
     </div>
+    <p class="article">福岡の太宰府市は連続32日の猛暑日を記録している。</p>
+    <div class="memo">春と秋はなくなりつつある。</div>
+    <div><span class="hint">現在の天気予報はスーパーコンピュータとAIを使っている。</span></div>
+    <div id="main">
+        <div>JavaScript</div>
+        <div>HTML</div>
+        <div>CSS</div>
+        <div>Java</div>
+        <div>Python</div>
+    </div>
+    <div id="list">
+        <h4>条件分岐</h4>
+        <ul>
+            <li>if</li>
+            <li>switch</li>
+        </ul>
+        <h4>繰り返し</h4>
+        <ul>
+            <li>for</li>
+            <li>for of</li>
+            <li>for in</li>
+            <li>while</li>
+            <li>do while</li>
+        </ul>
+        <div>
+            <h5>コレクションクラス</h5>
+            <ul>
+                <li>Array</li>
+                <li>Map</li>
+                <li>Set</li>
+            </ul>
+        </div>
+        <div>
+            <form>
+                <div class="container">
+                    <label for="name">名前: </label><br />
+                    <input type="text" name="name" id="name" value="山田太郎" class="basic" />
+                </div>
+                <div class="container">
+                    <label for="age">年齢: </label><br />
+                    <input type="number" name="age" id="age" value="38" class="basic" />
+                </div>
+                <div class="container">
+                    <label for="email">Eメールアドレス: </label><br />
+                    <input type="text" name="email" id="email" value="taro@yamada.com" />
+                </div>
+                <div>
+                    <input type="button" value="送信" />
+                </div>
+            </form>
+        </div>
+    </div>
     <script>
         const elem1 = document.getElementById('abc');
         console.log(elem1.textContent);
@@ -39,6 +91,31 @@
         for (const f of fruits) {
             f.style.backgroundColor = 'lemonchiffon';
         }
+        console.log('---< element1, element2, ... >---');
+        const elements = document.querySelectorAll('p.article, span.hint');
+        for (const element of elements) {
+            element.style.color = 'red';
+        }
+        console.log('---< parent > child(ren) >---');
+        const divs = document.querySelectorAll('#main > div');
+        for (const div of divs) {
+            console.log(div.textContent);
+        }
+        console.log('---< ancestor descendat >---');
+        const decendants = document.querySelectorAll('#list li');
+        for (const desc of decendants) {
+            console.log(desc.textContent);
+        }
+        console.log('---< attr >----');
+        // const classes = document.querySelectorAll("input[class = 'basic']");
+        const classes = document.querySelectorAll('input.basic');
+        /* for (const clazz of classes) {
+            console.log(clazz.value);
+        } */
+        classes.forEach(clazz => console.log(clazz.value));
+        const numbers = [-2, -1, 0, 1, 2, 3, 4, 5];
+        const square_numbers = numbers.filter(n => n % 2 === 1).map(n => n ** 2);
+        console.log(square_numbers);
     </script>
 </body>
 </html>
