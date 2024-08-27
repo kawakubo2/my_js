@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function hello() {
+            alert('簡単にクリックしちゃダメ！！');
+        }
+    </script>
+</head>
+<body>
+    <h3>EventListerの定義の仕方</h3>
+    <ul>
+        <li>HTMLタグの属性として定義</li>
+        <li>要素Nodeのプロパティとして定義</li>
+        <li>addEventListenerを使用して定義</li>
+    </ul>
+    <div onclick="alert('こんにちは！'); console.log('こんにちは！')">ここをクリック！</div>
+    <div onclick="hello()">クリックするな！危険！</div>
+    <div id="abc">イベントハンドラを要素Nodeのプロパティとして追加</div>
+    <div id="xyz">同じ要素の同じイベントに対し複数のイベントリスナを登録できる</div>
+    <script src="event_listener1.js"></script>
+</body>
+</html>
