@@ -23,6 +23,7 @@ function changeBackgroundColor() {
     xyz.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 }
 xyz.addEventListener('click', changeBackgroundColor);
-/*
-xyz.removeEventListener('click', changeBackgroundColor);
-*/
+
+document.querySelector('#btn').addEventListener('click', () => {
+    xyz.removeEventListener('click', changeBackgroundColor);
+});
