@@ -1,0 +1,8 @@
+.div-style {
+    width: 300px;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px #ccc;
+}
