@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="file_reader.js"></script>
+</head>
+<body>
+    <h3>テキストファイルの内容を表示</h3>
+    <form>
+        <div>
+            <label for="file">ファイル: </label>
+            <input type="file" name="file" id="file" />
+        </div>
+        <div>
+            <label for="charset">文字セット: </label>
+            <select id="charset">
+                <option value="UTF-8">UTF-8</option>
+                <option value="Shift_JIS">Shift_JIS</option>
+                <option value="EUC_JP">EUC_JP</option>
+            </select>
+        </div>
+        <input id="btn" type="button" value="内容を表示" />
+    </form>
+    <pre id="result"></pre>
+</body>
+</html>

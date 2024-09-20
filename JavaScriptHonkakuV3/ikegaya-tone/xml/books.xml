@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<books>
+    <book key="1">
+        <title>SQL入門</title>
+        <version>4</version>
+        <authors>
+            <author>
+                <name>山田太郎</name>
+                <email>taro@yamada.com</email>
+            </author>
+            <author>
+                <name>鈴木次郎</name>
+                <email>jiro@suzuki.com</email>
+            </author>
+        </authors>
+        <price>4000</price>
+    </book>
+    <book key="2">
+        <title>基礎Python</title>
+        <version>2</version>
+        <authors>
+            <author>
+                <name>横山花子</name>
+                <email>hanako@yokoyama</email>
+            </author>
+        </authors>
+        <price>2380</price>
+    </book>
+    <book key="3">
+        <title>JavaScript本格入門</title>
+        <version>3</version>
+        <authors>
+            <author>
+                <name>田中一郎</name>
+                <email>ichiro@tanaka.com</email>
+            </author>
+        </authors>
+        <price>3800</price>
+    </book>
+</books>

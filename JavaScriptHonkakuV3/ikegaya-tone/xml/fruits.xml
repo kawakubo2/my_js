@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<fruits>
+    <fruit>
+        <ja-name>バナナ</ja-name>
+        <name>banana</name>
+        <price>100</price>
+        <freshness-date>2024-10-10</freshness-date>
+    </fruit>
+    <fruit>
+        <ja-name>リンゴ</ja-name>
+        <name>apple</name>
+        <price>200</price>
+        <freshness-date>2024-10-01</freshness-date>
+    </fruit>
+    <fruit>
+        <ja-name>ブドウ</ja-name>
+        <name>grape</name>
+        <price>300</price>
+        <freshness-date>2024-09-30</freshness-date>
+    </fruit>
+
+</fruits>
