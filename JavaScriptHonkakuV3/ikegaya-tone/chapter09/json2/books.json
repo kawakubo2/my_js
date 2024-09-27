@@ -1,0 +1,44 @@
+{
+    "books": [
+        {
+            "key": 1,
+            "title": "SQL入門",
+            "version": "4",
+            "author": [
+                {
+                    "name": "山田太郎",
+                    "email": "taro@yamada.com"
+                },
+                {
+                    "name": "鈴木次郎",
+                    "email": "jiro@suzuki.com"
+                }
+            ],
+            "price": 4000
+        },
+        {
+            "key": 2,
+            "title": "基礎Python",
+            "version": "2",
+            "author": [
+                {
+                    "name": "横山花子",
+                    "email": "hanako@yokoyama.com"
+                }
+            ],
+            "price": 2380
+        },
+        {
+            "key": 3,
+            "title": "JavaScript本格入門",
+            "version": "改訂第2版",
+            "author": [
+                {
+                    "name": "田中一郎",
+                    "email": "ichiro@tanaka.com"
+                }
+            ],
+            "price": 3800
+        }
+    ]
+}
