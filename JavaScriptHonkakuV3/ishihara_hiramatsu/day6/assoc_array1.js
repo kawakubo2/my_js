@@ -38,5 +38,56 @@ console.log(`40歳以上: ${counter_ge_40}`)
 const nendaiMap = new Map();
 for (const member of members) {
     const nendai = Math.floor(member.age / 10) * 10;
-    
+    if (nendaiMap.has(nendai)) {
+        nendaiMap.set(nendai, nendaiMap.get(nendai) + 1);
+    } else {
+        nendaiMap.set(nendai, 1);
+    }
+}
+
+for (const nendai of [...nendaiMap.keys()].sort((m, n) => m - n)) {
+    console.log(`${nendai}代: ${nendaiMap.get(nendai)}`);
+}
+/*
+問3
+名前、年齢、給料の合計を求め、表示する
+山田太郎 42 106
+田中一郎 55 183
+・・・
+*/
+for (const member of members) {
+    let total = 0;
+    for (const salary of Object.values(member.salary)) {
+        total += salary;
+    }
+    console.log(`${member.name} ${member.age} ${total}`)
+}
+/*
+問4
+membersの配列から給料を求め、給料の範囲毎の人数
+範囲とは90～99を90万円台, 100～109を100万円代
+のように1の位を切り捨てたものを指す
+
+ 90: 1
+100: 1
+110: 4
+・・・
+*/
+
+const salaryMap = new Map();
+for (const member of members) {
+    let total = 0;
+    for (const value of Object.values(member.salary)) {
+        total += value;
+    }
+    const salaryRank = Math.floor(total / 10) * 10;
+    if (salaryMap.has(salaryRank)) {
+        salaryMap.set(salaryRank, salaryMap.get(salaryRank) + 1);
+    } else {
+        salaryMap.set(salaryRank, 1);
+    }
+}
+
+for (const rank of [...salaryMap.keys()].sort((m, n) => m - n)) {
+    console.log(`${rank}: ${salaryMap.get(rank)}`);
 }

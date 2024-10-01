@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const body = document.querySelector('body');
     const tbody = document.querySelector('#tbody');
+    const toggle = document.querySelector('#toggle');
 
     function createTbodyContents(books) {
         const fragment = document.createDocumentFragment();
@@ -41,4 +43,19 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(data.books);
             createTbodyContents(data.books);
         });
+    
+    toggle.addEventListener('click', () => {
+        fetch('./booksconfig.json')
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data.theme);
+                body.className = data.theme;
+                let fontFamily = null;
+                if (data['font-family'] === 'sans-serif') {
+                    body.style.fontFamily = 'sans-serif';
+                } else if (data['font-family'] === 'serif') {
+                    body.style.fontFamily = 'serif';
+                }
+            });
+    });
 });

@@ -13,18 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
     };
+
+
+
     const validate_input = () => {
         error_summary.textContent = '';
         const errors = [];
-        if (title?.value?.replace('　', '')?.trim() === '') {
+        if (isEmpty(title.value)) {
             errors.push('題名は必須入力です。')
         }
-        if (publisher?.value?.replace('　', '')?.trim() === '') {
-            errors.push('題名は必須入力です。')
+        if (isEmpty(publisher.value)) {
+            errors.push('出版社は必須入力です。')
         }
-        if (price?.value?.replace('　', '')?.trim() === '') {
+        if (isEmpty(price.value)) {
             errors.push('価格は必須入力です。')
-        } else if (!/^[0-9]+$/.test(price.value)) {
+        } else if (!isPositiveNumber(price.value)) {
             errors.push('価格の形式に誤りがあります。')
         }
         return errors;
@@ -32,9 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const create_tr = () => {
         const tr = document.createElement('tr');
-        tr.append(create_td(title.value));
-        tr.append(create_td(publisher.value));
-        tr.append(create_td(price.value));
+        tr.append(create_td(title.value, 'editable'));
+        tr.append(create_td(publisher.value, 'editable'));
+        tr.append(create_td(price.value, 'editable'));
         tr.append(create_td_with_button('追加', 'add'));
         tr.append(create_td_with_button('削除', 'delete'));
         tr.append(create_td_with_button('△', 'up'));
@@ -44,9 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return tr;
     };
 
-    const create_td = (text) => {
+    const create_td = (text, clazz) => {
         const td = document.createElement('td');
         td.textContent = text;
+        td.className = clazz;
         return td;
     };
 
@@ -67,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             const current_tr = e.target.parentElement.parentElement;
-            const next_tr = current_tr.nextElementSibling;
             current_tr.after(create_tr());
 
             document.querySelector('#fm').reset();
@@ -88,7 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (e.target.classList.contains('top')) {
             const current_tr = e.target.parentElement.parentElement;
             document.querySelector('#first-row').after(current_tr);
+        } else if (e.target.classList.contains('bottom')) {
+            const current_tr = e.target.parentElement.parentElement;
+            tbody.lastElementChild.after(current_tr);
         }
     });
 
+    tbody.addEventListener('dblclick', (e) => {
+        console.log(e.target.className);
+    });
 })
