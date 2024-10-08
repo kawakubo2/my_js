@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (const li of list) {
         li.addEventListener('click', (e) => {
-            const isbn = e.target.getAttribute('data-isbn');
+            const isbn = e.target.dataset.isbn;
             if (isbn) {
                 const img = document.createElement('img');
                 img.src = `https://wings.msn.to/books/${isbn}/${isbn}.jpg`;
