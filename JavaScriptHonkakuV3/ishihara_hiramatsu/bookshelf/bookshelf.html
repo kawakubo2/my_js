@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="bookshelf.js"></script>
+</head>
+<body>
+    <h3>本棚</h3>
+    <div>
+        <form>
+            <fieldset>
+                <legend>題名</legend>
+                <input type="text" name="title" id="title" />
+            </fieldset>
+            <fieldset>
+                <legend>出版社</legend>
+                <input type="text" name="publisher" id="publisher" />
+            </fieldset>
+            <fieldset>
+                <legend>価格</legend>
+                <input type="number" name="price" id="price" />
+            </fieldset>
+        </form>
+    </div>
+    <hr />
+    <div>
+        <table class="table table-striped">
+            <tbody id="tbody">
+                <tr id="header">
+                    <th>題名</th><th>出版社</th><th>価格</th>
+                    <th><button class="add">追加</button></th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

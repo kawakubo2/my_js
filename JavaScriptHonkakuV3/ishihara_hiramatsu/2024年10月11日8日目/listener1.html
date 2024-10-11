@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="listener1.js"></script>
+</head>
+<body>
+    <p id="event-driven">ユーザが画面上でどのようなアクションを起こすのかは予測不能。プログラムの先頭から末尾方向に実行してきた従来の方法では対処できない。これに対処するにはイベントが発生した場合に実行したい関数を登録する必要がある。その関数のことをイベントハンドラ(イベントリスナ)と呼ぶ。イベント発生時にイベントに登録しておいた関数を実行していくプログラムの方式のことをイベントドリブンモデル(イベント駆動モデル)と呼ぶ。</p>
+    <form>
+        <fieldset>
+            <legend>名前</legend>
+            <input type="text" name="name" id="name" />
+        </fieldset>
+        <fieldset>
+            <legend>血液型</legend>
+            <select name="bloodtype" id="bloodtype">
+                <option value="">選択</option>
+                <option value="A">A型</option>
+                <option value="B">B型</option>
+                <option value="AB">AB型</option>
+                <option value="O">O型</option>
+            </select>
+        </fieldset>
+    </form>
+    <div>
+        <p>文字数: <span id="name-result"></span></p>
+        <p>血液型: <span id="bloodtype-result"></span></p>
+    </div>
+</body>
+</html>

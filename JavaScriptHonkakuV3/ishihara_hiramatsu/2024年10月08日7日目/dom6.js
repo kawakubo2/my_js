@@ -19,3 +19,14 @@ result.append(ul);
     ・・・
 </ul>
 */
+
+const paragraghs = document.querySelectorAll('#category1 p');
+
+const result2 = document.querySelector('#result');
+const ul2 = document.createElement('ul');
+for (const p of paragraghs) {
+    const li = document.createElement('li');
+    li.textContent = p.textContent;
+    ul2.append(li);
+}
+result2.append(ul2);
