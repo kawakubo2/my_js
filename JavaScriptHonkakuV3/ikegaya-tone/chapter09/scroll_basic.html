@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="scroll_basic.js"></script>
+</head>
+<body>
+    <div id="main">
+Vision API OCR事始め(2)：検出されたテキストの階層構造（fullTextAnnotation）
+- 10月 17, 2020
+ 『Vision API OCR事始め(1)：TEXT_DETECTIONとDOCUMENT_TEXT_DETECTIONの違い』に続いて、今回は、Google Vision API OCRのレスポンスデータに含まれるテキストの階層構造（fullTextAnnotation）を中心に見ていきます。
+
+【目次】
+［１］はじめに
+［２］テキストの階層構造（fullTextAnnotation）
+（１）概要
+（２）PageとTextAnnotation.pagesフィールド
+（３）BlockType
+（４）トラバースサンプル
+［３］TextProperty
+（１）DetectedLanguage
+（２）DetectedBreak
+［４］TextAnnotation.text
+［５］テキスト要素のconfidenceフィールド
+（１）TEXT_DETECTIONの場合
+（２）DOCUMENT_TEXT_DETECTIONの場合
+［６］テキスト要素のbounding_boxフィールド
+（１）JPEGなどの画像（BatchAnnotateImages、AsyncBatchAnnotateImagesメソッド）の場合
+（２）PDFファイル（BatchAnnotateFiles、AsyncBatchAnnotateFilesメソッド）の場合
+［７］最後に
+
+［１］はじめに
+記事『Vision API OCR事始め(1)：TEXT_DETECTIONとDOCUMENT_TEXT_DETECTIONの違い』では、Google Vision APIのOCR機能であるTEXT_DETECTIONとDOCUMENT_TEXT_DETECTIONによって抽出されるテキストの大雑把な傾向について見ました。今回から、OCRによって抽出されるテキスト情報の詳細なデータ構造について見ていきます。
+
+Google Vision APIの機能リスト（https://cloud.google.com/vision/docs/features-list?hl=ja）には、テキスト検出（TEXT_DETECTION）とドキュメント テキスト検出（高密度テキスト / 手書き）（DOCUMENT_TEXT_DETECTION）のレスポンスデータとして、
+OCR で検出されたテキスト（fullTextAnnotation）の構造的階層を返します。
+と書かれています。
+本記事では、この検出されたテキストの構造的階層（fullTextAnnotation）について見ていきます。
+（公式ガイドには「テキストの構造的階層」や「テキスト構造の階層」という言葉が出てきます。英語版ではstructural hierarchy for the text、hierarchy of text structureとなっており、「構造」より「階層」の意図が強いかもしれませんが、以下ではざっくり「テキストの階層構造」とします。）
+
+（参考）
+OCR結果のもう一つのデータ構造であるtextAnnotationsについては、『Vision API OCR事始め(3)：textAnnotations』を参照してください。
+
+（補足）
+本記事ではサンプルコードや説明をPythonクライアントライブラリを利用して書いていますが、OCRの抽出結果はプログラミング言語に依存しません。
+APIの仕様やPythonクライアントライブラリの利用方法、レスポンスデータの関係については、以下の記事を参照してください。
+
+Vision API クライアントライブラリの概要（Python編）
+Vision APIのBatchAnnotateImagesメソッド（画像からの同期特徴抽出）を少し深堀りする
+Vision APIのBatchAnnotateFilesメソッド（ファイルからの同期特徴抽出）を少し深堀りする
+Vision API Pythonクライアントライブラリを少し深堀りする（BatchAnnotateImages編）
+Vision API Pythonクライアントライブラリを少し深堀りする（BatchAnnotateFiles編）
+
+また、本記事ではPythonクライアントライブラリ v2.0.0リリースに対応したコードで書いています。v1.0.0とv2.0.0の違いについては、『Vision API Pythonクライアントライブラリ v2.0.0リリース（BREAKING CHANGES 有り）』を参照してください。
+
+
+［２］テキストの階層構造（fullTextAnnotation）
+（１）概要
+Google Vision APIの機能リスト（https://cloud.google.com/vision/docs/features-list?hl=ja）では、抽出されたテキスト構造の階層として、以下のように説明しています。
+TextAnnotation -> Page -> Block -> Paragraph -> Word -> Symbol.
+Page 以降の各構造要素には、検出された言語、区切りなどの独自のプロパティがある場合があります。
+
+
+これを、公式リファレンス（https://cloud.google.com/vision/docs/reference/rpc/google.cloud.vision.v1?hl=ja#google.cloud.vision.v1.AnnotateImageResponse）をもとに図にしてみました。
+
+Vision API OCR：TextAnnotationのデータ構造
+
+
+特徴（機能）タイプとしてTEXT_DETECTIONまたはDOCUMENT_TEXT_DETECTIONを指定してメソッドを呼び出すと、そのレスポンスデータには画像（ページ）単位の抽出結果であるAnnotateImageResponseオブジェクトが含まれています。
+
+（これらの詳細については、『Vision API Pythonクライアントライブラリを少し深堀りする（BatchAnnotateImages編）』や『Vision API Pythonクライアントライブラリを少し深堀りする（BatchAnnotateFiles編）』を参考にしてください。）
+
+このAnnotateImageResponseオブジェクトのfullTextAnnotation（full_text_annotation）フィールドを参照することで、TextAnnotation型のオブジェクトが得られます。
+（Pythonライブラリでは、キャメルケースではなくスネークケースでfull_text_annotationとなります。）
+
+TextAnnotationは、Page＝＞Block＝＞Paragraph＝＞Word＝＞Symbolという階層構造を持ちます。この構造を公式リファレンスでは以下のように説明しています。
+Page：Detected page from OCR.
+Block：Logical element on the page.
+Paragraph：Structural unit of text representing a number of words in certain order.
+Word：A word representation.
+Symbol：A single symbol representation.
+
+Pageは、画像またはPDFファイルなどのページに対応しています。
+
+また、Symbolは文字（空白や改行ではない字形がある１文字）と考えてよいと思います。抽出した文字は、Symbolのtextフィールドで得られます。
+
+そして、ページ内で抽出した文字（Symbol）をWord、Paragraph、Blockと階層的にまとめているイメージです。
+
+
+直観的にはWord、Paragraph、Blockという構造に違和感はないのですが、まとめ方に関する説明はありませんので、それぞれの意味は、あまり深く考えないことにします。
+
+一見すると当たり前のようなデータ構造ですが、よく考えると、単なる文字（Symbol）の抽出にとどまらず、多様な言語を正しい方向で文章レベルの構造として認識できるのは、凄いと思いました。
+
+上記はざっくりとした構造の説明ですが、有用な情報や利用上の制約などがありますので、以下では、それぞれのフィールドについて少し深堀していきます。
+
+（２）PageとTextAnnotation.pagesフィールド
+Vision APIは、ファイル形式によりメソッドを使い分ける必要があります。
+JPEG、PNGなどの画像ファイル
+BatchAnnotateImages、AsyncBatchAnnotateImagesメソッド
+PDFファイルなどの１つのファイルに複数のページやフレームを含めることが出来るファイル形式
+BatchAnnotateFiles、AsyncBatchAnnotateFilesメソッド
+
+PDFファイルなどはページの概念が明確ですが、画像ファイルについては、１ファイル＝１ページだと思います。
+では、BatchAnnotateImagesで複数画像を送信したり、BatchAnnotateFilesでPDFファイルから複数ページを処理すると、TextAnnotation.pagesフィールドに複数ページが格納されるかというと、そうではありません。
+
+
+画像あるいはPDFファイルなどのページ単位の抽出内容は、ページ毎にAnnotateImageResponseオブジェクトで返却されます。つまり、１ページの情報はAnnotateImageResponseに対応しているため、AnnotateImageResponseに紐づくPageも１つということになります。
+
+結果として、TextAnnotation.pagesに含まれるPageの数は常に１になると思います。
+
+（３）BlockType
+Blockとは、ページ（Page）内の論理要素と説明されています。しかし、具体的に何を意図しているかは、Blockのblock_typeフィールド（BlockType）を見るとわかる気がします。
+
+BlockTypeの定義
+0：UNKNOWN （Unknown block type.）
+1：TEXT　　　（Regular text block.）
+2：TABLE　　 （Table block..）
+3：PICTURE　（Image block..）
+4：RULER　　（Horizontal/vertical line box.）
+5：BARCODE　（Barcode block.）
+
+といいつつ、私はTEXT以外の値が入る例を今までのところ見たことがありませんので、TEXT以外のブロックが具体的にどのように認識されるのか分かりません。（今後、TEXT以外のブロックに出会うことがあれば、記事を書きたいと思います。）
+
+とはいえ、公式リファレンスによると、TEXT（=1）以外はparagraphsに値が設定されないようですので、抽出したテキストにアクセスしたい場合は、TEXTブロックのみ考慮すればよいことになります。
+
+（４）トラバースサンプル
+以下のコードは、TextAnnotationからSymbol（文字）をトラバースする単純なサンプルコードです。
+
+def sample_traverse_text_annotation(text_annotation):
+  # TextAnnotationのPageは、pagesで得られる。
+  for page in text_annotation.pages:
+    # Page毎の処理：Page内のBlockは、blocksで得られる。
+    for block in page.blocks:
+      # Block毎の処理：Block内のParagraphは、paragraphsで得られる
+      for paragraph in block.paragraphs:
+        # Paragraph毎の処理：Paragraph内のWordは、wordsで得られる
+        for word in paragraph.words:
+          # Word毎の処理：Word内のSymbolは、symbolsで得られる
+          for symbol in word.symbols:
+            # Symbol毎の処理：ここでは文字(textフィールド)を表示
+            print("{}".format(symbol.text))
+
+
+Pythonクライアントライブラリを使って、TextAnnotationオブジェクトへアクセスする例を見てみます。
+
+①text_detection、document_text_detection、annotate_imageメソッド
+戻り値はAnnotateImageRequest型ですので、full_text_annotationフィールドを利用します。
+#image_response = client.document_text_detection( パラメータ )
+#image_response = client.text_detection( パラメータ )
+#image_response = client.annotate_image( パラメータ )
+#
+sample_traverse_text_annotation( image_response.full_text_annotation )
+
+②batch_annotate_imagesメソッド
+戻り値はBatchAnnotateImagesResponse型ですので、responsesフィールドからAnnotateImageRequestオブジェクトを取り出して、full_text_annotationフィールドを利用します。
+#images_response = client.batch_annotate_images( パラメータ )
+for image_response in images_response.responses:
+  sample_traverse_text_annotation( image_response.full_text_annotation )
+
+③batch_annotate_filesメソッド
+戻り値はBatchAnnotateFilesResponse型ですので、まず、responsesフィールドからAnnotateFileRequest を取り出して、さらに、そのresponsesフィールドからAnnotateImageRequestオブジェクトを取り出して、full_text_annotationフィールドを利用します。
+#files_response = client.batch_annotate_files( パラメータ )
+for file_response in files_response.responses:
+  for image_response in file_response.responses:
+    sample_traverse_text_annotation( image_response.full_text_annotation )
+
+［３］TextProperty
+Page、Block、Paragraph、Word、Symbolには、TextProperty型の値を持つpropetyフィールドがあります。
+TextPropertyには、以下の二つのフィールドがあります。
+detected_languagesフィールド
+DetectedLanguage型のオブジェクトのリスト
+detected_breakフィールド
+DetectedBreak型のオブジェクト
+
+TextPropertyの構造を図にしてみました。
+
+Vision API OCR：TextPropertyのデータ構造
+
+
+（１）DetectedLanguage
+検出された言語情報として、language_code（BCP-47）とconfidence値のペアが得られます。
+
+考えてみると、これはとても深いテーマだと思いますが、ここでは深く考えず、以下の少し作為的な画像（hello.png）を例に、検出された言語情報を見てみます。
+
+
+
+
+まず、TextPropertyをもつ要素をトラバースしてDetectedLanguageの内容を表示する簡単なコードを用意します。
+def print_langs(text_annotation):
+
+  def str_langs(prop):
+    if prop.detected_languages:
+      return "[" + ','.join([ "({}/{})".format(
+          ln.language_code,ln.confidence) for ln in prop.detected_languages]
+          ) + "]"
+    else:
+      return ''
+
+  for ipg, page in enumerate(text_annotation.pages):
+    print("Page[{}] {}".format(ipg,str_langs(page.property)))
+    for ib,block in enumerate(page.blocks):
+      print("*Block[{}]  {}".format(ib,str_langs(block.property)))
+      for ipar,paragraph in enumerate(block.paragraphs):
+        print("  Paragraph[{}]  {}".format(ipar,str_langs(paragraph.property)))
+        for iw,word in enumerate(paragraph.words):
+          print("   Word[{}]  {}".format(iw,str_langs(word.property)))
+          for isym, symbol in enumerate(word.symbols):
+            print("    Symbol[{}]={}  {}".format(isym,symbol.text,str_langs(symbol.property)))
+
+上記画像に対して処理します。
+hello_response = client.document_text_detection({'source':{'filename':'hello.png'}})
+print_langs( hello_response.full_text_annotation )
+
+結果は以下のようになりました。
+Page[0] [(ru/0.4099999964237213),(fr/0.23999999463558197),(en/0.17000000178813934),(ja/0.17000000178813934)]
+*Block[0]  [(ja/1.0)]
+  Paragraph[0]  [(ja/1.0)]
+   Word[0]  [(ja/0.0)]
+    Symbol[0]=こ  [(ja/0.0)]
+    Symbol[1]=ん  [(ja/0.0)]
+    Symbol[2]=に  [(ja/0.0)]
+    Symbol[3]=ち  [(ja/0.0)]
+    Symbol[4]=は  [(ja/0.0)]
+*Block[1]  [(en/1.0)]
+  Paragraph[0]  [(en/1.0)]
+   Word[0]  [(en/0.0)]
+    Symbol[0]=H  [(en/0.0)]
+    Symbol[1]=e  [(en/0.0)]
+    Symbol[2]=l  [(en/0.0)]
+    Symbol[3]=l  [(en/0.0)]
+    Symbol[4]=o  [(en/0.0)]
+*Block[2]  [(ru/1.0)]
+  Paragraph[0]  [(ru/1.0)]
+   Word[0]  [(ru/0.0)]
+    Symbol[0]=З  [(ru/0.0)]
+    Symbol[1]=д  [(ru/0.0)]
+    Symbol[2]=р  [(ru/0.0)]
+    Symbol[3]=а  [(ru/0.0)]
+    Symbol[4]=в  [(ru/0.0)]
+    Symbol[5]=с  [(ru/0.0)]
+    Symbol[6]=т  [(ru/0.0)]
+    Symbol[7]=в  [(ru/0.0)]
+    Symbol[8]=у  [(ru/0.0)]
+    Symbol[9]=й  [(ru/0.0)]
+    Symbol[10]=т  [(ru/0.0)]
+    Symbol[11]=е  [(ru/0.0)]
+*Block[3]  [(fr/1.0)]
+  Paragraph[0]  [(fr/1.0)]
+   Word[0]  [(fr/0.0)]
+    Symbol[0]=B  [(fr/0.0)]
+    Symbol[1]=o  [(fr/0.0)]
+    Symbol[2]=n  [(fr/0.0)]
+    Symbol[3]=j  [(fr/0.0)]
+    Symbol[4]=o  [(fr/0.0)]
+    Symbol[5]=u  [(fr/0.0)]
+    Symbol[6]=r  [(fr/0.0)]
+
+４つの単語が４つのブロックに分割されて認識されています。各単語の文字と言語も正しく認識されています。
+ここで、Helloの「o」はBonjourの「o」と同じ文字コードですが、ちゃんと「en」、「fr」と区別されています。これだけを見ても、単純に認識された文字から言語を割り振っているわけではないことがわかります。
+
+また、Pageのレベルでは、Block以下で検出された「ja」、「en」、「ru」、「fr」がconfidence値とともにリストされています。このconfidenceの値の計算方法は、公式ドキュメントに説明がないようですし、実験例も少ないので正確には分かりませんが、上記の例だけで考えると、言語の文字数÷検出された文字数といった感じの値になっています。
+
+
+ところで、上記の例は少し作為的と書きましたが、理由は言語が明確に分かれる例だからです。異なる言語の単語が混在する文章では認識結果も変わります。
+また本記事では割愛していますが、リクエスト時に言語のヒント（languageHints）を指定することもできます。
+このあたりについては、別の記事で書きたいと思っています。
+
+（２）DetectedBreak
+Symbolには空白や改行が入らないのですが、Vision APIのOCRでは空白や改行を認識しています。また、テキストデータの階層構造にLineという概念がありませんが、改行を認識しているので、Paragraph内にLineの概念を含んでいるとも言えます。
+この空白や改行にあたる情報は、DetectedBreakから得られます。
+
+DetectedBreakは２つのフィールドを持っています。
+type：　以下のBreakType定数
+0：UNKNOWN
+Unknown break label type.
+1：SPACE
+Regular space.
+2：SURE_SPACE
+Sure space (very wide).
+3：EOL_SURE_SPACE
+Line-wrapping break.
+4：HYPHEN
+End-line hyphen that is not present in text; does not co-occur with SPACE, LEADER_SPACE, or LINE_BREAK.
+5：LINE_BREAK
+Line break that ends a paragraph.
+is_prefix
+True if break prepends the element.
+
+ということなのですが、以下に具体的に見ていきたいと思います。
+
+まず、TextPropertyをもつ要素をトラバースしてDetectedBreakがあれば、その内容を表示する簡単なコードを用意します。
+def print_break(text_annotation):
+
+  def str_break(prop):
+    brk = prop.detected_break
+    return "is_prefix={},type={}".format(brk.is_prefix,brk.type_) if brk else ''
+
+  print("-----text-----")
+  print(text_annotation.text)
+  print("--------------")
+  for ipg, page in enumerate(text_annotation.pages):
+    print("Page[{}] {}".format(ipg,str_break(page.property)))
+    for ib,block in enumerate(page.blocks):
+      print("*Block[{}]  {}".format(ib,str_break(block.property)))
+      for ipar,paragraph in enumerate(block.paragraphs):
+        print("  Paragraph[{}]  {}".format(ipar,str_break(paragraph.property)))
+        for iw,word in enumerate(paragraph.words):
+          print("   Word[{}]  {}".format(iw,str_break(word.property)))
+          for isym, symbol in enumerate(word.symbols):
+            print("    Symbol[{}]={}  {}".format(isym,symbol.text,str_break(symbol.property)))
+
+①英文サンプル
+以下の英文の画像（rep.png）を例に、DetectedBreakの設定内容を見てみます。
+
+
+
+実行してみます。
+rep_response = client.document_text_detection({'source':{'filename':'rep.png'}})
+print_break(rep_response.full_text_annotation)
+
+結果は以下のようになりました。
+-----text-----
+Yesterday, I had a meeting with a sales rep-
+resentative of a client company.
+
+--------------
+Page[0] 
+*Block[0]  
+  Paragraph[0]  
+   Word[0]  
+    Symbol[0]=Y  
+    Symbol[1]=e  
+    Symbol[2]=s  
+    Symbol[3]=t  
+    Symbol[4]=e  
+    Symbol[5]=r  
+    Symbol[6]=d  
+    Symbol[7]=a  
+    Symbol[8]=y  
+   Word[1]  
+    Symbol[0]=,  is_prefix=False,type=1
+   Word[2]  
+    Symbol[0]=I  is_prefix=False,type=1
+   Word[3]  
+    Symbol[0]=h  
+    Symbol[1]=a  
+    Symbol[2]=d  is_prefix=False,type=1
+   Word[4]  
+    Symbol[0]=a  is_prefix=False,type=1
+   Word[5]  
+    Symbol[0]=m  
+    Symbol[1]=e  
+    Symbol[2]=e  
+    Symbol[3]=t  
+    Symbol[4]=i  
+    Symbol[5]=n  
+    Symbol[6]=g  is_prefix=False,type=1
+   Word[6]  
+    Symbol[0]=w  
+    Symbol[1]=i  
+    Symbol[2]=t  
+    Symbol[3]=h  is_prefix=False,type=1
+   Word[7]  
+    Symbol[0]=a  is_prefix=False,type=1
+   Word[8]  
+    Symbol[0]=s  
+    Symbol[1]=a  
+    Symbol[2]=l  
+    Symbol[3]=e  
+    Symbol[4]=s  is_prefix=False,type=1
+   Word[9]  
+    Symbol[0]=r  
+    Symbol[1]=e  
+    Symbol[2]=p  is_prefix=False,type=4
+   Word[10]  
+    Symbol[0]=r  
+    Symbol[1]=e  
+    Symbol[2]=s  
+    Symbol[3]=e  
+    Symbol[4]=n  
+    Symbol[5]=t  
+    Symbol[6]=a  
+    Symbol[7]=t  
+    Symbol[8]=i  
+    Symbol[9]=v  
+    Symbol[10]=e  is_prefix=False,type=1
+   Word[11]  
+    Symbol[0]=o  
+    Symbol[1]=f  is_prefix=False,type=1
+   Word[12]  
+    Symbol[0]=a  is_prefix=False,type=1
+   Word[13]  
+    Symbol[0]=c  
+    Symbol[1]=l  
+    Symbol[2]=i  
+    Symbol[3]=e  
+    Symbol[4]=n  
+    Symbol[5]=t  is_prefix=False,type=1
+   Word[14]  
+    Symbol[0]=c  
+    Symbol[1]=o  
+    Symbol[2]=m  
+    Symbol[3]=p  
+    Symbol[4]=a  
+    Symbol[5]=n  
+    Symbol[6]=y  
+   Word[15]  
+    Symbol[0]=.  is_prefix=False,type=5
+
+DetectedBreakはSymbolにのみ設定されています。
+Page,Block,Paragraph,Wordには設定されません。
+単語を区切る半角空白レベルの小さなスペースがSPACE（=1）として認識されています。
+英語本などでたまに見かける、単語途中にハイフンを入れて改行するパターンがHYPHEN（=4）として認識されています。
+この例では、「representative」の「p」にHYPHEN（=4）が設定され、Symbolとしての「-」は含まれていません。
+Paragraphの終わりに、LINE_BREAK（=5）が設定されています。
+
+②微妙なサンプル
+次は、主に空白の具合を見るための作為的な画像（spline.png）を見てみます。
+
+
+
+実行してみます。
+spline_response = client.document_text_detection({'source':{'filename':'spline.png'}})
+print_break(spline_response.full_text_annotation)
+
+結果は以下のようになりました。
+-----text-----
+これは Line 1 で、
+これはLine 2 です。
+これは
+別ブロックです。
+
+--------------
+Page[0] 
+*Block[0]  
+  Paragraph[0]  
+   Word[0]  
+    Symbol[0]=こ  
+    Symbol[1]=れ  
+   Word[1]  
+    Symbol[0]=は  is_prefix=False,type=1
+   Word[2]  
+    Symbol[0]=L  
+    Symbol[1]=i  
+    Symbol[2]=n  
+    Symbol[3]=e  is_prefix=False,type=1
+   Word[3]  
+    Symbol[0]=1  is_prefix=False,type=1
+   Word[4]  
+    Symbol[0]=で  
+   Word[5]  
+    Symbol[0]=、  is_prefix=False,type=3
+   Word[6]  
+    Symbol[0]=こ  
+    Symbol[1]=れ  
+   Word[7]  
+    Symbol[0]=は  
+   Word[8]  
+    Symbol[0]=L  
+    Symbol[1]=i  
+    Symbol[2]=n  
+    Symbol[3]=e  is_prefix=False,type=1
+   Word[9]  
+    Symbol[0]=2  is_prefix=False,type=1
+   Word[10]  
+    Symbol[0]=で  
+    Symbol[1]=す  
+   Word[11]  
+    Symbol[0]=。  is_prefix=False,type=5
+*Block[1]  
+  Paragraph[0]  
+   Word[0]  
+    Symbol[0]=こ  
+    Symbol[1]=れ  
+   Word[1]  
+    Symbol[0]=は  is_prefix=False,type=5
+*Block[2]  
+  Paragraph[0]  
+   Word[0]  
+    Symbol[0]=別  
+   Word[1]  
+    Symbol[0]=ブ  
+    Symbol[1]=ロ  
+    Symbol[2]=ッ  
+    Symbol[3]=ク  
+   Word[2]  
+    Symbol[0]=で  
+    Symbol[1]=す  
+   Word[3]  
+    Symbol[0]=。  is_prefix=False,type=5
+
+DetectedBreakはSymbolにのみ設定されています。
+Page,Block,Paragraph,Wordには設定されません。
+１行目と２行目のSPACE（=1）が認識されていますが、スペースの幅に関係なくSPACE（=1）になっています。
+３行目の空白領域は、スペースではなく、別ブロックとして認識されています。
+２行目の空白領域の方が３行目の空白領域より大きいのですが、２行目はSPACEとして認識され、３行目はブロック分割になっています。
+スペースなのか、別パラグラフなのか、別ブロックなのかは難しいところだと思います。実際、２行目の空白領域を大きくとるなどの変更を行うと、別パラグラフになったり別ブロックになったりします。
+１行目と２行目は同じParagraphとして認識されており、Paragraph内での改行は、EOL_SURE_SPACE（=3）が設定されています。
+Paragraphの終わりには、LINE_BREAK（=5）が設定されています。
+
+いくらか試してみたのですが、is_prefixがTrueとなる例、SURE_SPACE（=2）とUNKNOWN（=0）が認識される例を作ることが出来ませんでした。
+
+もっとも、これらについては、意図的な空白なのか単なるレイアウトの問題なのかも微妙ですし、英語など、単語区切りとしての空白の存在が認識できれば十分な場合もあります。そもそも、用途によっては、DetectedBreakに頼らず、文字などの矩形情報から考える方が良い場合もあると思います。
+ということで、今はこれ以上は深入りしないことにしました。
+
+［４］TextAnnotation.text
+TextAnnotationのtextフィールドには、ページ内で検出したUTF-8テキストが格納されると説明されています。
+
+このページレベルのテキストは、page以下の情報から作られていると思いますが、どのように作られているかは公式ドキュメントに書かれていないようです。ここで、Stack Overflowで以下の記事を見つけました。
+Understanding DetectedBreak in google OCR full text annotations（https://stackoverflow.com/questions/52579907/understanding-detectedbreak-in-google-ocr-full-text-annotations）
+
+これによると、実験により自分なりに考えるしかないようです。
+そこで、テキストの階層とDetectedBreakの情報から、以下のようなページのテキストを作成する簡単な処理を考えてみました。
+def simple_page_text_with_break(page,*,
+        sp=' ',sure_sp=' ', eol='\n', hyphen='-\n',linebreak='\n',unk=''):
+  """ページ内のdetected_breakを考慮したテキスト作成"""
+  res = ""
+  for block in page.blocks:
+    for paragraph in block.paragraphs:
+      for word in paragraph.words:
+        for symbol in word.symbols:
+          pre = ''
+          post = ''
+          if symbol.property.detected_break:
+            # DetectedBreakがあるとき
+            break_str = unk
+            typ = symbol.property.detected_break.type_
+            if typ == vision.TextAnnotation.DetectedBreak.BreakType.SPACE:
+              break_str = sp
+            elif typ == vision.TextAnnotation.DetectedBreak.BreakType.SURE_SPACE:
+              break_str = sure_sp
+            elif typ == vision.TextAnnotation.DetectedBreak.BreakType.EOL_SURE_SPACE:
+              break_str = eol
+            elif typ == vision.TextAnnotation.DetectedBreak.BreakType.HYPHEN:
+              break_str = hyphen
+            elif typ == vision.TextAnnotation.DetectedBreak.BreakType.LINE_BREAK:
+              break_str = linebreak
+            # is_prefiexが真の時、シンボルの前に追加。それ以外は後ろへ
+            if symbol.property.detected_break.is_prefix:
+              pre = break_str
+            else:
+              post = break_str
+          res += pre + symbol.text + post
+  return res
+
+上記関数がTextAnnotation.textの値と一致するかどうかを以下の簡単なテストを行ってみたところ、少なくとも本ブログの例では一致するようです。但し、DetectedBreakの値がUNKNOWNとSURE_SPACEとなる例、そしてis_prefixがTrueになる具体例がわからないため、それらを含む場合は結果が異なるかもしれません。
+
+text1 = response.full_text_annotation.text
+text2 = simple_page_text_with_break(response.full_text_annotation.pages[0])
+print("OK")  if text1 == text2  else  print("NG")
+
+
+［５］テキスト要素のconfidenceフィールド
+Page、Block、Paragraph、Word、Symbolにはconfidenceフィールドがあります。
+confidenceは、0から1の間の値をとります。（confidenceの正式？な日本語訳が分からないのですが、確信度とか信頼度のように使われているようです。）
+
+実際に試してみると、DOCUMENT_TEXT_DETECTIONではconfidence値が設定されますが、TEXT_DETECTIONでは設定されないようです。これを考えると、confidenceフィールドは、DOCUMENT_TEXT_DETECTION固有のフィールドのように思えます。
+（BatchAnnotateFilesメソッドにおいても、DOCUMENT_TEXT_DETECTIONのみ値が設定されるようです。）
+
+以下は、記事『Vision API OCR事始め(1)：TEXT_DETECTIONとDOCUMENT_TEXT_DETECTIONの違い』で利用した12ポイント版の画像（asparagus12.png）でconfidence値を具体的に見てみます。
+
+
+
+以下の簡単なconfidence値を表示するコードを利用します。
+def print_confidence(text_annotation):
+  for ipg, page in enumerate(text_annotation.pages):
+    print("Page[{}] confidence={}".format(ipg, page.confidence))
+    for ib,block in enumerate(page.blocks):
+      print("*Block[{}] confidence={}".format(ib,block.confidence))
+      for ipar,paragraph in enumerate(block.paragraphs):
+        print("  Paragraph[{}] confidence={}".format(ipar,paragraph.confidence))
+        for iw,word in enumerate(paragraph.words):
+          print("   Word[{}] confidence={}".format(iw,word.confidence))
+          for isym, symbol in enumerate(word.symbols):
+            print("    Symbol[{}]={} confidence={}".format(isym,symbol.text,symbol.confidence))
+
+（１）TEXT_DETECTIONの場合
+実行コード
+txt_aspara12_response = client.text_detection({'source':{'filename':'asparagus12.png'}})
+print_confidence(txt_aspara12_response.full_text_annotation)
+
+結果
+Page[0] confidence=0.0
+*Block[0] confidence=0.0
+  Paragraph[0] confidence=0.0
+   Word[0] confidence=0.0
+    Symbol[0]=竜 confidence=0.0
+    Symbol[1]=霊 confidence=0.0
+    Symbol[2]=菜 confidence=0.0
+   Word[1] confidence=0.0
+    Symbol[0]=は confidence=0.0
+   Word[2] confidence=0.0
+    Symbol[0]=ア confidence=0.0
+    Symbol[1]=ス confidence=0.0
+    Symbol[2]=パ confidence=0.0
+    Symbol[3]=ラ confidence=0.0
+   Word[3] confidence=0.0
+    Symbol[0]=ガ confidence=0.0
+    Symbol[1]=ス confidence=0.0
+   Word[4] confidence=0.0
+    Symbol[0]=の confidence=0.0
+   Word[5] confidence=0.0
+    Symbol[0]=こ confidence=0.0
+    Symbol[1]=と confidence=0.0
+   Word[6] confidence=0.0
+    Symbol[0]=ら confidence=0.0
+    Symbol[1]=し confidence=0.0
+    Symbol[2]=い confidence=0.0
+
+TEXT_DETECTIONでは、confidence値が設定されないようです。
+ちなみに、この例は「髭」を「霊」と誤認識している例です。
+
+（２）DOCUMENT_TEXT_DETECTIONの場合
+実行コード
+doc_aspara12_response = client.document_text_detection({'source':{'filename':'asparagus12.png'}})
+print_confidence(doc_aspara12_response.full_text_annotation)
+
+結果
+Page[0] confidence=0.0
+*Block[0] confidence=0.9100000262260437
+  Paragraph[0] confidence=0.9100000262260437
+   Word[0] confidence=0.6800000071525574
+    Symbol[0]=竜 confidence=0.9800000190734863
+    Symbol[1]=髭 confidence=0.14000000059604645
+    Symbol[2]=菜 confidence=0.9300000071525574
+   Word[1] confidence=0.6899999976158142
+    Symbol[0]=は confidence=0.6899999976158142
+   Word[2] confidence=0.9800000190734863
+    Symbol[0]=ア confidence=0.9800000190734863
+    Symbol[1]=ス confidence=0.9800000190734863
+    Symbol[2]=パ confidence=0.9900000095367432
+    Symbol[3]=ラ confidence=0.9900000095367432
+   Word[3] confidence=0.9900000095367432
+    Symbol[0]=ガ confidence=1.0
+    Symbol[1]=ス confidence=0.9900000095367432
+   Word[4] confidence=0.9900000095367432
+    Symbol[0]=の confidence=0.9900000095367432
+   Word[5] confidence=0.9800000190734863
+    Symbol[0]=こ confidence=0.9800000190734863
+    Symbol[1]=と confidence=0.9900000095367432
+   Word[6] confidence=0.9800000190734863
+    Symbol[0]=ら confidence=0.9700000286102295
+    Symbol[1]=し confidence=0.9900000095367432
+    Symbol[2]=い confidence=0.9900000095367432
+
+DOCUMENT_TEXT_DETECTIONでは、page以外の要素にconfidence値が設定されています。（page要素のconfidence値は設定されないようです。）
+この例は「髭」を正しく認識していますが、confidenceが0.14程度とかなり低い値になっています。
+Block、Paragraph、Wordのconfidence値は、例を見る限り、０～1の範囲になるように、下位要素のconfidenceを要素数で割って、それを足し合わせた数のように思えますが、公式ドキュメントに説明がないので、自信はありません。
+
+この例を見る限り、confidence値と閾値で何らかの判断をしようとすると、閾値の設定がなかなか難しい気がしました。
+
+ついでに、先の12ポイント版から24ポイント版（asparagus24.png）になると、confidence値がどのような変化があるのか見てみました。
+
+
+
+実行コード
+doc_aspara24_response = client.document_text_detection({'source':{'filename':'asparagus24.png'}})
+print_confidence(doc_aspara24_response.full_text_annotation)
+
+結果
+Page[0] confidence=0.0
+*Block[0] confidence=0.9100000262260437
+  Paragraph[0] confidence=0.9100000262260437
+   Word[0] confidence=0.75
+    Symbol[0]=竜 confidence=0.9700000286102295
+    Symbol[1]=髭 confidence=0.3100000023841858
+    Symbol[2]=菜 confidence=0.9900000095367432
+   Word[1] confidence=0.7799999713897705
+    Symbol[0]=は confidence=0.7799999713897705
+   Word[2] confidence=0.9800000190734863
+    Symbol[0]=ア confidence=0.9800000190734863
+    Symbol[1]=ス confidence=0.9800000190734863
+    Symbol[2]=パ confidence=0.9900000095367432
+    Symbol[3]=ラ confidence=0.9900000095367432
+   Word[3] confidence=0.9900000095367432
+    Symbol[0]=ガ confidence=0.9900000095367432
+    Symbol[1]=ス confidence=0.9900000095367432
+   Word[4] confidence=0.9900000095367432
+    Symbol[0]=の confidence=0.9900000095367432
+   Word[5] confidence=0.9800000190734863
+    Symbol[0]=こ confidence=0.9800000190734863
+    Symbol[1]=と confidence=0.9900000095367432
+   Word[6] confidence=0.9100000262260437
+    Symbol[0]=ら confidence=0.7599999904632568
+    Symbol[1]=し confidence=0.9900000095367432
+    Symbol[2]=い confidence=0.9900000095367432
+
+24ポイント版はTEXT_DETECTIONでも「髭」を正しく認識できた例でした。
+confidence値は、12ポイント版が0.14だったのに対して、24ポイント版は0.31まで上がっています。
+一方、12ポイント版よりconfidence値が下がった文字もあります。（「らしい」の「ら」が、0.97から0.75まで下がっています。）
+
+［６］テキスト要素のbounding_boxフィールド
+Page要素には、ページの幅を表すwidthフィールド、高さを表すheightフィールドがあります。
+そしてBlock、Paragraph、Word、Symbolの各要素には、ページ内の矩形領域を表すbounding_boxフィールドがあります。bounding_boxフィールドには、以下のような構造をもつBoundingPoly型のオブジェクトが格納されています。
+
+Vision API OCR：BoundingPolyのデータ構造
+
+
+BoundingPolyにはverticesとnormalized_verticesの二つのフィールドがあり、これがどのように使われるのか公式ドキュメントに説明が無いようなので、実際に試してみました。
+
+すると、JPEGなどの画像についてはverticesフィールド、PDFファイルについてはnormalized_verticesフィールドが使われることがわかりました。
+つまり、BatchAnnotateFilesまたはAsyncBatchAnnotateFilesメソッドを利用してPDFファイルを解析した場合のみnormalized_verticesフィールドに設定され、それ以外はverticesフィールドに設定されるようです。
+（BatchAnnotateFilesまたはAsyncBatchAnnotateFilesメソッドを利用してTIFFファイルを解析した場合は、verticesフィールドに設定されるようです。）
+
+これは、ページの座標単位が、PDFファイルはポイント、画像はピクセルであることによる違いのようです。
+
+なお、テキストの向きと座標の格納順序など、なかなか興味深い内容が多いため、詳しくは別の記事まとめたいと思いますが、ここでは、違いを簡単に見ておきます。
+
+これらを確認するため、先の「竜髭菜はアスパラガスのことらしい」の画像に対して、以下のbounding_boxフィールドの値を表示する関数を使って比較します。
+def print_bounding_box(text_annotation):
+
+  def str_bounding_poly(poly):
+    if poly.normalized_vertices:
+      return 'N[' + ','.join([ "({},{})".format(v.x,v.y) for v in poly.normalized_vertices]) + ']'
+    elif poly.vertices:
+      return 'V[' + ','.join([ "({},{})".format(v.x,v.y) for v in poly.vertices]) + ']'
+    else:
+      return '[]'
+
+  for ipg, page in enumerate(text_annotation.pages):
+    print("Page[{}]  width={}, height={}".format(ipg, page.width, page.height))
+    for ib,block in enumerate(page.blocks):
+      print("*Block[{}]  bounding_box={}".format(ib, str_bounding_poly(block.bounding_box)))
+      for ipar,paragraph in enumerate(block.paragraphs):
+        print("  Paragraph[{}]  bounding_box={}".format(ipar, str_bounding_poly(paragraph.bounding_box)))
+        for iw,word in enumerate(paragraph.words):
+          print("   Word[{}]  bounding_box={}".format(iw, str_bounding_poly(word.bounding_box)))
+          for isym, symbol in enumerate(word.symbols):
+            print("    Symbol[{}]={}  bounding_box={}".format(isym,symbol.text,str_bounding_poly(symbol.bounding_box)))
+
+（１）JPEGなどの画像（BatchAnnotateImages、AsyncBatchAnnotateImagesメソッド）の場合
+Pageのwidthとheightの単位は、ピクセルです。
+TEXT_DETECTION、DOCUMENT_TEXT_DETECTIONのどちらも、Block、Paragraph、Word、Symbolについて、BoundingPolyのverticesフィールドにそれぞれの矩形が格納されています。
+なお、TEXT_DETECTIONとDOCUMENT_TEXT_DETECTIONでは抽出した領域が異なる場合があります。以下の例でも、微妙に異なります。
+
+実行結果（TEXT_DETECTION）
+Page[0]  width=329, height=54
+*Block[0]  bounding_box=V[(12,15),(281,15),(281,34),(12,34)]
+  Paragraph[0]  bounding_box=V[(12,15),(281,15),(281,34),(12,34)]
+   Word[0]  bounding_box=V[(12,19),(60,19),(60,33),(12,33)]
+    Symbol[0]=竜  bounding_box=V[(12,19),(26,19),(26,32),(12,32)]
+    Symbol[1]=霊  bounding_box=V[(29,19),(43,19),(43,32),(29,32)]
+    Symbol[2]=菜  bounding_box=V[(46,19),(60,19),(60,33),(46,33)]
+   Word[1]  bounding_box=V[(62,15),(81,15),(81,34),(62,34)]
+    Symbol[0]=は  bounding_box=V[(62,15),(81,15),(81,34),(62,34)]
+   Word[2]  bounding_box=V[(98,19),(144,19),(144,32),(98,32)]
+    Symbol[0]=ア  bounding_box=V[(98,20),(111,20),(111,32),(98,32)]
+    Symbol[1]=ス  bounding_box=V[(114,20),(119,20),(119,31),(114,31)]
+    Symbol[2]=パ  bounding_box=V[(123,19),(128,19),(128,31),(123,31)]
+    Symbol[3]=ラ  bounding_box=V[(132,20),(144,20),(144,32),(132,32)]
+   Word[3]  bounding_box=V[(146,15),(186,15),(186,34),(146,34)]
+    Symbol[0]=ガ  bounding_box=V[(146,15),(172,15),(172,34),(146,34)]
+    Symbol[1]=ス  bounding_box=V[(173,15),(186,15),(186,34),(173,34)]
+   Word[4]  bounding_box=V[(188,15),(197,15),(197,34),(188,34)]
+    Symbol[0]=の  bounding_box=V[(188,15),(197,15),(197,34),(188,34)]
+   Word[5]  bounding_box=V[(200,19),(229,19),(229,32),(200,32)]
+    Symbol[0]=こ  bounding_box=V[(200,20),(213,20),(213,32),(200,32)]
+    Symbol[1]=と  bounding_box=V[(217,19),(229,19),(229,32),(217,32)]
+   Word[6]  bounding_box=V[(234,20),(281,20),(281,32),(234,32)]
+    Symbol[0]=ら  bounding_box=V[(234,20),(249,20),(249,32),(234,32)]
+    Symbol[1]=し  bounding_box=V[(250,20),(260,20),(260,32),(250,32)]
+    Symbol[2]=い  bounding_box=V[(261,20),(281,20),(281,32),(261,32)]
+
+実行結果（DOCUMENT_TEXT_DETECTION）
+Page[0]  width=329, height=54
+*Block[0]  bounding_box=V[(12,15),(281,15),(281,34),(12,34)]
+  Paragraph[0]  bounding_box=V[(12,15),(281,15),(281,34),(12,34)]
+   Word[0]  bounding_box=V[(12,15),(55,15),(55,34),(12,34)]
+    Symbol[0]=竜  bounding_box=V[(12,15),(25,15),(25,34),(12,34)]
+    Symbol[1]=髭  bounding_box=V[(29,15),(39,15),(39,34),(29,34)]
+    Symbol[2]=菜  bounding_box=V[(46,15),(55,15),(55,34),(46,34)]
+   Word[1]  bounding_box=V[(67,15),(70,15),(70,34),(67,34)]
+    Symbol[0]=は  bounding_box=V[(67,15),(70,15),(70,34),(67,34)]
+   Word[2]  bounding_box=V[(79,15),(139,15),(139,34),(79,34)]
+    Symbol[0]=ア  bounding_box=V[(79,15),(93,15),(93,34),(79,34)]
+    Symbol[1]=ス  bounding_box=V[(98,15),(110,15),(110,34),(98,34)]
+    Symbol[2]=パ  bounding_box=V[(119,15),(129,15),(129,34),(119,34)]
+    Symbol[3]=ラ  bounding_box=V[(133,15),(139,15),(139,34),(133,34)]
+   Word[3]  bounding_box=V[(148,15),(176,15),(176,34),(148,34)]
+    Symbol[0]=ガ  bounding_box=V[(148,15),(162,15),(162,34),(148,34)]
+    Symbol[1]=ス  bounding_box=V[(168,15),(176,15),(176,34),(168,34)]
+   Word[4]  bounding_box=V[(189,15),(192,15),(192,34),(189,34)]
+    Symbol[0]=の  bounding_box=V[(189,15),(192,15),(192,34),(189,34)]
+   Word[5]  bounding_box=V[(199,15),(229,15),(229,34),(199,34)]
+    Symbol[0]=こ  bounding_box=V[(199,15),(213,15),(213,34),(199,34)]
+    Symbol[1]=と  bounding_box=V[(220,15),(229,15),(229,34),(220,34)]
+   Word[6]  bounding_box=V[(231,15),(281,15),(281,34),(231,34)]
+    Symbol[0]=ら  bounding_box=V[(231,15),(246,15),(246,34),(231,34)]
+    Symbol[1]=し  bounding_box=V[(252,15),(264,15),(264,34),(252,34)]
+    Symbol[2]=い  bounding_box=V[(272,15),(281,15),(281,34),(272,34)]
+
+
+（２）PDFファイル（BatchAnnotateFiles、AsyncBatchAnnotateFilesメソッド）の場合
+Pageのwidthとheightの単位は、ポイントです。
+Block、Paragraph、Wordについては、BoundingPolyのnormalized_verticesフィールドにそれぞれの矩形が格納されますが、Symbolについては、verticesとnormalized_verticesのどちらも設定されません。つまり、文字レベルの矩形は得られないということになります。
+なお、TEXT_DETECTIONとDOCUMENT_TEXT_DETECTIONでは抽出した領域が異なる場合があります。以下の例でも、微妙に異なります。
+但し、AsyncBatchAnnotateFilesはDOCUMENT_TEXT_DETECTIONのみサポートしています。
+TIFFファイルを解析した場合は、normalized_verticesフィールドではなく、JPEGなどの画像と同様にverticesフィールドに設定されるようです。
+
+以下は「竜髭菜はアスパラガスのことらしい」の画像（asparagus12.png）を、img2pdfでPDF化してBatchAnnotateFilesを呼び出した例です。
+img2pdfについては、記事『Colaboratory環境で画像ファイルをPDFファイルに変換する（img2pdf）』を参考にしてください。
+
+実行結果（TEXT_DETECTION）
+Page[0]  width=246, height=40
+*Block[0]  bounding_box=N[(0.03658536449074745,0.30000001192092896),(0.8536585569381714,0.30000001192092896),(0.8536585569381714,0.625),(0.03658536449074745,0.625)]
+  Paragraph[0]  bounding_box=N[(0.03658536449074745,0.30000001192092896),(0.8536585569381714,0.30000001192092896),(0.8536585569381714,0.625),(0.03658536449074745,0.625)]
+   Word[0]  bounding_box=N[(0.03658536449074745,0.30000001192092896),(0.2073170691728592,0.30000001192092896),(0.2073170691728592,0.625),(0.03658536449074745,0.625)]
+    Symbol[0]=竜  bounding_box=[]
+    Symbol[1]=髭  bounding_box=[]
+    Symbol[2]=菜  bounding_box=[]
+   Word[1]  bounding_box=N[(0.2073170691728592,0.30000001192092896),(0.2520325183868408,0.30000001192092896),(0.2520325183868408,0.625),(0.2073170691728592,0.625)]
+    Symbol[0]=は  bounding_box=[]
+   Word[2]  bounding_box=N[(0.2926829159259796,0.3499999940395355),(0.4390243887901306,0.3499999940395355),(0.4390243887901306,0.6000000238418579),(0.2926829159259796,0.6000000238418579)]
+    Symbol[0]=ア  bounding_box=[]
+    Symbol[1]=ス  bounding_box=[]
+    Symbol[2]=パ  bounding_box=[]
+    Symbol[3]=ラ  bounding_box=[]
+   Word[3]  bounding_box=N[(0.44308942556381226,0.30000001192092896),(0.565040647983551,0.30000001192092896),(0.565040647983551,0.625),(0.44308942556381226,0.625)]
+    Symbol[0]=ガ  bounding_box=[]
+    Symbol[1]=ス  bounding_box=[]
+   Word[4]  bounding_box=N[(0.565040647983551,0.30000001192092896),(0.6016260385513306,0.30000001192092896),(0.6016260385513306,0.625),(0.565040647983551,0.625)]
+    Symbol[0]=の  bounding_box=[]
+   Word[5]  bounding_box=N[(0.6016260385513306,0.30000001192092896),(0.6910569071769714,0.30000001192092896),(0.6910569071769714,0.625),(0.6016260385513306,0.625)]
+    Symbol[0]=こ  bounding_box=[]
+    Symbol[1]=と  bounding_box=[]
+   Word[6]  bounding_box=N[(0.7113820910453796,0.3499999940395355),(0.8536585569381714,0.3499999940395355),(0.8536585569381714,0.6000000238418579),(0.7113820910453796,0.6000000238418579)]
+    Symbol[0]=ら  bounding_box=[]
+    Symbol[1]=し  bounding_box=[]
+    Symbol[2]=い  bounding_box=[]
+
+実行結果（DOCUMENT_TEXT_DETECTION）
+Page[0]  width=246, height=40
+*Block[0]  bounding_box=N[(0.03252032399177551,0.2750000059604645),(0.8536585569381714,0.2750000059604645),(0.8536585569381714,0.625),(0.03252032399177551,0.625)]
+  Paragraph[0]  bounding_box=N[(0.03252032399177551,0.2750000059604645),(0.8536585569381714,0.2750000059604645),(0.8536585569381714,0.625),(0.03252032399177551,0.625)]
+   Word[0]  bounding_box=N[(0.03252032399177551,0.2750000059604645),(0.1666666716337204,0.2750000059604645),(0.1666666716337204,0.625),(0.03252032399177551,0.625)]
+    Symbol[0]=竜  bounding_box=[]
+    Symbol[1]=髭  bounding_box=[]
+    Symbol[2]=菜  bounding_box=[]
+   Word[1]  bounding_box=N[(0.20325203239917755,0.2750000059604645),(0.2195121943950653,0.2750000059604645),(0.2195121943950653,0.625),(0.20325203239917755,0.625)]
+    Symbol[0]=は  bounding_box=[]
+   Word[2]  bounding_box=N[(0.24390244483947754,0.2750000059604645),(0.4268292784690857,0.2750000059604645),(0.4268292784690857,0.625),(0.24390244483947754,0.625)]
+    Symbol[0]=ア  bounding_box=[]
+    Symbol[1]=ス  bounding_box=[]
+    Symbol[2]=パ  bounding_box=[]
+    Symbol[3]=ラ  bounding_box=[]
+   Word[3]  bounding_box=N[(0.45121949911117554,0.2750000059604645),(0.5365853905677795,0.2750000059604645),(0.5365853905677795,0.625),(0.45121949911117554,0.625)]
+    Symbol[0]=ガ  bounding_box=[]
+    Symbol[1]=ス  bounding_box=[]
+   Word[4]  bounding_box=N[(0.5691056847572327,0.2750000059604645),(0.5813007950782776,0.2750000059604645),(0.5813007950782776,0.625),(0.5691056847572327,0.625)]
+    Symbol[0]=の  bounding_box=[]
+   Word[5]  bounding_box=N[(0.6056910753250122,0.2750000059604645),(0.6910569071769714,0.2750000059604645),(0.6910569071769714,0.625),(0.6056910753250122,0.625)]
+    Symbol[0]=こ  bounding_box=[]
+    Symbol[1]=と  bounding_box=[]
+   Word[6]  bounding_box=N[(0.7032520174980164,0.2750000059604645),(0.8536585569381714,0.2750000059604645),(0.8536585569381714,0.625),(0.7032520174980164,0.625)]
+    Symbol[0]=ら  bounding_box=[]
+    Symbol[1]=し  bounding_box=[]
+    Symbol[2]=い  bounding_box=[]
+
+
+［７］最後に
+かなり昔、仕事でOCRをちょっとだけ使ったことがあります。そのころのOCRは、「文字」の抽出という文字通りの機能でしたが、Vision APIのOCRは文字抽出というより、文章レベルというか、意味の領域に少し踏み込んだものとなっていて、凄い進化を感じます。
+今回の記事では触れていませんが、テキストの構造を表現できるということは、テキストの方向をちゃんと認識しているということであり、実際、画像を回転しても、ちゃんと日本語の並びで抽出できたりして、驚きです。
+今回はfullTextAnnotationのデータ構造を中心に見てみましたが、次はtextAnnotationsのデータ構造をみて、さらに文字の方向や座標など、さらに深堀していきたいと思います。
+
+    </div>
+</body>
+</html>
