@@ -47,7 +47,7 @@ array.sort((n1, n2) => n1 - n2);
 console.log('---< 配列の二分探索 >---');
 let arrayOk = 0;
 let arrayNg = 0;
-const arrayStart = new Date().getTime();
+console.time('Arrayの検索時間');
 for (let i = 0; i < TEST_COUNT; i++) {
     if (binarySearch(array, randomArray[i])) {
         arrayOk++;
@@ -55,15 +55,14 @@ for (let i = 0; i < TEST_COUNT; i++) {
         arrayNg++;
     }
 }
-const arrayEnd = new Date().getTime();
-console.log(`arrayの検索時間: ${arrayEnd - arrayStart}ms`);
+console.timeEnd('Arrayの検索時間');
 console.log(`検索成功: ${arrayOk}`);
 console.log(`検索失敗: ${arrayNg}`);
 
 console.log('---< Setの探索 >---');
 let setOk = 0;
 let setNg = 0;
-const setStart = new Date().getTime();
+console.time('Setの検索時間');
 for (let i = 0; i < TEST_COUNT; i++) {
     if (set.has(randomArray[i])) {
         setOk++;
@@ -71,7 +70,6 @@ for (let i = 0; i < TEST_COUNT; i++) {
         setNg++;
     }
 }
-const setEnd = new Date().getTime();
-console.log(`setの検索時間: ${setEnd - setStart}ms`);
+console.timeEnd('Setの検索時間');
 console.log(`検索成功: ${setOk}`);
 console.log(`検索失敗: ${setNg}`);
