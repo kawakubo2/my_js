@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const tbody = document.querySelector('#tbody');
     const error_summary = document.querySelector('#error_summary');
+    const first_tr = document.querySelector('#tbody > #header');
 
     function isNullOrEmpty(value) {
         return value === null || value === undefined || value.trim() === '';
@@ -51,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tr.append(create_td_with_button(['delete', 'btn', 'btn-danger'], '削除'));
         tr.append(create_td_with_button(['up', 'btn', 'btn-secondary'], '△'));
         tr.append(create_td_with_button(['down', 'btn', 'btn-secondary'], '▽'));
+        tr.append(create_td_with_button(['top', 'btn', 'btn-secondary'], 'TOP'));
+        tr.append(create_td_with_button(['bottom', 'btn', 'btn-secondary'], 'BOTTOM'));
         return tr;
     }
 
@@ -71,24 +74,54 @@ document.addEventListener('DOMContentLoaded', () => {
         return td;
     }
 
+    function doAdd(current_tr) {
+        const errors = validate_input();
+        if (errors.length > 0) {
+            print_errors(errors);
+            return;
+        }
+        current_tr.after(create_tr());
+        reset_form();
+    }
+    function doDelete(current_tr) {
+        tbody.removeChild(current_tr);
+    }
+    function doUp(current_tr) {
+        const previous_tr = current_tr.previousElementSibling;
+        if (previous_tr === first_tr) {
+            return;
+        }
+        previous_tr.before(current_tr);
+    }
+    function doDown(current_tr) {
+        const next_tr = current_tr.nextElementSibling;
+        next_tr?.after(current_tr);
+    }
+    function doTop(current_tr) {
+        first_tr.after(current_tr);
+    }
+    function doBottom(current_tr) {
+        tbody.lastElementChild.after(current_tr);
+    }
     tbody.addEventListener('click', (e) => {
         error_summary.textContent = '';
         const tr = document.createElement('tr');
 
         // 追加ボタンクリック時にのみ入力値検証する
         const classList = e.target.classList;
+        const current_tr = e.target.parentElement.parentElement;
         if (classList.contains('add')) {
-            const errors = validate_input();
-            if (errors.length > 0) {
-                print_errors(errors);
-                return;
-            }
-            tbody.append(create_tr());
-            reset_form();
-
+            doAdd(current_tr);
         } else if (classList.contains('delete')) {
-            const current_tr = e.target.parentElement.parentElement;
-            tbody.removeChild(current_tr);
+            doDelete(current_tr);
+        } else if (classList.contains('up')) {
+            doUp(current_tr);
+        } else if (classList.contains('down')) {
+            doDown(current_tr);
+        } else if (classList.contains('top')) {
+            doTop(current_tr);
+        } else if (classList.contains('bottom')) {
+            doBottom(current_tr);
         }
     });
 });
