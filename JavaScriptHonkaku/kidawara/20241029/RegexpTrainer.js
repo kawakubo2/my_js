@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btn.addEventListener('click', () => {
         if (pattern.value && target.value) {
-            const regexp = new RegExp(pattern);
-            if (regexp.test(target)) {
+            const regexp = new RegExp(pattern.value);
+            if (regexp.test(target.value)) {
                 result.textContent = '〇';
             } else {
                 result.textContent = '×'
