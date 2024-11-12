@@ -1,0 +1,9 @@
+{
+    "members": [
+        {"number": 1001, "name": "Yamada", "age": 35, "weight": 72, "height": 178},
+        {"number": 1002, "name": "Sasaki", "age": 28, "weight": 72, "height": 168},
+        {"number": 1003, "name": "Yoneda", "age": 38, "weight": 72, "height": 162},
+        {"number": 1004, "name": "Tanaka", "age": 41, "weight": 72, "height": 185},
+        {"number": 1005, "name": "Furuta", "age": 22, "weight": 72, "height": 165}
+    ]
+}
