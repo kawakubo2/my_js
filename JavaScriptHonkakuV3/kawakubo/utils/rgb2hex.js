@@ -1,14 +1,3 @@
-const { SourceTextModule } = require("vm");
-
-const number = 65535;
-
-console.log(number.toString(2));
-console.log(number.toString(8));
-console.log(number.toString(16));
-
-/*
-rgb(128, 255, 64) ---> #xxxxxx;
-*/
 function rgb2hex(rgb) {
     const pattern = /^rgb\s*\((\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/i;
     const [, red, green, blue ] = rgb.match(pattern).map(n => Number(n));
