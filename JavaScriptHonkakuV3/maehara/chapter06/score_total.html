@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+function totalScore(scores) {
+    let total = 0;
+    for (const score of scores) {
+        // console.assert(typeof score === 'number' && (score >= 0 && score <= 100), { score, "0～100の数値を入力してください" });
+        console.assert(typeof score === 'number' && (score >= 0 && score <= 100));
+        total += score;
+    }
+    return total;
+}
+
+const numbers = [38, 70, 90, -15, 58, 100];
+
+console.log(`合計点: ${totalScore(numbers)}`);
+    </script>
+</body>
+</html>
+
