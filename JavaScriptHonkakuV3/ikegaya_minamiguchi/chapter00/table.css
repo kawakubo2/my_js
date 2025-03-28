@@ -1,0 +1,22 @@
+table#kakeibo {
+  border-collapse: collapse;
+  border-radius: 16px;
+}
+
+table#kakeibo th, table#kakeibo td {
+  border: 1px solid #999;
+  padding: 0.3em;
+}
+
+table#kakeibo td.price {
+  text-align: right;
+}
+
+table#kakeibo thead {
+  color: white;
+  background-color: navy;
+}
+
+table#kakeibo tr:nth-child(even) {
+  background-color: aliceblue;
+}
