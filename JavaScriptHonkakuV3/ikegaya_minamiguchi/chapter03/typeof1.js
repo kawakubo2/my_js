@@ -1,0 +1,2 @@
+let name = 'ヤマダタロウ';
+name
