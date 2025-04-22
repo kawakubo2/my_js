@@ -25,3 +25,10 @@ const members = [
 名前: 田中一郎 年齢: 55 BMI値: 24.7
 */
 
+for (const member of members) {
+  console.log(`名前: ${member.name} 年齢: ${member.age} BMI値: ${(member.weight / (member.height / 100) ** 2).toFixed(1)}`);
+}
+console.log('----------------------------------------')
+for (const {name, age, weight, height} of members) {
+  console.log(`名前: ${name} 年齢: ${age} BMI値: ${(weight / (height / 100) ** 2).toFixed(1)}`);
+}
