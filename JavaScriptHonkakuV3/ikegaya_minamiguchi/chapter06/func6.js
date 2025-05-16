@@ -31,3 +31,7 @@ console.log(max3(6, 9, 9));
 function max4(a, b, c, d) {
   return max2(max2(a, b), max2(c, d));
 }
+
+function max10(a, b, c, d, e, f, g, h, i, j) {
+  
+}
