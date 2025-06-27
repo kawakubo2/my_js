@@ -27,7 +27,7 @@ const rawdata_to_sorted_list = (raw_data) => {
 }
 
 const get_last_sunday = () => {
-	let result = new Date();
+	let result = new Date(2021, 0, 1);
 	result = new Date(result.getFullYear(), result.getMonth(), result.getDate(), 0, 0, 0, 0);
 
 	while(true) {

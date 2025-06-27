@@ -1,6 +1,3 @@
-const fruits = ['banana', 'apple', 'grape', 'banana', 'apple', 'orange',
-                'banana', 'pear', 'watermelon', 'pear'];
-
 /*
 banana: 3
 apple: 2
@@ -9,6 +6,8 @@ orange: 1
 pear: 2
 watermelon: 1
 */
+const fruits = ['banana', 'apple', 'grape', 'banana', 'apple', 'orange',
+                'banana', 'pear', 'watermelon', 'pear'];
 
 const counter = new Map();
 for (const f of fruits) {
