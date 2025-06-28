@@ -50,7 +50,7 @@ console.log(d2 instanceof Dog);
 console.log(d2 instanceof SuperAnimal);
 
 console.log('---< isPrototypeOf >---');
-// TODO 本来はtrueになるべきだと思われるが、実際にはfalseとなる
+// FIXME 本来はtrueになるべきだと思われるが、実際にはfalseとなる
 console.log(Dog.prototype.isPrototypeOf(d1));
 console.log(Animal.prototype.isPrototypeOf(d1));
 
