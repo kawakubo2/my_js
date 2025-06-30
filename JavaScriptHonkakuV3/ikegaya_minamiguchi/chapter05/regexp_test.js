@@ -9,7 +9,7 @@ const ng = ["1a", "b2", "1+", "2-", "++1", "--2", "+2+", "+2-", "-3+",
 ];
 
 function test(pattern, targets, ok) {
-    console.log(`---------${ok ? "OK" : "NG"}パターン ---------`)
+    console.log(`========= ${ok ? "OK" : "NG"}パターン =========`)
     const regexp = new RegExp(pattern);
     let count = 0;
     for (const target of targets) {
@@ -18,7 +18,7 @@ function test(pattern, targets, ok) {
             count++;
             judge = true;
         }
-        console.log(`${target}: ${judge ? '〇': '×'}`);
+        console.log(`${target.padEnd(12)}: ${judge ? '〇': '×'}`);
     }
     console.log("-----------------------------")
     if (ok) {
