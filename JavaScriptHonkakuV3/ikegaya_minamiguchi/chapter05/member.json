@@ -1,0 +1,22 @@
+{
+    "members": [
+        {
+            "member_id": 1001,
+            "name": "山田太郎",
+            "height": 170,
+            "weight": 70
+        },
+        {
+            "member_id": 1002,
+            "name": "横山花子",
+            "height": 158,
+            "weight": 52
+        },
+        {
+            "member_id": 1003,
+            "name": "田中一郎",
+            "height": 180,
+            "weight": 80 
+        }
+    ]
+}
