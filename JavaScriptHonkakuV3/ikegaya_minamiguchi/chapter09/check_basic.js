@@ -1,6 +1,10 @@
+function getCheckValus(selector) {
+    const items = Array.from(document.querySelectorAll(selector));
+    return items.filter(item => item.checked).map(item => item.value);
+}
 document.addEventListener('DOMContentLoaded', () => {
-    const foods = Array.from(document.querySelectorAll('input[name="food"]'));
     document.querySelector('#btn').addEventListener('click', () => {
-        console.log(foods.filter(item => item.checked).map(item => item.value));
+        console.log(getCheckValus('input[name="food"]'));
+        console.log(getCheckValus('input[name="sports"]'));
     });
 });
