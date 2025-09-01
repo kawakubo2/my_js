@@ -18,6 +18,7 @@ const data2 = [
 ];
 
 function get_min(data) {
+    const result = [];
     let min = 101;
     const xs = [];
     for (let i = 0; i <= 100; i++) {
@@ -29,7 +30,7 @@ function get_min(data) {
             xs[num]++;
             if (num < min) min = num;
         } else if (query === 2) {
-            console.log(min);
+            result.push(min);
             xs[min]--;
             if (xs[min] <= 0) {
                 for (let i = min; i <= 100; i++) {
@@ -40,10 +41,15 @@ function get_min(data) {
             throw new Error("クエリに整合性がない");
         }
     }
+    return result;
+}
+
+function print_result(result) {
+    result.forEach(element => console.log(element));
 }
 
 function test(data, func) {
-    console.log('--- テストデータ ---');
+    console.log('\n--- テストデータ ---');
     console.log(data.length);
     for (let i = 0; i < data.length; i++) {
         let s = '';
@@ -53,10 +59,15 @@ function test(data, func) {
         console.log(s);
     }
     console.log('--- 結果 ---');
-    func(data);
+    const result = func(data);
+    result && print_result(result);
 }
 
-console.log('--- テスト1 ---');
-test(data1, get_min);
-console.log('--- テスト2 ---');
-test(data2, get_min);
+function main() {
+    console.log('\n--- テスト1 ---');
+    test(data1, get_min);
+    console.log('\n--- テスト2 ---');
+    test(data2, get_min);
+}
+
+main();
