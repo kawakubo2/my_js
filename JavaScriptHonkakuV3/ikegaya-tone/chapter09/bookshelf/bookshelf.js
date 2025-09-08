@@ -14,15 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     };
 
-
-
     const validate_input = () => {
         error_summary.textContent = '';
         const errors = [];
-        if (isEmpty(title.value)) {
+        if (isEmpty(title.value?.trim())) {
             errors.push('題名は必須入力です。')
         }
-        if (isEmpty(publisher.value)) {
+        if (isEmpty(publisher.value?.trim())) {
             errors.push('出版社は必須入力です。')
         }
         if (isEmpty(price.value)) {
