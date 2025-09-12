@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="books.js"></script>
+</head>
+<body>
+    <div>
+        <form>
+            <div class="container">
+                <label for="title">題名　:</label>
+                <input type="text" name="title" id="title" />
+            </div>
+            <div class="container">
+                <label for="publisher">出版社:</label>
+                <input type="text" name="publisher" id="publisher" />
+            </div>
+            <div class="container">
+                <label for="price">価格　:</label>
+                <input type="text" name="price" id="price" />
+            </div>
+        </form>
+    </div>
+    <hr />
+    <table>
+        <tbody id="bookshelf">
+            <tr>
+                <th>題名</th>
+                <th>出版社</th>
+                <th>価格</th>
+                <th><input type="button" class="add" value="追加"></th>
+            </tr>
+
+        </tbody>
+    </table>
+</body>
+</html>
