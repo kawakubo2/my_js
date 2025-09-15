@@ -44,60 +44,36 @@ document.addEventListener('DOMContentLoaded',() => {
                 labels: ['１回','２回','３回'],
                 datasets: [
                     {
-                        label: "A",
-                        data: "30",
+                        label: ["A", "B", "C"],
+                        data: [30, 20, 10],
                         backgroundColor: "red",
                         stack: 'Stack 0',
                     },
                     {
-                        label: "B",
-                        data: "20",
-                        backgroundColor: "yellow",
-                        stack: 'Stack 0',
-                    },
-                    {
-                        label: "C",
-                        data: "10",
-                        backgroundColor: "blue",
-                        stack: 'Stack 0',
-                    },
-                    {
-                        label: "A",
-                        data: "18",
-                        backgroundColor: "red",
-                        stack: 'Stack 1',
-                    },
-                    {
-                        label: "B",
-                        data: "10",
+                        label: ["A", "B", "C"],
+                        data: [20, 10, 5],
                         backgroundColor: "yellow",
                         stack: 'Stack 1',
                     },
                     {
-                        label: "C",
-                        data: "8",
+                        label: ["A", "B", "C"],
+                        data: [10, 5, 2],
                         backgroundColor: "blue",
-                        stack: 'Stack 1',
+                        stack: 'Stack 3',
                     },
-                    {
-                        label: "A",
-                        data: "5",
-                        backgroundColor: "red",
-                        stack: 'Stack 2',
+                ],
+                maintainAspectRatio: false,
+                interaction: {
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        stacked: true,
                     },
-                    {
-                        label: "B",
-                        data: "3",
-                        backgroundColor: "yellow",
-                        stack: 'Stack 2',
-                    },
-                    {
-                        label: "C",
-                        data: "2",
-                        backgroundColor: "blue",
-                        stack: 'Stack 2',
-                    },
-                ]
+                    y: {
+                        stacked: true
+                    }
+                }
             },
             options: {
                 plugins: {
@@ -122,5 +98,3 @@ document.addEventListener('DOMContentLoaded',() => {
             }
         });
     });
-// });
- 
