@@ -6,6 +6,10 @@ main {
     width: 800px;
     margin: 1rem auto;
 }
+main section.bookshelf-error-summary {
+    width: 300px;
+    margin: 1rem auto;
+}
 main section.bookshelf-input-form {
     width: 300px;
     margin: 1rem auto;
