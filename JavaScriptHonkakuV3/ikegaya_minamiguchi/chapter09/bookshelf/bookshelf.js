@@ -36,12 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
         error_summary.append(fragment);
     }
 
-    function create_tr() {
+    function create_tr(e, title, publisher, price) {
         const tr = document.createElement('tr');
-        tr.append(create_td(title.value));
-        tr.append(create_td(publisher.value));
-        tr.append(create_td(price.value));
-        return tr;
+        tr.append(create_td(title));
+        tr.append(create_td(publisher));
+        tr.append(create_td(price));
+        tr.append(create_td_with_button('追加', 'add'));
+        e.target.parentElement.parentElement.after(tr);
     }
 
     function create_td(value) {
@@ -49,14 +50,36 @@ document.addEventListener('DOMContentLoaded', () => {
         td.textContent = value;
         return td;
     }
-    tbody.addEventListener('click', () => {
-        const errors = validate();
-        if (errors.length > 0) {
-            print_errors(errors);
-            return;
+
+    function create_button(text, clazz) {
+        const button = document.createElement('input');
+        button.type = 'button';
+        button.classList.add(clazz);
+        button.value = text;
+        return button;
+    }
+
+    function create_td_with_button(text, clazz) {
+        const td = document.createElement('td');
+        const button = create_button(text, clazz);
+        td.append(button);
+        return td;
+    }
+
+
+    tbody.addEventListener('click', (e) => {
+        if (e.target.classList.contains('add')) {
+            const errors = validate();
+            if (errors.length > 0) {
+                print_errors(errors);
+                return;
+            }
+            create_tr(e, 
+                title.value.trim(), 
+                publisher.value.trim(), 
+                price.value.trim());
+            form.reset();
+            title.focus();
         }
-        tbody.append(create_tr());
-        form.reset();
-        title.focus();
     });
 });
