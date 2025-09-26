@@ -42,7 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
         tr.append(create_td(publisher));
         tr.append(create_td(price));
         tr.append(create_td_with_button('追加', 'add'));
-        e.target.parentElement.parentElement.after(tr);
+        tr.append(create_td_with_button('削除', 'remove'));
+        tr.append(create_td_with_button('△', 'up'));
+        tr.append(create_td_with_button('▽', 'down'));
+        e.target.closest('tr').after(tr);
     }
 
     function create_td(value) {
@@ -80,6 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 price.value.trim());
             form.reset();
             title.focus();
+        } else if (e.target.classList.contains('remove')) {
+            tbody.removeChild(e.target.closest('tr'));
+        } else if (e.target.classList.contains('up')) {
+            const tr = e.target.closest('tr');
+            const prev_tr = tr.previousELementSibling;
+            if (prev_tr.id === 'book-list-header') return;
+            prev_tr.before(tr);
         }
     });
 });
