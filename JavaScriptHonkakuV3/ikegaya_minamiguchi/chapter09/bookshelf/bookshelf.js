@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tr.append(create_td_with_button('削除', 'remove'));
         tr.append(create_td_with_button('△', 'up'));
         tr.append(create_td_with_button('▽', 'down'));
+        tr.append(create_td_with_button('先頭へ移動', 'top'));
+        tr.append(create_td_with_button('末尾へ移動', 'bottom'));
         e.target.closest('tr').after(tr);
     }
 
@@ -87,9 +89,24 @@ document.addEventListener('DOMContentLoaded', () => {
             tbody.removeChild(e.target.closest('tr'));
         } else if (e.target.classList.contains('up')) {
             const tr = e.target.closest('tr');
-            const prev_tr = tr.previousELementSibling;
-            if (prev_tr.id === 'book-list-header') return;
+            const prev_tr = tr.previousElementSibling;
+            if (prev_tr?.id === 'book-list-header') return;
             prev_tr.before(tr);
+        } else if (e.target.classList.contains('down')) {
+            const tr = e.target.closest('tr');
+            const next_tr = tr.nextElementSibling;
+            if (next_tr) {
+                next_tr.after(tr);
+            }
+        } else if (e.target.classList.contains('top')) {
+            const header_tr = document.querySelector('#book-list-header');
+            const tr = e.target.closest('tr');
+            header_tr.after(tr);
+        } else if (e.target.classList.contains('bottom')) {
+            const tr = e.target.closest('tr');
+            tbody.append(tr);
+        } else {
+            // 今回は記述しない
         }
     });
 });
