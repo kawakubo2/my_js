@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function isEmpty(value) {
         return value === null || value.trim() === '';
     }
+
+    function isNonNegativeNumber(value) {
+        return /^\d+$/.test(value);
+    }
+
     function validate() {
         const errors = [];
         error_summary.textContent = '';
@@ -20,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (isEmpty(price.value)) {
             errors.push('価格は必須入力です。');
-        } else if (!(/^\d+$/.test(price.value))) {
+        } else if (!isNonNegativeNumber(price.value)) {
             errors.push('価格は0以上の整数値を入力してください。');
         }
         return errors;
@@ -38,9 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function create_tr(e, title, publisher, price) {
         const tr = document.createElement('tr');
-        tr.append(create_td(title));
-        tr.append(create_td(publisher));
-        tr.append(create_td(price));
+        tr.append(create_td(title, 'editable', 'title-td'));
+        tr.append(create_td(publisher, 'editable', 'publisher-td'));
+        tr.append(create_td(price, 'editable', 'price-td'));
         tr.append(create_td_with_button('追加', 'add'));
         tr.append(create_td_with_button('削除', 'remove'));
         tr.append(create_td_with_button('△', 'up'));
@@ -50,9 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.target.closest('tr').after(tr);
     }
 
-    function create_td(value) {
+    function create_td(value, ...classes) {
         const td = document.createElement('td');
         td.textContent = value;
+        classes.forEach(clazz => td.classList.add(clazz));
         return td;
     }
 
@@ -105,8 +111,45 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (e.target.classList.contains('bottom')) {
             const tr = e.target.closest('tr');
             tbody.append(tr);
+        } else if (e.target.classList.contains('edit-commit')) {
+            const edit_td = e.target.closest('td');
+            const textbox = edit_td.firstElementChild;
+            if (edit_td.classList.contains('title-td')) {
+                if (isEmpty(textbox.value)) {
+                    alert('題名は必須入力です。');
+                    return;
+                }
+            } else if (edit_td.classList.contains('publisher-td')) {
+                if (isEmpty(textbox.value)) {
+                    alert('出版社は必須入力です。');
+                    return;
+                }
+            } else if (edit_td.classList.contains('price-td')) {
+                if (isEmpty(textbox.value)) {
+                    alert('価格は必須入力です。');
+                    return;
+                } else if (!isNonNegativeNumber(textbox.value)) {
+                    alert('価格は0以上の整数値を入力してください。');
+                    return;
+                }
+            }
+            edit_td.textContent = textbox.value;
         } else {
             // 今回は記述しない
         }
     });
+ 
+    tbody.addEventListener('dblclick', (e) => {
+        if (e.target.classList.contains('editable')) {
+            const prev = e.target.textContent;
+            const textbox = document.createElement('input');
+            textbox.type = 'text';
+            textbox.value = prev;
+            textbox.classList.add('textbox');
+            e.target.textContent = '';
+            e.target.append(textbox);
+            const commitButton = create_button('×', 'edit-commit');
+            e.target.append(commitButton);
+        }
+    })
 });
