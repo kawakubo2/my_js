@@ -62,12 +62,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return td;
     }
 
-    function create_button(text, clazz) {
+    function create_button(text, ...classes) {
         const button = document.createElement('input');
         button.type = 'button';
-        button.classList.add(clazz);
+        classes.forEach(clazz => button.classList.add(clazz));
         button.value = text;
         return button;
+    }
+
+    function create_input(type, value, ...classes) {
+        const input = document.createElement('input');
+        input.type = type;
+        input.value = value;
+        classes.forEach(clazz => input.classList.add(clazz));
+        return input;
     }
 
     function create_td_with_button(text, clazz) {
@@ -113,25 +121,29 @@ document.addEventListener('DOMContentLoaded', () => {
             tbody.append(tr);
         } else if (e.target.classList.contains('edit-commit')) {
             const edit_td = e.target.closest('td');
-            const textbox = edit_td.firstElementChild;
+            const textbox = edit_td.querySelector('.textbox');
+            const span = edit_td.querySelector('.result');
+            span.textContent = '';
             if (edit_td.classList.contains('title-td')) {
                 if (isEmpty(textbox.value)) {
-                    alert('題名は必須入力です。');
+                    span.textContent = '題名は必須入力です。';
                     return;
                 }
             } else if (edit_td.classList.contains('publisher-td')) {
                 if (isEmpty(textbox.value)) {
-                    alert('出版社は必須入力です。');
+                    span.textContent = '出版社は必須入力です。';
                     return;
                 }
             } else if (edit_td.classList.contains('price-td')) {
                 if (isEmpty(textbox.value)) {
-                    alert('価格は必須入力です。');
+                    span.textContent = '価格は必須入力です。';
                     return;
                 } else if (!isNonNegativeNumber(textbox.value)) {
-                    alert('価格は0以上の整数値を入力してください。');
+                    span.textContent = '価格は0以上の整数値を入力してください。';
                     return;
                 }
+            } else {
+                throw new Error('想定外のクラス属性が指定された')
             }
             edit_td.textContent = textbox.value;
         } else {
@@ -142,14 +154,16 @@ document.addEventListener('DOMContentLoaded', () => {
     tbody.addEventListener('dblclick', (e) => {
         if (e.target.classList.contains('editable')) {
             const prev = e.target.textContent;
-            const textbox = document.createElement('input');
-            textbox.type = 'text';
-            textbox.value = prev;
-            textbox.classList.add('textbox');
+            const textbox = create_input('text', prev, 'textbox');
             e.target.textContent = '';
             e.target.append(textbox);
             const commitButton = create_button('×', 'edit-commit');
             e.target.append(commitButton);
+            const br = document.createElement('br');
+            const errorMsg = document.createElement('span');
+            errorMsg.classList.add('result');
+            e.target.append(br);
+            e.target.append(errorMsg);
         }
     })
 });

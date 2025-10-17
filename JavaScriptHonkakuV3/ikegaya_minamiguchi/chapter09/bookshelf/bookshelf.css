@@ -27,3 +27,7 @@ main section.bookshelf-list {
 #error-summary {
     color: red;
 }
+
+#book-list span.result {
+    color: red;
+}
