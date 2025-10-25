@@ -34,6 +34,31 @@ for (const member of members) {
     }
 }
 
+console.log('--- 体重毎の人数 ---');
 for (const [weight, count] of weightCounter.entries()) {
     console.log(`${weight}kg代: ${count}`);
 }
+
+const heightCounter = new Map();
+
+for (const member of members) {
+    const height = Math.floor(member.height / 10) * 10;
+    if (heightCounter.has(height)) {
+        heightCounter.set(height, heightCounter.get(height) + 1);
+    } else {
+        heightCounter.set(height, 1);
+    }
+}
+
+console.log('--- 身長毎の人数 ---');
+const heightArray = Array.from(heightCounter.keys());
+heightArray.sort((h1, h2) => h1 - h2);
+for (const height of heightArray) {
+    console.log(`${height}cm代: ${heightCounter.get(height)}`);
+}
+
+
+
+
+
+
