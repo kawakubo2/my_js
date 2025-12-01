@@ -3,16 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "SET NODE_OPTIONS=--experimental-vm-modules && jest --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "decimal.js": "^10.6.0",
-    "chart.js": "^4.5.1"
+    "chart.js": "^4.5.1",
+    "d3.js": "^0.0.2-security",
+    "decimal.js": "^10.6.0"
   },
   "devDependencies": {
     "jest": "^30.2.0"
