@@ -1,0 +1,33 @@
+header h1 {
+    text-align: center;
+    font-size: 26pt;
+}
+main {
+    width: 800px;
+    margin: 1rem auto;
+}
+main section.bookshelf-error-summary {
+    width: 300px;
+    margin: 1rem auto;
+}
+main section.bookshelf-input-form {
+    width: 300px;
+    margin: 1rem auto;
+}
+main h2 {
+    text-align:center;
+    font-size: 18pt;
+}
+main section.bookshelf-input-form .container {
+    margin: 0.4rem auto;
+}
+main section.bookshelf-list {
+    margin: 1rem auto;
+}
+#error-summary {
+    color: red;
+}
+
+#book-list span.result {
+    color: red;
+}

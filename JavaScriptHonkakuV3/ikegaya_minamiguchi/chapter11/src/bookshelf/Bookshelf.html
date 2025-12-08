@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="bookshelf.css" />
+    <script src="bookshelf.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>〇〇〇図書館 | 図書登録</h1>
+    </header>
+    <main>
+        <section class="bookshelf-error-summary">
+            <ul id="error-summary">
+
+            </ul>
+        </section>
+        <section class="bookshelf-input-form">
+            <h2>登録フォーム</h2>
+            <form id="bookshelf-form">
+                <div class="container">
+                    <label for="title">題名　: </label>
+                    <input type="text" name="title" id="title" size="20" />
+                </div>
+                <div class="container">
+                    <label for="publisher">出版社: </label>
+                    <input type="text" name="publisher" id="publisher" size="20" />
+                </div>
+                <div class="container">
+                    <label for="price">価格　: </label>
+                    <input type="text" name="price" id="price" size="20" />
+                </div>
+            </form>
+        </section>
+        <hr>
+        <section class="bookshelf-list">
+            <h2>登録予定リスト</h2>
+            <div>
+                <table class="table">
+                    <tbody id="book-list">
+                        <tr id="book-list-header">
+                            <th>題名</th>
+                            <th>出版社</th>
+                            <th>価格</th>
+                            <th><input type="button" class="add" value="追加" /></th>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+    </main> 
+</body>
+</html>
