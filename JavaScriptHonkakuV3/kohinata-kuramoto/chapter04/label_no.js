@@ -1,10 +1,12 @@
 document.write('<table border="1">');
 let counter = 0;
-for (let i = 1; i <= 99; i++) {
+
+outer:
+for (let i = 1; i <= 9; i++) {
   document.write('<tr>');
-  for (let j = 1; j <= 99; j++) {
+  for (let j = 1; j <= 9; j++) {
     counter++;
-    if (i * j > 300) break;
+    if (i * j > 30) break outer;
     document.write('<td>' + (i * j) + '</td>');
   }
   document.write('</tr>');
