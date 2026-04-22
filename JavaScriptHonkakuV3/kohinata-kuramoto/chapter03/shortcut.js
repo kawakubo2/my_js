@@ -6,7 +6,7 @@ if (score >= 60) {
 }
 
 
-score >= 60 && console.log('合格');
+score >= 60 && console.log('合格')
 
 const score2 = 48;
 if (score2 >= 60) {
