@@ -2,8 +2,10 @@ const alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
 
 const size = 5;
 let end = 0;
-for (let i = 0; i < alpha.length; i++) {
+for (let i = 0; i < alpha.length; i += size) {
   end += size;
-  if (end > alpha.length)
-  console.log(alpha.slice(i, i + size));
+  if (end >= alpha.length) {
+    end = size.length;
+  }
+  console.log(alpha.slice(i, end));
 }
