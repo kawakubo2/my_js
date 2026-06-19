@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let pattern = document.querySelector('#pattern').value;
-  let option  = document.querySelector('#option').value;
-  let target  = document.querySelector('#target').value;
+  let pattern = document.querySelector('#pattern');
+  let option  = document.querySelector('#option');
+  let target  = document.querySelector('#target');
   let result  = document.querySelector('#result');
   let testBtn = document.querySelector('#test');
 
@@ -9,9 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return s === null || s.trim() === '';
   }
   testBtn.addEventListener('click', (e) => {
+    // e.preventDefault();
     result.textContent = '';
-    if (isEmpty(pattern) || isEmpty(target)) return;
-    const regexp = new RegExp(pattern, option);
-    result.textContent = regexp.test(target) ? '〇': '×';
+    if (isEmpty(pattern.value) || isEmpty(target.value)) return;
+    const regexp = new RegExp(pattern.value, option.value);
+    result.textContent = regexp.test(target.value) ? '〇': '×';
   });
 });
