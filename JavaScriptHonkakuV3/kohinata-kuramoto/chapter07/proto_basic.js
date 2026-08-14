@@ -12,6 +12,14 @@ const child = Object.create(parent, {
   }
 });
 
+console.log('--- child ---');
+
 for (const prop in child) {
+  console.log(`${prop}: ${child[prop]}`);
+}
+
+console.log('--- parent ---');
+
+for (const prop in parent) {
   console.log(`${prop}: ${child[prop]}`);
 }
