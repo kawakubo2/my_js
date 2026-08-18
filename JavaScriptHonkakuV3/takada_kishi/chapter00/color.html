@@ -3,10 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="color.css">
   <title>ABC会社 | 新着情報 | 〇〇商品リニューアル</title>
 </head>
 <body>
   <h1>はじめてのHTML</h1>
+  <section id="top">
+    <h2>ページ間を移動</h2>
+    <a href="./a.html">商品</a>
+    <a href="./b.html">ドキュメンテーション</a>
+  </section>
+  <section>
+    <h2>ページ内を移動</h2>
+    <a href="#image">画像へ移動</a>
+  </section>
   <section>
     <h2>段落</h2>
     <p>見出しタグは文字の大きさを調整するものではなく、<br>記述する内容のレベルを合わせるために使用するものです。</p>
@@ -21,6 +31,62 @@
       <li>dlタグ・・・見出し(dtタグ)と本文(ddタグ)のように辞書的に並べるときに使用</li>
     </ul>
 
+  </section>
+  <section>
+    <h3>順序がある場合の箇条書き(olタグ)</h3>
+    <h4>カレーの作り方</h4>
+    <ol>
+      <li>野菜を洗う</li>
+      <li>人参、ジャガイモの皮をむく</li>
+      <li>豚肉を炒める</li>
+      <li>人参、ジャガイモを炒める</li>
+      <li>豚肉と人参、ジャガイモを合わせて炒める</li>
+      <li>水を加えて沸騰し、10分程度あくを取りつつ煮込む</li>
+      <li>ルーを加え、煮込む</li>
+    </ol>
+  </section>
+  <section>
+    <h4>見出しと本体を列挙するための箇条書き</h4>
+    <dl>
+      <dt>SQL</dt>
+      <dd>リレーショナル・データベースを操作するための言語</dd>
+      <dt>JavaScript</dt>
+      <dd>主にブラウザ上で動作する言語。サーバサイドでも使用可能</dd>
+      <dt>Java</dt>
+      <dd>Sun Micro Systemsが開発した言語。マイコンからエンタープライズ用途まで幅広く使える</dd>
+    </dl>
+  </section>
+  <section id="image">
+    <h2>画像を表示するためのタグ(imgタグ)</h2>
+    <img src="https://haru-idea.jp/images/haru0054_sm.jpg" alt="haruプログラミング教室の室内風景" />
+  </section>
+  <section>
+    <h2>表組(tableタグ)</h2>
+    <table id="kakeibo">
+      <thead>
+        <tr>
+          <th>日付</th>
+          <th>費目</th>
+          <th>メモ</th>
+          <th>入金額</th>
+          <th>出金額</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2026-08-03</td><td>食費</td><td>コーヒーを購入</td><td class="price">0</td><td class="price">380</td>
+        </tr>
+        <tr>
+          <td>2026-08-10</td><td>給料</td><td>1月の給料</td><td class="price">280000</td><td class="price">0</td>
+        </tr>
+        <tr>
+          <td>2026-08-11</td><td>教養娯楽費</td><td>書籍を購入</td><td class="price">0</td><td class="price">2800</td>
+        </tr>
+        <tr>
+          <td>2026-08-14</td><td>交際費</td><td>同期会の会費</td><td class="price">0</td><td class="price">5000</td>
+        </tr>
+      </tbody>
+    </table>
   </section>
 
   

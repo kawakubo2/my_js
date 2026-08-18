@@ -1,0 +1,22 @@
+#kakeibo {
+  width: 30rem;
+  margin: 1rem auto;
+}
+
+#kakeibo, #kakeibo th, #kakeibo td {
+  padding: 0.2rem;
+  border: 1px solid #999;
+  border-collapse: collapse;
+}
+
+#kakeibo td.price {
+  text-align: right;
+}
+
+#kakeibo > thead {
+  background-color: aquamarine;
+}
+
+#kakeibo > tbody {
+  background-color: bisque;
+}

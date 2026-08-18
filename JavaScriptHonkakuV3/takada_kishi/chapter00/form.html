@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>form部品の作り方</h2>
+  <form>
+    <div class="container">
+      <label for="name">名前: </label>
+      <input type="text" name="name" id="name">
+    </div>
+    <div class="container">
+      <label><input type="number" name="age" id="age" min="0" step="10">代</label>
+    </div>
+    <div class="container">
+      <label><input type="radio" name="bloodtype" value="A">A型</label>
+      <label><input type="radio" name="bloodtype" value="B">B型</label>
+      <label><input type="radio" name="bloodtype" value="O">O型</label>
+      <label><input type="radio" name="bloodtype" value="AB">AB型</label>
+    </div>
+    <div class="containere">
+      <select name="bloodtype2" id="bloodtype2">
+        <option value=""></option>
+        <option value="A">A型</option>
+        <option value="B">B型</option>
+        <option value="O">O型</option>
+        <option value="AB">AB型</option>
+      </select>
+    </div>
+    <div class="containere">
+      <textarea rows="5" cols="40" name="memo" id="memo"></textarea>
+    </div>
+    <div class="containere">
+      <h3>好きな本のジャンルは？</h3>
+      <label><input type="checkbox" name="genre" value="novel">小説</label>
+      <label><input type="checkbox" name="genre" value="nonfiction">ノンフィクション</label>
+      <label><input type="checkbox" name="genre" value="cooking">料理</label>
+      <label><input type="checkbox" name="genre" value="sports">スポーツ</label>
+      <label><input type="checkbox" name="genre" value="travel">旅行</label>
+    </div>
+    <div class="container">
+      <input type="date" name="date" id="date">
+    </div>
+    <div class="container">
+      <input type="datetime-local" name="datetime" id="datetime">
+    </div>
+    <div class="container">
+      <input type="time" name="time" id="time" step="900">
+    </div>
+  </form>
+</body>
+</html>
