@@ -9766,7 +9766,6 @@ getJasmineRequireObj().Suite = function(j$) {
       } else {
         this.result.failedExpectations.push(expectationResult);
 
-        // TODO: refactor so that we don't need to override cached status
         if (this.result.status) {
           this.result.status = 'failed';
         }
