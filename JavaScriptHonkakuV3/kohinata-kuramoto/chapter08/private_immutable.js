@@ -23,13 +23,13 @@ class Member {
   }
 }
 
-// Object.freeze(Member.prototype);
+Object.freeze(Member.prototype);
 
 const m = new Member('佐藤理央', 25);
 m.show();
 
-Member.prototype.getData = function() {
-  return {name: this.name, age: this.age};
-}
+// Member.prototype.getData = function() {
+//   return {name: this.name, age: this.age};
+// }
 
-console.log(m.getData());
+// console.log(m.getData());

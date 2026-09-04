@@ -1,0 +1,21 @@
+table {
+  width: 30rem;
+  margin: auto;
+}
+
+table, th, td  {
+  border-collapse: collapse;
+  border: 1px solid #999;
+}
+
+th, td {
+  padding: 0.3rem;
+}
+
+td {
+  color: #555;
+}
+td.price {
+  text-align: right;
+  color: green;
+}
