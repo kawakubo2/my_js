@@ -19,3 +19,10 @@ console.log(result[1]);
 console.log(result[2]);
 console.log(result[3]);
 console.log(result[4]);
+
+const subjects = [100, 78, 67, 90, 33];
+const [, mathematics, english, , social_studies] = subjects;
+console.log('-----------------');
+console.log(mathematics);
+console.log(english);
+console.log(social_studies);
