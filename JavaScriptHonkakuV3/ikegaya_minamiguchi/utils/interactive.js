@@ -10,3 +10,6 @@ const readline = require('readline-sync');
 const name = readline.question('名前: ');
 const age = readline.question('年齢: ');
 console.log(`${name}さんの年齢は${age}歳です`);
+console.log(`ageの型: ${typeof age}`);
+const newAge = Number(age);
+console.log(`newAgeの型: ${typeof newAge}`);
