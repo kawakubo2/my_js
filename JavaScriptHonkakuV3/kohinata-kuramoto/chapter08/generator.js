@@ -1,9 +1,11 @@
 const LIMIT = 1_000_000;
 
-function* generateNumbers(max) {
+function generateNumbers(max) {
+  const result = [];
   for (let i = 1; i <= max; i++) {
-    yield i;
+    result.push(i);
   }
+  return result;
 }
 
 function* filterEvenNumbers(numbers) {
@@ -22,13 +24,7 @@ function* generateSquareRootNumbers(numbers) {
 
 const startMemory = process.memoryUsage().heapUsed;
 
-// const numbers = []
-// for (const n of generateSquareRootNumbers(filterEvenNumbers(generateNumbers(LIMIT)))) {
-//   numbers.push(n);
-// }
-// console.log(`結果の配列の要素数: ${numbers.length}`);
 generateSquareRootNumbers(filterEvenNumbers(generateNumbers(LIMIT)));
-
 
 const endMemory = process.memoryUsage().heapUsed;
 
