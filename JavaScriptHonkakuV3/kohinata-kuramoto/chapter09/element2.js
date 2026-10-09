@@ -14,6 +14,5 @@ language.addEventListener('change', () => {
     l.style.backgroundColor = 'navy';
     l.style.color = 'white';
   }
-
 });
 
