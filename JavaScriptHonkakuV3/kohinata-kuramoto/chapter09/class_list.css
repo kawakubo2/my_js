@@ -1,0 +1,8 @@
+.highlight {
+  padding: 0.5rem;
+  background-color: navy;
+  color: white;
+  border: 1px solid #666;
+  border-radius: 0.8rem;
+  box-shadow: 5px 5px 5px #666;
+}

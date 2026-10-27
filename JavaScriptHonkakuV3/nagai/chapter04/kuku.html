@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let counter = 0;
+    document.write('<table border="1">');
+    const start = performance.now();
+    kuku:
+    for (let i = 1; i <= 9; i++) {
+      document.write('<tr>');
+      for (let j = 1; j <= 9; j++) {
+        counter++;
+        const result = i * j;
+        if (result > 30) break kuku;
+        document.write(`<td>${result}</td>`);
+      }
+      document.write('</tr>');
+    }
+    const end = performance.now();
+    document.write('</table>');
+    document.write(`<p>処理時間: ${end - start}ミリ秒 ${counter}回</p>`);
+  </script>
+</body>
+</html>
