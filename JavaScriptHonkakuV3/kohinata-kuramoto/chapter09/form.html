@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>form要素の紹介</h2>
+  <form novalidate>
+    <fieldset>
+      <legend>お名前: </legend>
+      <input type="text" name="name" id="name">
+    </fieldset>
+    <fieldset>
+      <legend>メールアドレス: </legend>
+      <input type="email" name="email" id="email">
+    </fieldset>
+    <fieldset>
+      <legend>電話番号: </legend>
+      <input type="tel" name="tel" id="tel">
+    </fieldset>
+    <fieldset>
+      <legend>テストの成績: </legend>
+      <input type="number" name="score" id="score" min="0" max="100" step="5">
+    </fieldset>
+    <fieldset>
+      <legend>入社年月日: </legend>
+      <input type="date" name="hire_date" id="hire_date">
+    </fieldset>
+    <fieldset>
+      <legend>次回打ち合わせ: </legend>
+      <input type="datetime-local" name="meeting" id="meeting">
+    </fieldset>
+    <fieldset>
+      <legend>セミナーの感想: </legend>
+      <textarea rows="5" cols="40" 
+        name="feedback" id="feedback"></textarea>
+    </fieldset>
+    <input type="submit" value="送信">
+  </form>
+</body>
+</html>

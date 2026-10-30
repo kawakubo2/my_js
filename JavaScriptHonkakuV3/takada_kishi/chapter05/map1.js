@@ -9,9 +9,16 @@ const employee_map = new Map([
 
 console.log(employee_map);
 
-// キーと値の追加
-employee_map.set('C0002', {name: '鈴木次郎', age: 28, weight: 80, height: 175});
-console.log(employee_map);
+/*
+Mapにキーがない場合、キーと値の登録
+Mapにキーがある場合、値の上書き
+*/
+if (!employee_map.has('C002')) {
+  employee_map.set('C0002', {name: '鈴木次郎', age: 28, weight: 80, height: 175});
+  console.log(employee_map);
+} else {
+  console.log('C0002に社員は既に存在します。');
+}
 
 console.log('--- 終了したい場合はxxxを入力');
 while (true) {
